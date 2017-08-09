@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import binaryblitz.justforyou.R
 import binaryblitz.justforyou.data.user.UserProfileStorage
 import binaryblitz.justforyou.data.user.UserStorageImpl
+import binaryblitz.justforyou.ui.main.support.SupportFragment
 import binaryblitz.justforyou.ui.router.ScreenRouter
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
@@ -47,22 +48,23 @@ class MainActivity : AppCompatActivity() {
     val adapter = ViewPagerAdapter(supportFragmentManager)
     adapter.addFragment(EmptyFragment(), "empty_tag")
     adapter.addFragment(EmptyFragment(), "empty_tag")
-    adapter.addFragment(EmptyFragment(), "empty_tag")
+    adapter.addFragment(SupportFragment(), "empty_tag")
     adapter.addFragment(EmptyFragment(), "empty_tag")
     tabsViewPager.offscreenPageLimit = 4
     tabsViewPager.adapter = adapter
     bottomBar.selectTabAtPosition(PROGRAMMS_TAB)
     bottomBar.setOnTabSelectListener { position ->
       when (position) {
-        R.id.action_programms -> showTab(PROGRAMMS_TAB)
-        R.id.action_delivery -> showTab(CALENDAR_TAB)
-        R.id.action_support -> showTab(SUPPORT_TAB)
+        R.id.action_programms -> showTab("Программы", PROGRAMMS_TAB)
+        R.id.action_delivery -> showTab("Доставка", CALENDAR_TAB)
+        R.id.action_support -> showTab("Поддержка", SUPPORT_TAB)
       }
     }
     initDrawer(toolbar, this)
   }
 
-  private fun showTab(position: Int) {
+  private fun showTab(title: String, position: Int) {
+    toolbar.title = title
     tabsViewPager.currentItem = position
   }
 
