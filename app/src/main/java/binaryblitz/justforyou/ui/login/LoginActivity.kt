@@ -91,7 +91,7 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
   }
 
   override fun successLogin() {
-    ScreenRouter.openMainScreen(this)
+    ScreenRouter.openOnboardingScreen(this)
   }
 
   override fun openUserView() {
