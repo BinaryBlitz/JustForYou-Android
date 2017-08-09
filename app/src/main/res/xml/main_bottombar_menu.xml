@@ -14,9 +14,4 @@
       id="@+id/action_support"
       title="Поддержка"
       />
-  <tab
-      icon="@drawable/ic_person_24"
-      id="@+id/action_profile"
-      title="Профиль"
-      />
 </tabs>

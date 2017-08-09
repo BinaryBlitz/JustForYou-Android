@@ -52,6 +52,9 @@ dependencies {
   provided 'org.glassfish:javax.annotation:10.0-b28'
   implementation 'com.redmadrobot:inputmask:2.3.0'
   implementation 'com.roughike:bottom-bar:2.3.1'
+  implementation('com.mikepenz:materialdrawer:5.9.2@aar') {
+    transitive = true
+  }
 
   // Networking
   def retrofitVersion = '2.2.0'
