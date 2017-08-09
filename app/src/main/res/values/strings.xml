@@ -7,4 +7,6 @@
   <string name="title_notifications">Notifications</string>
   <string name="about_user">Расскажите немного о себе:</string>
   <string name="code_send_to">Код отправлен на</string>
+  <string name="login_text">Вход</string>
+  <string name="wrong_code">Неправильный код!</string>
 </resources>

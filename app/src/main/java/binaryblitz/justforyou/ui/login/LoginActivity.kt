@@ -25,6 +25,8 @@ import kotlinx.android.synthetic.main.activity_login.userContainerView
 class LoginActivity : MvpAppCompatActivity(), LoginView {
   @InjectPresenter
   lateinit var loginPresenter: LoginPresenter
+  private val phoneNumberMask = "+7 ([000]) [000] [00] [00]"
+  private val verificationCodeMask = "[0000]"
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -33,9 +35,9 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
   }
 
   private fun initViewElements() {
-    toolbar.title = "Вход"
+    toolbar.title = getString(string.login_text)
 
-    val phoneListener = MaskedTextChangedListener("+7 ([000]) [000] [00] [00]", false,
+    val phoneListener = MaskedTextChangedListener(phoneNumberMask, false,
         phoneNumberEdit, null,
         object : MaskedTextChangedListener.ValueListener {
           override fun onTextChanged(maskFilled: Boolean, extractedValue: String) {
@@ -45,7 +47,7 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
         }
     )
 
-    val codeListener = MaskedTextChangedListener("[0000]", false,
+    val codeListener = MaskedTextChangedListener(verificationCodeMask, false,
         codeVerificationEdit, null,
         object : MaskedTextChangedListener.ValueListener {
           override fun onTextChanged(maskFilled: Boolean, extractedValue: String) {
@@ -77,7 +79,7 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
   }
 
   override fun showError(message: String) {
-    Toast.makeText(this, "Неправильный код!", Toast.LENGTH_SHORT).show()
+    Toast.makeText(this, getString(string.wrong_code), Toast.LENGTH_SHORT).show()
   }
 
   override fun showPhoneForm() {

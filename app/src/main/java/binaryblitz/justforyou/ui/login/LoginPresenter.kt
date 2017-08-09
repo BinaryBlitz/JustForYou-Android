@@ -1,5 +1,7 @@
 package binaryblitz.justforyou.ui.login
 
+import binaryblitz.justforyou.data.user.UserProfileStorage
+import binaryblitz.justforyou.data.user.UserStorageImpl
 import binaryblitz.justforyou.di.JustForYouApp
 import binaryblitz.justforyou.network.NetworkService
 import binaryblitz.justforyou.network.models.User
@@ -14,6 +16,7 @@ class LoginPresenter : BasePresenter<LoginView>() {
   lateinit var service: NetworkService
   lateinit var token: String
   lateinit var phone: String
+  private var userProfileStorage: UserProfileStorage = UserStorageImpl()
 
   init {
     JustForYouApp.appComponent?.inject(this)
@@ -56,9 +59,9 @@ class LoginPresenter : BasePresenter<LoginView>() {
     viewState.showProgress()
     service.createUser(UserData(User(lastName, phone, firstName, email)))
         .subscribe(
-            { (data) ->
+            { user ->
               viewState.hideProgress()
-              // TODO save user data
+              userProfileStorage.saveUser(user)
               viewState.successLogin()
             },
             { errorResponse ->

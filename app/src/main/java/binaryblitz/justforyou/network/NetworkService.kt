@@ -1,13 +1,16 @@
 package binaryblitz.justforyou.network
 
+import binaryblitz.justforyou.data.user.UserInfo
 import binaryblitz.justforyou.network.models.UserData
 import binaryblitz.justforyou.network.responses.CreateTokenResponse
-import binaryblitz.justforyou.network.responses.UserResponse
 import binaryblitz.justforyou.network.responses.VerifyTokenResponse
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
+/**
+ * A Service that performs network requests
+ */
 class NetworkService(private val serviceApi: ApiService) {
 
   fun createToken(phoneNumber: String): Single<CreateTokenResponse> {
@@ -24,7 +27,7 @@ class NetworkService(private val serviceApi: ApiService) {
         .map { it }
   }
 
-  fun createUser(user: UserData): Single<UserResponse> {
+  fun createUser(user: UserData): Single<UserInfo> {
     return serviceApi.createUser(user)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
