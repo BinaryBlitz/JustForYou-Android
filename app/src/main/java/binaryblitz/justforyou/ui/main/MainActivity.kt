@@ -1,19 +1,22 @@
 package binaryblitz.justforyou.ui.main
 
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import binaryblitz.justforyou.R
 import binaryblitz.justforyou.data.user.UserProfileStorage
 import binaryblitz.justforyou.data.user.UserStorageImpl
 import binaryblitz.justforyou.ui.router.ScreenRouter
-import kotlinx.android.synthetic.main.activity_main.message
-import kotlinx.android.synthetic.main.activity_main.navigation
+import kotlinx.android.synthetic.main.activity_main.bottomBar
+import kotlinx.android.synthetic.main.activity_main.tabsViewPager
 
 /**
  * The main activity of app that controls the transitions between tabs from bottom bar
  */
 class MainActivity : AppCompatActivity() {
+  private val PROGRAMMS_TAB: Int = 0
+  private val CALENDAR_TAB: Int = 1
+  private val SUPPORT_TAB: Int = 2
+  private val PROFILE_TAB: Int = 3
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -33,24 +36,26 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun initViewElements() {
-    navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-  }
-
-  private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-    when (item.itemId) {
-      R.id.navigation_home -> {
-        message.setText(R.string.title_home)
-        return@OnNavigationItemSelectedListener true
-      }
-      R.id.navigation_dashboard -> {
-        message.setText(R.string.title_dashboard)
-        return@OnNavigationItemSelectedListener true
-      }
-      R.id.navigation_notifications -> {
-        message.setText(R.string.title_notifications)
-        return@OnNavigationItemSelectedListener true
+    val adapter = ViewPagerAdapter(supportFragmentManager)
+    adapter.addFragment(EmptyFragment(), "empty_tag")
+    adapter.addFragment(EmptyFragment(), "empty_tag")
+    adapter.addFragment(EmptyFragment(), "empty_tag")
+    adapter.addFragment(EmptyFragment(), "empty_tag")
+    tabsViewPager.offscreenPageLimit = 5
+    tabsViewPager.adapter = adapter
+    bottomBar.selectTabAtPosition(PROGRAMMS_TAB)
+    bottomBar.setOnTabSelectListener { position ->
+      when (position) {
+        R.id.action_programms -> showTab(PROGRAMMS_TAB)
+        R.id.action_delivery -> showTab(CALENDAR_TAB)
+        R.id.action_support-> showTab(SUPPORT_TAB)
+        else -> showTab(PROFILE_TAB)
       }
     }
-    false
   }
+
+  private fun showTab(position: Int) {
+    tabsViewPager.currentItem = position
+  }
+
 }

@@ -1,0 +1,22 @@
+<tabs>
+  <tab
+      icon="@drawable/ic_home_24"
+      id="@+id/action_programms"
+      title="Программы"
+      />
+  <tab
+      icon="@drawable/ic_calendar24"
+      id="@+id/action_delivery"
+      title="Заказы"
+      />
+  <tab
+      icon="@drawable/ic_chat24"
+      id="@+id/action_support"
+      title="Поддержка"
+      />
+  <tab
+      icon="@drawable/ic_person_24"
+      id="@+id/action_profile"
+      title="Профиль"
+      />
+</tabs>
