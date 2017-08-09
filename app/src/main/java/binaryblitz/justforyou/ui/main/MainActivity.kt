@@ -8,15 +8,18 @@ import binaryblitz.justforyou.data.user.UserProfileStorage
 import binaryblitz.justforyou.data.user.UserStorageImpl
 import binaryblitz.justforyou.ui.main.support.SupportFragment
 import binaryblitz.justforyou.ui.router.ScreenRouter
+import com.crashlytics.android.Crashlytics
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
 import com.mikepenz.materialdrawer.DrawerBuilder
 import com.mikepenz.materialdrawer.model.DividerDrawerItem
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
+import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_main.bottomBar
 import kotlinx.android.synthetic.main.activity_main.tabsViewPager
 import kotlinx.android.synthetic.main.activity_main.toolbar
+
 
 /**
  * The main activity of app that controls the transitions between tabs from bottom bar
@@ -29,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    Fabric.with(this, Crashlytics())
     checkIfAuthorized()
   }
 
