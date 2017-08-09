@@ -1,21 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="binaryblitz.justforyou.LoginActivity"
+    android:animateLayoutChanges="true"
+    android:background="#fff"
+    tools:context="binaryblitz.justforyou.ui.login.LoginActivity"
     >
 
-  <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Hello World!"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      />
+  <android.support.v7.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="?attr/actionBarSize"
+      android:animateLayoutChanges="true"
+      android:background="?attr/colorPrimary"
+      android:title="Вход"
+      app:layout_scrollFlags="scroll|enterAlways|snap"
+      app:popupTheme="@style/AppTheme.AppBarOverlay"
+      app:titleTextColor="@color/whiteColor"
+      style="@style/ToolbarStyleLight"
+      >
+  </android.support.v7.widget.Toolbar>
 
-</android.support.constraint.ConstraintLayout>
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginTop="72dp"
+      android:orientation="vertical"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
+      >
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/ic_launcher"
+        />
+
+    <LinearLayout
+        android:visibility="visible"
+        android:orientation="vertical"
+        android:id="@+id/loginContainerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+      <EditText
+          android:id="@+id/phoneNumberEdit"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:layout_centerVertical="true"
+          android:layout_marginEnd="32dp"
+          android:layout_marginStart="32dp"
+          android:hint="Ваш номер телефона"
+          android:inputType="phone|textNoSuggestions"
+          android:textAlignment="center"
+          />
+
+      <EditText
+          android:id="@+id/codeVerificationEdit"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:layout_centerVertical="true"
+          android:layout_marginEnd="32dp"
+          android:layout_marginStart="32dp"
+          android:hint="Ваш код"
+          android:inputType="phone|textNoSuggestions"
+          android:textAlignment="center"
+          android:visibility="gone"
+          />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/phoneNumberEdit"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="18dp"
+        android:text="@string/login_message"
+        android:textAlignment="center"
+        />
+
+    <LinearLayout
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:id="@+id/userContainerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+      <EditText
+          android:id="@+id/firstNameEdit"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:layout_centerVertical="true"
+          android:layout_marginEnd="32dp"
+          android:layout_marginStart="32dp"
+          android:hint="Введите имя"
+          android:inputType="text"
+          android:textAlignment="center"
+          />
+
+      <EditText
+          android:id="@+id/lastNameEdit"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:layout_centerVertical="true"
+          android:layout_marginEnd="32dp"
+          android:layout_marginStart="32dp"
+          android:hint="Введите фамилию"
+          android:inputType="text"
+          android:textAlignment="center"
+          />
+
+      <EditText
+          android:id="@+id/emailEdit"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:layout_centerVertical="true"
+          android:layout_marginEnd="32dp"
+          android:layout_marginStart="32dp"
+          android:hint="Введите email"
+          android:inputType="textEmailAddress"
+          android:textAlignment="center"
+          />
+
+      <android.support.v7.widget.AppCompatButton
+          android:id="@+id/finishLoginButton"
+          android:layout_marginTop="16dp"
+          android:layout_gravity="center_horizontal"
+          style="@style/Widget.AppCompat.Button.Colored"
+          app:backgroundTint="@color/colorPrimary"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Продолжить"/>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:visibility="invisible"
+        style="?android:attr/progressBarStyle"
+        />
+
+  </LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>
