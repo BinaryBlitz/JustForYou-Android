@@ -1,3 +1,10 @@
 <resources>
   <string name="app_name">JustForYou</string>
+  <string name="login_message">На этот номер телефона будет выслан код для регистрации в приложении</string>
+  <string name="title_activity_main">MainActivity</string>
+  <string name="title_home">Home</string>
+  <string name="title_dashboard">Dashboard</string>
+  <string name="title_notifications">Notifications</string>
+  <string name="about_user">Расскажите немного о себе:</string>
+  <string name="code_send_to">Код отправлен на</string>
 </resources>
