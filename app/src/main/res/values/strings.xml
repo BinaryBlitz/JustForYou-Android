@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">JustForYou</string>
+  <string name="app_name">Just For You</string>
   <string name="login_message">На этот номер телефона будет выслан код для регистрации в приложении</string>
   <string name="title_activity_main">MainActivity</string>
   <string name="title_home">Home</string>

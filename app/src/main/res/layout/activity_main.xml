@@ -29,7 +29,7 @@
 
   </android.support.design.widget.AppBarLayout>
 
-  <binaryblitz.justforyou.ui.base.NonSwipeableViewPager
+  <ru.binaryblitz.justforyou.ui.base.NonSwipeableViewPager
       android:id="@+id/tabsViewPager"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
