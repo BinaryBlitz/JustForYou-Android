@@ -44,9 +44,13 @@ class LoginPresenter : BasePresenter<LoginView>() {
     viewState.showProgress()
     service.verifyToken(token, phone, code)
         .subscribe(
-            { (data) ->
+            { response ->
               viewState.hideProgress()
-              viewState.openUserView()
+              if (response.apiToken != null) {
+                getUser(response.apiToken)
+              } else {
+                viewState.openUserView()
+              }
             },
             { errorResponse ->
               viewState.showError(errorResponse.localizedMessage)
@@ -61,6 +65,23 @@ class LoginPresenter : BasePresenter<LoginView>() {
         .subscribe(
             { user ->
               viewState.hideProgress()
+              userProfileStorage.saveUser(user)
+              viewState.successLogin()
+            },
+            { errorResponse ->
+              viewState.showError(errorResponse.localizedMessage)
+              viewState.hideProgress()
+            }
+        )
+  }
+
+  fun getUser(token: String) {
+    viewState.showProgress()
+    service.getUser(token)
+        .subscribe(
+            { user ->
+              viewState.hideProgress()
+              user.apiToken = token
               userProfileStorage.saveUser(user)
               viewState.successLogin()
             },
