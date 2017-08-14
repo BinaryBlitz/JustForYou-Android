@@ -13,5 +13,5 @@ data class UserInfo(
     val id: Int,
     val email: String,
     @Json(name = "api_token")
-    val apiToken: String
+    var apiToken: String
 )
