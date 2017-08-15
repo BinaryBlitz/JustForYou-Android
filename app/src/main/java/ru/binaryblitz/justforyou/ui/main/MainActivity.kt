@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.toolbar
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.data.user.UserProfileStorage
 import ru.binaryblitz.justforyou.data.user.UserStorageImpl
+import ru.binaryblitz.justforyou.ui.main.programs.ProgramsFragment
 import ru.binaryblitz.justforyou.ui.main.support.SupportFragment
 import ru.binaryblitz.justforyou.ui.router.ScreenRouter
 
@@ -50,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
   private fun initViewElements() {
     val adapter = ViewPagerAdapter(supportFragmentManager)
-    adapter.addFragment(EmptyFragment(), "empty_tag")
+    adapter.addFragment(ProgramsFragment.getInstance(), "programs_tag")
     adapter.addFragment(EmptyFragment(), "empty_tag")
     adapter.addFragment(SupportFragment(), "empty_tag")
     adapter.addFragment(EmptyFragment(), "empty_tag")
