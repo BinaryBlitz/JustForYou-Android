@@ -2,7 +2,7 @@ package ru.binaryblitz.justforyou.data.programs
 
 import com.squareup.moshi.Json
 
-data class Program(
+data class Block(
 		@Json(name = "programs_count")
     val programsCount: Int? = null,
     val color: String? = null,

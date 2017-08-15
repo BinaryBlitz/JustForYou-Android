@@ -11,10 +11,10 @@
   <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
   <style name="ToolbarStyleLight" parent="@style/ThemeOverlay.AppCompat.ActionBar">
-    <item name="colorControlNormal">@color/whiteColor</item>
-    <item name="colorControlActivated">#FFF</item>
-    <item name="android:textColorPrimary">#FFF</item>
-    <item name="android:textColor">#FFF</item>
+    <item name="colorControlNormal">@color/colorPrimary</item>
+    <item name="colorControlActivated">@color/colorPrimary</item>
+    <item name="android:textColorPrimary">@color/colorPrimary</item>
+    <item name="android:textColor">@color/colorPrimary</item>
     <item name="actionButtonStyle">@style/Widget.AppCompat.ActionButton</item>
     <item name="selectableItemBackground">?android:selectableItemBackground</item>
     <item name="selectableItemBackgroundBorderless">?android:selectableItemBackground</item>

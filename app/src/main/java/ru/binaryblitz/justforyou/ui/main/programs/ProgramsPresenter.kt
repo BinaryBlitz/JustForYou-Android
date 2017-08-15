@@ -9,7 +9,7 @@ import ru.binaryblitz.justforyou.ui.base.BasePresenter
 import javax.inject.Inject
 
 @InjectViewState
-class ProgramsPresenter : BasePresenter<ProgramsView>() {
+class ProgramsPresenter : BasePresenter<BlocksView>() {
   @Inject
   lateinit var networkService: NetworkService
   var userProfileStorage: UserProfileStorage = UserStorageImpl()
@@ -18,13 +18,13 @@ class ProgramsPresenter : BasePresenter<ProgramsView>() {
     JustForYouApp.appComponent?.inject(this)
   }
 
-  fun getFoodPrograms() {
+  fun getFoodBlocks() {
     viewState.showProgress()
-    networkService.getFoodPrograms(userProfileStorage.getToken())
+    networkService.getFoodBlocks(userProfileStorage.getToken())
         .subscribe(
             { programs ->
               viewState.hideProgress()
-              viewState.showPrograms(programs)
+              viewState.showBlocks(programs)
             },
             { errorResponse ->
               viewState.showError(errorResponse.localizedMessage)

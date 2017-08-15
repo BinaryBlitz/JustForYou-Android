@@ -18,17 +18,17 @@ import kotlinx.android.synthetic.main.program_item.view.programImage
 import kotlinx.android.synthetic.main.program_item.view.programTitle
 import kotlinx.android.synthetic.main.program_item.view.programsCount
 import ru.binaryblitz.justforyou.R
-import ru.binaryblitz.justforyou.data.programs.Program
+import ru.binaryblitz.justforyou.data.programs.Block
 import ru.binaryblitz.justforyou.ui.base.BaseRecyclerAdapter
 
 
 /**
  * Fragment view that contains the logic for displaying list of food delivery programs
  */
-class ProgramsFragment : MvpAppCompatFragment(), ProgramsView, OnRefreshListener {
+class ProgramsFragment : MvpAppCompatFragment(), BlocksView, OnRefreshListener {
   @InjectPresenter(type = PresenterType.LOCAL)
   lateinit var presenter: ProgramsPresenter
-  lateinit var adapter: BaseRecyclerAdapter<Program>
+  lateinit var adapter: BaseRecyclerAdapter<Block>
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -42,7 +42,7 @@ class ProgramsFragment : MvpAppCompatFragment(), ProgramsView, OnRefreshListener
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     initViewElements(view)
-    presenter.getFoodPrograms()
+    presenter.getFoodBlocks()
   }
 
   fun initViewElements(view: View) {
@@ -54,8 +54,8 @@ class ProgramsFragment : MvpAppCompatFragment(), ProgramsView, OnRefreshListener
 
   }
 
-  override fun showPrograms(programs: List<Program>) {
-    adapter.setData(programs)
+  override fun showBlocks(blocks: List<Block>) {
+    adapter.setData(blocks)
   }
 
   override fun showProgress() {
@@ -75,7 +75,7 @@ class ProgramsFragment : MvpAppCompatFragment(), ProgramsView, OnRefreshListener
   }
 
   override fun onRefresh() {
-    presenter.getFoodPrograms()
+    presenter.getFoodBlocks()
   }
 
   companion object {
@@ -86,15 +86,15 @@ class ProgramsFragment : MvpAppCompatFragment(), ProgramsView, OnRefreshListener
   }
 }
 
-class ProgramAdapter : BaseRecyclerAdapter<Program>() {
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder<Program> {
+class ProgramAdapter : BaseRecyclerAdapter<Block>() {
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder<Block> {
     val view = LayoutInflater.from(parent.context).inflate(R.layout.program_item, parent, false)
     return ViewHolder(view)
   }
 
-  private inner class ViewHolder(itemView: View) : RecyclerViewHolder<Program>(itemView) {
+  private inner class ViewHolder(itemView: View) : RecyclerViewHolder<Block>(itemView) {
 
-    override fun setItem(item: Program, position: Int) {
+    override fun setItem(item: Block, position: Int) {
       Picasso.with(itemView.context).load(item.imageUrl).fit().into(itemView.programImage)
       itemView.programTitle.text = item.name
       //TODO Обработка программ/программы

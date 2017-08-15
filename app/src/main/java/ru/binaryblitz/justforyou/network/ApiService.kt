@@ -7,7 +7,7 @@ import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
-import ru.binaryblitz.justforyou.data.programs.Program
+import ru.binaryblitz.justforyou.data.programs.Block
 import ru.binaryblitz.justforyou.data.user.UserInfo
 import ru.binaryblitz.justforyou.network.models.UserData
 import ru.binaryblitz.justforyou.network.responses.CreateTokenResponse
@@ -31,5 +31,5 @@ interface ApiService {
   fun getUser(@Query("api_token") token: String): Single<UserInfo>
 
   @GET("/api/blocks.json")
-  fun getPrograms(@Query("api_token") token: String): Single<List<Program>>
+  fun getBlocks(@Query("api_token") token: String): Single<List<Block>>
 }

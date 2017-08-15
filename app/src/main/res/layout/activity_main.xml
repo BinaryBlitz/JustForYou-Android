@@ -18,12 +18,12 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="@color/whiteColor"
         app:title="Just for you"
         app:layout_scrollFlags="scroll|enterAlways|snap"
         app:popupTheme="@style/AppTheme.AppBarOverlay"
         app:theme="@style/ToolbarStyleLight"
-        app:titleTextColor="@color/whiteColor"
+        app:titleTextColor="@color/colorPrimary"
         style="@style/ToolbarStyleLight"
         />
 
