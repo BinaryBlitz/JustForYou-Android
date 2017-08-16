@@ -1,4 +1,4 @@
-package ru.binaryblitz.justforyou.ui.main.programs
+package ru.binaryblitz.justforyou.ui.main.blocks
 
 import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy

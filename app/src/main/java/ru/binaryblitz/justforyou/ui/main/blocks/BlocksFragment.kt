@@ -1,4 +1,4 @@
-package ru.binaryblitz.justforyou.ui.main.programs
+package ru.binaryblitz.justforyou.ui.main.blocks
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar

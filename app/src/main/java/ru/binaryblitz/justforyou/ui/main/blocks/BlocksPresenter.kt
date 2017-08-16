@@ -1,4 +1,4 @@
-package ru.binaryblitz.justforyou.ui.main.programs
+package ru.binaryblitz.justforyou.ui.main.blocks
 
 import com.arellomobile.mvp.InjectViewState
 import ru.binaryblitz.justforyou.data.user.UserProfileStorage
