@@ -9,7 +9,7 @@ import ru.binaryblitz.justforyou.ui.base.BasePresenter
 import javax.inject.Inject
 
 @InjectViewState
-class ProgramsPresenter : BasePresenter<BlocksView>() {
+class BlocksPresenter : BasePresenter<BlocksView>() {
   @Inject
   lateinit var networkService: NetworkService
   var userProfileStorage: UserProfileStorage = UserStorageImpl()

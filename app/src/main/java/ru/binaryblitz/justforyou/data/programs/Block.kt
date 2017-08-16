@@ -1,6 +1,7 @@
 package ru.binaryblitz.justforyou.data.programs
 
 import com.squareup.moshi.Json
+import io.mironov.smuggler.AutoParcelable
 
 data class Block(
 		@Json(name = "programs_count")
@@ -10,4 +11,4 @@ data class Block(
     val imageUrl: String? = null,
     val name: String? = null,
     val id: Int? = null
-)
+) : AutoParcelable

@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_on_boarding.viewPager
 import ru.binaryblitz.justforyou.ui.login.onboarding.base.OnBoardingFragment
 import ru.binaryblitz.justforyou.ui.login.onboarding.fragments.DefaultOnboardingPage
 import ru.binaryblitz.justforyou.ui.login.onboarding.fragments.WelcomePage
-import ru.binaryblitz.justforyou.ui.router.ScreenRouter
+import ru.binaryblitz.justforyou.ui.router.Router
 
 class OnBoardingActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
   val PAGES_COUNT = 4
@@ -35,7 +35,7 @@ class OnBoardingActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
     pageIndicatorView.selectedColor = resources.getColor(R.color.whiteColor)
     pageIndicatorView.unselectedColor = resources.getColor(R.color.colorAccent)
 
-    nextButton.setOnClickListener { ScreenRouter.openMainScreen(this) }
+    nextButton.setOnClickListener { Router.openMainScreen(this) }
   }
 
   private fun initOnBoardingPages(): ViewPager {

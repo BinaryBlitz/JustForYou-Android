@@ -19,7 +19,7 @@ import ru.binaryblitz.justforyou.data.user.UserProfileStorage
 import ru.binaryblitz.justforyou.data.user.UserStorageImpl
 import ru.binaryblitz.justforyou.ui.main.programs.ProgramsFragment
 import ru.binaryblitz.justforyou.ui.main.support.SupportFragment
-import ru.binaryblitz.justforyou.ui.router.ScreenRouter
+import ru.binaryblitz.justforyou.ui.router.Router
 
 
 /**
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     val ifNotAuthorized: Boolean = userProfileStorage.getToken().isNullOrEmpty()
     if (ifNotAuthorized) {
       finish()
-      ScreenRouter.openStartScreen(this)
+      Router.openStartScreen(this)
     } else {
       setContentView(R.layout.activity_main)
       initViewElements()
