@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.DetailedProgramActivity"
+    >
+
+  <android.support.design.widget.AppBarLayout
+      android:id="@+id/app_bar"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/app_bar_height"
+      android:fitsSystemWindows="true"
+      android:theme="@style/AppTheme.AppBarOverlay"
+      >
+
+    <android.support.design.widget.CollapsingToolbarLayout
+        android:id="@+id/detailedProgramCollapsingView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar_height"
+        android:animateLayoutChanges="true"
+        android:fitsSystemWindows="true"
+        app:contentScrim="@color/whiteColor"
+        app:elevation="1dp"
+        app:expandedTitleMarginEnd="64dp"
+        app:expandedTitleMarginStart="48dp"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed"
+        app:scrimAnimationDuration="200"
+        >
+
+      <FrameLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          >
+
+        <ImageView
+            android:id="@+id/detailedProgramImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/program_item_gradient_shape"
+            android:orientation="vertical"
+            android:padding="32dp"
+            >
+
+          <TextView
+              android:id="@+id/programTitle"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:shadowColor="@color/primary"
+              android:shadowDx="1"
+              android:shadowDy="1"
+              android:shadowRadius="2"
+              android:text="@string/app_name"
+              android:textColor="@color/whiteColor"
+              android:textSize="32sp"
+              android:textStyle="normal"
+              />
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="4dp"
+              android:layout_marginTop="4dp"
+              android:orientation="horizontal"
+              >
+            <TextView
+                android:id="@+id/programPricePerDay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:shadowColor="@color/primary"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:text="@string/app_name"
+                android:textColor="@color/whiteColor"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                />
+
+            <View
+                android:layout_width="8dp"
+                android:layout_height="1dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="4dp"
+                android:background="@color/whiteColor"
+                ></View>
+
+            <TextView
+                android:id="@+id/programPricePerWeek"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:shadowColor="@color/primary"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:text="@string/app_name"
+                android:textColor="@color/whiteColor"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                />
+          </LinearLayout>
+
+        </LinearLayout>
+
+
+      </FrameLayout>
+
+      <android.support.v7.widget.Toolbar
+          android:id="@+id/toolbar"
+          android:layout_width="match_parent"
+          android:layout_height="?attr/actionBarSize"
+          app:layout_collapseMode="pin"
+          app:popupTheme="@style/AppTheme.PopupOverlay"
+          app:theme="@style/ToolbarStyleLight"
+          />
+
+    </android.support.design.widget.CollapsingToolbarLayout>
+  </android.support.design.widget.AppBarLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
+      >
+
+    <FrameLayout
+        android:id="@+id/swipeRefreshView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        >
+
+      <include layout="@layout/content_detailed_program"/>
+
+    </FrameLayout>
+
+
+  </LinearLayout>
+
+  <android.support.v7.widget.AppCompatButton
+      android:id="@+id/proceedProgramButton"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal|bottom"
+      android:layout_marginTop="8dp"
+      android:background="@color/colorPrimary"
+      android:clickable="true"
+      android:foreground="?android:selectableItemBackground"
+      android:paddingBottom="4dp"
+      android:paddingTop="4dp"
+      android:text="Добавить в корзину"
+      android:textColor="@color/whiteColor"
+      />
+
+</android.support.design.widget.CoordinatorLayout>

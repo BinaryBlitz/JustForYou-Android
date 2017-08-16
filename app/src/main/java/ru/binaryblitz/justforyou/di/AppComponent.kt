@@ -6,8 +6,8 @@ import ru.binaryblitz.justforyou.di.modules.ContextModule
 import ru.binaryblitz.justforyou.di.modules.NetworkModule
 import ru.binaryblitz.justforyou.network.NetworkService
 import ru.binaryblitz.justforyou.ui.login.LoginPresenter
-import ru.binaryblitz.justforyou.ui.main.program_item.ProgramsPresenter
 import ru.binaryblitz.justforyou.ui.main.blocks.BlocksPresenter
+import ru.binaryblitz.justforyou.ui.main.program_item.ProgramsPresenter
 import javax.inject.Singleton
 
 
