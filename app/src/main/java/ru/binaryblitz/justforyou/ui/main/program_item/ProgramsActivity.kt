@@ -19,6 +19,12 @@ class ProgramsActivity : MvpAppCompatActivity(), ProgramsView {
     setContentView(R.layout.activity_program)
 
     presenter.getBlockPrograms(intent.getParcelableExtra<Block>(Extras.EXTRA_BLOCK).id!!)
+
+    initViewElements()
+  }
+
+  private fun initViewElements() {
+
   }
 
   override fun showProgress() {
