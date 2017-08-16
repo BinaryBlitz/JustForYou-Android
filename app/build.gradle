@@ -50,6 +50,7 @@ dependencies {
   implementation "com.android.support:customtabs:$supportLibVersion"
   implementation 'com.arello-mobile:moxy:1.5.3'
   implementation 'com.arello-mobile:moxy-app-compat:1.5.3'
+  implementation 'me.grantland:autofittextview:0.2.+'
   kapt 'com.arello-mobile:moxy-compiler:1.5.3'
   provided 'org.glassfish:javax.annotation:10.0-b28'
   implementation 'com.redmadrobot:inputmask:2.3.0'

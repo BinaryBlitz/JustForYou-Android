@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:attrs="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_content"
+    android:id="@+id/programsCoordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -21,11 +22,11 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_weight="1"
-        style="@style/ToolbarStyleLight"
         android:background="@color/whiteColor"
         app:layout_scrollFlags="scroll|enterAlways"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:title="@string/app_name"
+        style="@style/ToolbarStyleLight"
         >
 
     </android.support.v7.widget.Toolbar>
@@ -33,20 +34,28 @@
   </android.support.design.widget.AppBarLayout>
 
   <android.support.v4.view.ViewPager
-      android:background="@color/backgroundColor"
-      android:id="@+id/container"
+      android:visibility="gone"
+      android:id="@+id/programsViewPager"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:background="@color/backgroundColor"
       app:layout_behavior="@string/appbar_scrolling_view_behavior"
       />
 
-  <android.support.design.widget.FloatingActionButton
-      android:id="@+id/fab"
+  <ProgressBar
+      android:id="@+id/programsProgress"
+      android:layout_gravity="center"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_gravity="end|bottom"
-      android:layout_margin="@dimen/fab_margin"
-      app:srcCompat="@android:drawable/ic_dialog_email"
+      />
+
+  <com.rd.PageIndicatorView
+      android:id="@+id/pageIndicatorView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="bottom|center_horizontal"
+      android:layout_marginBottom="16dp"
+      attrs:piv_viewPager="@id/programsViewPager"
       />
 
 </android.support.design.widget.CoordinatorLayout>

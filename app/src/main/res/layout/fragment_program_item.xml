@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:autofit="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginBottom="48dp"
+    android:animateLayoutChanges="true"
+    >
+  <android.support.v7.widget.CardView
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:card_view="http://schemas.android.com/apk/res-auto"
+      android:id="@+id/classContainerView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_margin="16dp"
+      android:animateLayoutChanges="true"
+      android:background="@color/whiteColor"
+      android:clickable="true"
+      android:foreground="?android:selectableItemBackground"
+      android:orientation="vertical"
+      card_view:cardCornerRadius="16dp"
+      card_view:cardElevation="4dp"
+      >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+      <FrameLayout
+          android:layout_width="match_parent"
+          android:layout_height="250dp"
+          >
+
+        <ImageView
+            android:id="@+id/programImage"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"
+            />
+
+        <TextView
+            android:id="@+id/programTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/program_item_gradient_shape"
+            android:padding="16dp"
+            android:shadowColor="@color/primary"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:text="@string/app_name"
+            android:textColor="@color/whiteColor"
+            android:textSize="24sp"
+            android:textStyle="normal"
+            />
+
+
+      </FrameLayout>
+
+      <TextView
+          android:id="@+id/programPricePerDay"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="16dp"
+          android:layout_marginStart="16dp"
+          android:layout_marginTop="4dp"
+          android:text="@string/app_name"
+          android:textColor="@color/primary"
+          android:textSize="14sp"
+          android:textStyle="normal"
+          />
+
+      <TextView
+          android:id="@+id/programPricePerWeek"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="16dp"
+          android:layout_marginStart="16dp"
+          android:layout_marginTop="4dp"
+          android:text="@string/app_name"
+          android:textColor="@color/primary"
+          android:textSize="14sp"
+          android:textStyle="normal"
+          />
+
+      <me.grantland.widget.AutofitTextView
+          android:id="@+id/programDescription"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="16dp"
+          android:layout_marginStart="16dp"
+          android:layout_marginTop="8dp"
+          android:maxHeight="100dp"
+          android:maxLines="10"
+          android:text="Just for you Just for you Just for you  Just for you  Just for you
+        Just for you  Just for you Just for you Just for you Just for you
+        Just for you  Just for you  Just for you  Just for you "
+          android:textColor="@color/default_base_text"
+          android:textSize="16sp"
+          android:textStyle="normal"
+          autofit:minTextSize="14sp"
+          />
+
+      <android.support.v7.widget.AppCompatButton
+          android:id="@+id/proceedProgramButton"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:layout_marginTop="8dp"
+          android:background="@color/colorPrimary"
+          android:clickable="true"
+          android:foreground="?android:selectableItemBackground"
+          android:paddingBottom="4dp"
+          android:paddingTop="4dp"
+          android:text="Купить"
+          android:textColor="@color/whiteColor"
+          />
+
+
+    </LinearLayout>
+  </android.support.v7.widget.CardView>
+</RelativeLayout>

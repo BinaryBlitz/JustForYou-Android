@@ -8,5 +8,5 @@ import ru.binaryblitz.justforyou.ui.base.BaseLCEView
 
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface ProgramsView : MvpView, BaseLCEView {
-  fun showPrograms(blocks: List<Program>)
+  fun showPrograms(programs: List<Program>)
 }
