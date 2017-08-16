@@ -3,6 +3,7 @@ package ru.binaryblitz.justforyou.network
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import ru.binaryblitz.justforyou.data.programs.Block
 import ru.binaryblitz.justforyou.data.programs.Program
 import ru.binaryblitz.justforyou.data.user.UserInfo
 import ru.binaryblitz.justforyou.network.models.UserData
@@ -42,8 +43,15 @@ class NetworkService(private val serviceApi: ApiService) {
         .map { it }
   }
 
-  fun getFoodPrograms(token: String): Single<List<Program>> {
-    return serviceApi.getPrograms(token)
+  fun getFoodBlocks(token: String): Single<List<Block>> {
+    return serviceApi.getBlocks(token)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .map { it }
+  }
+
+  fun getPrograms(blockId: Int, token: String): Single<List<Program>> {
+    return serviceApi.getPrograms(blockId, token)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .map { it }

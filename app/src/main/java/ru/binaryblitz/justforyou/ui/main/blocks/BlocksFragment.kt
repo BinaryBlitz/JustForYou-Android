@@ -1,4 +1,4 @@
-package ru.binaryblitz.justforyou.ui.main.programs
+package ru.binaryblitz.justforyou.ui.main.blocks
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -11,6 +11,7 @@ import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.PresenterType
 import com.squareup.picasso.Picasso
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_programs.programsRefreshContainer
 import kotlinx.android.synthetic.main.fragment_programs.programsView
 import kotlinx.android.synthetic.main.fragment_programs.progressBarView
@@ -18,17 +19,18 @@ import kotlinx.android.synthetic.main.program_item.view.programImage
 import kotlinx.android.synthetic.main.program_item.view.programTitle
 import kotlinx.android.synthetic.main.program_item.view.programsCount
 import ru.binaryblitz.justforyou.R
-import ru.binaryblitz.justforyou.data.programs.Program
+import ru.binaryblitz.justforyou.data.programs.Block
 import ru.binaryblitz.justforyou.ui.base.BaseRecyclerAdapter
+import ru.binaryblitz.justforyou.ui.router.Router
 
 
 /**
- * Fragment view that contains the logic for displaying list of food delivery programs
+ * Fragment view that contains the logic for displaying list of food delivery blocks
  */
-class ProgramsFragment : MvpAppCompatFragment(), ProgramsView, OnRefreshListener {
+class ProgramsFragment : MvpAppCompatFragment(), BlocksView, OnRefreshListener {
   @InjectPresenter(type = PresenterType.LOCAL)
-  lateinit var presenter: ProgramsPresenter
-  lateinit var adapter: BaseRecyclerAdapter<Program>
+  lateinit var presenter: BlocksPresenter
+  lateinit var adapter: ProgramAdapter
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -42,20 +44,21 @@ class ProgramsFragment : MvpAppCompatFragment(), ProgramsView, OnRefreshListener
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     initViewElements(view)
-    presenter.getFoodPrograms()
+    presenter.getFoodBlocks()
   }
 
   fun initViewElements(view: View) {
     programsRefreshContainer.setOnRefreshListener(this)
 
     adapter = ProgramAdapter()
+    adapter.onItemSelectAction.subscribe { block -> Router.openProgramScreen(activity, block) }
     programsView.layoutManager = LinearLayoutManager(activity)
     programsView.adapter = adapter
 
   }
 
-  override fun showPrograms(programs: List<Program>) {
-    adapter.setData(programs)
+  override fun showBlocks(blocks: List<Block>) {
+    adapter.setData(blocks)
   }
 
   override fun showProgress() {
@@ -75,7 +78,7 @@ class ProgramsFragment : MvpAppCompatFragment(), ProgramsView, OnRefreshListener
   }
 
   override fun onRefresh() {
-    presenter.getFoodPrograms()
+    presenter.getFoodBlocks()
   }
 
   companion object {
@@ -86,19 +89,22 @@ class ProgramsFragment : MvpAppCompatFragment(), ProgramsView, OnRefreshListener
   }
 }
 
-class ProgramAdapter : BaseRecyclerAdapter<Program>() {
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder<Program> {
+class ProgramAdapter : BaseRecyclerAdapter<Block>() {
+  var onItemSelectAction: PublishSubject<Block> = PublishSubject.create()
+
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder<Block> {
     val view = LayoutInflater.from(parent.context).inflate(R.layout.program_item, parent, false)
     return ViewHolder(view)
   }
 
-  private inner class ViewHolder(itemView: View) : RecyclerViewHolder<Program>(itemView) {
+  private inner class ViewHolder(itemView: View) : RecyclerViewHolder<Block>(itemView) {
 
-    override fun setItem(item: Program, position: Int) {
+    override fun setItem(item: Block, position: Int) {
       Picasso.with(itemView.context).load(item.imageUrl).fit().into(itemView.programImage)
       itemView.programTitle.text = item.name
       //TODO Обработка программ/программы
-      itemView.programsCount.text = ""+ item.programsCount + " Программ"
+      itemView.programsCount.text = "" + item.programsCount + " Программ"
+      itemView.setOnClickListener { onItemSelectAction.onNext(getItemAt(position)) }
     }
 
   }

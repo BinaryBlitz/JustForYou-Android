@@ -20,14 +20,21 @@
         android:theme="@style/AppTheme">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
+
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-    <activity android:name=".ui.login.onboarding.OnBoardingActivity"
-        ></activity>
+    <activity android:name=".ui.login.onboarding.OnBoardingActivity"/>
+
     <meta-data
         android:name="io.fabric.ApiKey"
-        android:value="886de8c1d524dbaa9dfdbd457b8c8469ecafdfd4" />
+        android:value="886de8c1d524dbaa9dfdbd457b8c8469ecafdfd4"/>
+
+    <activity
+        android:name=".ui.main.program_item.ProgramsActivity"
+        android:label="@string/title_activity_program"
+        android:theme="@style/AppTheme">
+    </activity>
   </application>
 
 </manifest>

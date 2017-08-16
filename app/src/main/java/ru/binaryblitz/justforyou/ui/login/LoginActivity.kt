@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_login.statusText
 import kotlinx.android.synthetic.main.activity_login.toolbar
 import kotlinx.android.synthetic.main.activity_login.userContainerView
 import ru.binaryblitz.justforyou.R
-import ru.binaryblitz.justforyou.ui.router.ScreenRouter
+import ru.binaryblitz.justforyou.ui.router.Router
 
 
 class LoginActivity : MvpAppCompatActivity(), LoginView {
@@ -90,7 +90,7 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
   }
 
   override fun successLogin() {
-    ScreenRouter.openOnboardingScreen(this)
+    Router.openOnboardingScreen(this)
   }
 
   override fun openUserView() {

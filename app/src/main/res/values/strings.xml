@@ -9,4 +9,7 @@
   <string name="code_send_to">Код отправлен на</string>
   <string name="login_text">Вход</string>
   <string name="wrong_code">Неправильный код!</string>
+  <string name="title_activity_program">ProgramActivity</string>
+  <string name="action_settings">Settings</string>
+  <string name="section_format">Hello World from section: %1$d</string>
 </resources>
