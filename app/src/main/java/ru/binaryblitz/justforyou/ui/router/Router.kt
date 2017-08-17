@@ -4,10 +4,12 @@ import android.app.Activity
 import android.content.Intent
 import ru.binaryblitz.justforyou.components.Extras
 import ru.binaryblitz.justforyou.data.programs.Block
+import ru.binaryblitz.justforyou.data.programs.Program
 import ru.binaryblitz.justforyou.ui.login.LoginActivity
 import ru.binaryblitz.justforyou.ui.login.onboarding.OnBoardingActivity
 import ru.binaryblitz.justforyou.ui.main.MainActivity
 import ru.binaryblitz.justforyou.ui.main.program_item.ProgramsActivity
+import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.DetailedProgramActivity
 
 /**
  * Class that holds all screen navigation and transitions.
@@ -35,4 +37,11 @@ object Router {
     intent.putExtra(Extras.EXTRA_BLOCK, block)
     context.startActivity(intent)
   }
+
+  fun openDetailedProgramScreen(context: Activity, program: Program) {
+    val intent = Intent(context, DetailedProgramActivity::class.java)
+    intent.putExtra(Extras.EXTRA_PROGRAM, program)
+    context.startActivity(intent)
+  }
+
 }

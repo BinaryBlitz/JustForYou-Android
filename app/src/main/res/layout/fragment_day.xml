@@ -1,0 +1,40 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteColor"
+    android:orientation="vertical"
+    >
+
+  <TextView
+      android:id="@+id/menuDayNumber"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="16dp"
+      android:text="День 1"
+      android:textColor="@color/default_base_text"
+      android:textSize="24sp"
+      />
+
+  <TextView
+      android:id="@+id/menuCaloriesCount"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginBottom="16dp"
+      android:text="1000 кКал"
+      android:textColor="@color/primary"
+      android:textSize="14sp"
+      />
+
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/menuView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginBottom="56dp"
+      android:background="@color/backgroundColor"
+      android:visibility="visible"
+      />
+
+</LinearLayout>

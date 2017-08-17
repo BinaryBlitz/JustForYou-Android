@@ -1,0 +1,44 @@
+<FrameLayout
+    android:id="@+id/menuContainer"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+  <android.support.v4.view.ViewPager
+      android:id="@+id/menuViewPager"
+      android:layout_height="match_parent"
+      android:layout_width="wrap_content"
+      />
+
+  <ProgressBar
+      android:id="@+id/menuProgress"
+      android:layout_gravity="center"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      />
+
+  <ImageView
+      android:alpha="0.2"
+      android:id="@+id/leftViewPagerButton"
+      android:layout_gravity="left"
+      android:layout_height="36dp"
+      android:layout_margin="16dp"
+      android:layout_width="48dp"
+      android:src="@drawable/ic_chevron_left_black_24dp"
+      />
+
+  <ImageView
+      android:alpha="0.2"
+      android:id="@+id/rightViewPagerButton"
+      android:layout_gravity="right"
+      android:layout_height="48dp"
+      android:layout_margin="16dp"
+      android:layout_width="48dp"
+      android:src="@drawable/ic_chevron_right_black_24dp"
+      />
+</FrameLayout>
+

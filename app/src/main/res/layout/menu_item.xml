@@ -9,13 +9,11 @@
     android:animateLayoutChanges="true"
     android:background="@color/whiteColor"
     android:clickable="true"
-    android:layout_marginTop="16dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
+    android:layout_margin="16dp"
     android:foreground="?android:selectableItemBackground"
     android:orientation="vertical"
     card_view:cardCornerRadius="4dp"
-    card_view:cardElevation="2dp"
+    card_view:cardElevation="0dp"
     >
   <LinearLayout
       android:layout_width="match_parent"
@@ -24,53 +22,59 @@
       android:orientation="horizontal"
       >
 
-    <ImageView
-        android:id="@+id/programImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center_vertical"
-        />
-
     <LinearLayout
+        android:layout_margin="16dp"
         android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
 
-      <me.grantland.widget.AutofitTextView
-          android:id="@+id/programTitle"
-          android:layout_width="match_parent"
+      <TextView
+          android:id="@+id/menuItemName"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:maxHeight="16sp"
-          android:layout_gravity="center_horizontal"
           android:maxLines="2"
-          android:textAlignment="center"
-          android:textColor="@color/default_base_text"
-          android:textSize="18sp"
+          android:textColor="@color/greyColor"
+          android:textSize="14sp"
           android:textStyle="normal"
           tools:text="Гипохолестириновое питание"
           />
 
-      <View
-          android:layout_width="72dp"
-          android:layout_height="1dp"
-          android:layout_gravity="center_horizontal"
-          android:layout_marginBottom="8dp"
+      <RelativeLayout
           android:layout_marginTop="16dp"
-          android:background="@color/greyColor"
-          ></View>
-
-      <TextView
-          android:id="@+id/programsCount"
-          android:layout_width="wrap_content"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_gravity="center_horizontal"
-          android:text="2 программы"
-          android:textAllCaps="true"
-          android:textColor="@color/primary"
-          android:textSize="14sp"
-          />
+          >
+
+        <TextView
+            android:layout_alignParentStart="true"
+            android:id="@+id/menuItemCaloriesCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="500 кКал"
+            android:textAllCaps="true"
+            android:textColor="@color/primary"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:visibility="gone"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/menuItemTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="08:00-09:00"
+            android:textAllCaps="true"
+            android:textColor="@color/greyColor"
+            android:textSize="14sp"
+            />
+
+
+      </RelativeLayout>
+
     </LinearLayout>
   </LinearLayout>
 </android.support.v7.widget.CardView>

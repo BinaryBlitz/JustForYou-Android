@@ -4,5 +4,6 @@ package ru.binaryblitz.justforyou.components
  * Created by ilyasavin on 8/16/17.
  */
 object Extras {
-  public const val EXTRA_BLOCK: String = "block_id"
+  public const val EXTRA_BLOCK: String = "extra_block"
+  public const val EXTRA_PROGRAM: String = "extra_program"
 }

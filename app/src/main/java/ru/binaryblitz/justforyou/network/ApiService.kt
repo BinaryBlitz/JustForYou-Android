@@ -7,6 +7,7 @@ import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
+import ru.binaryblitz.justforyou.data.menu.Menu
 import ru.binaryblitz.justforyou.data.programs.Block
 import ru.binaryblitz.justforyou.data.programs.Program
 import ru.binaryblitz.justforyou.data.user.UserInfo
@@ -37,4 +38,7 @@ interface ApiService {
   @GET("/api/blocks/{blockId}/programs.json")
   fun getPrograms(@Path("blockId") blockId: Int,
       @Query("api_token") token: String): Single<List<Program>>
+
+  @GET("/api/programs/{programId}/days.json")
+  fun getMenu(@Path("programId") programId: Int, @Query("api_token") token: String): Single<List<Menu>>
 }

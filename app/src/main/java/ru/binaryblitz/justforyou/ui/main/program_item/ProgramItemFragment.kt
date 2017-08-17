@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_program_item.programContainerView
 import kotlinx.android.synthetic.main.fragment_program_item.programDescription
 import kotlinx.android.synthetic.main.fragment_program_item.programImage
 import kotlinx.android.synthetic.main.fragment_program_item.programPricePerDay
@@ -13,6 +14,7 @@ import kotlinx.android.synthetic.main.fragment_program_item.programPricePerWeek
 import kotlinx.android.synthetic.main.fragment_program_item.programTitle
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.data.programs.Program
+import ru.binaryblitz.justforyou.ui.router.Router
 
 class ProgramItemFragment : MvpAppCompatFragment() {
 
@@ -27,8 +29,9 @@ class ProgramItemFragment : MvpAppCompatFragment() {
     programTitle.text = program.name
     Picasso.with(activity).load(program.imageUrl).fit().centerCrop().into(programImage)
     programDescription.text = program.description
-    programPricePerDay.text = program.primaryPrice.toString()
-    programPricePerWeek.text = program.secondaryPrice.toString()
+    programPricePerDay.text = "Цена за 1 день: " + program.primaryPrice.toString()
+    programPricePerWeek.text = "При заказе от 10 дней: " + program.secondaryPrice.toString()
+    programContainerView.setOnClickListener { Router.openDetailedProgramScreen(activity, program) }
   }
 
   companion object {

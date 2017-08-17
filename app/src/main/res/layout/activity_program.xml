@@ -34,19 +34,20 @@
   </android.support.design.widget.AppBarLayout>
 
   <android.support.v4.view.ViewPager
-      android:visibility="gone"
       android:id="@+id/programsViewPager"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:layout_marginBottom="64dp"
       android:background="@color/backgroundColor"
+      android:visibility="gone"
       app:layout_behavior="@string/appbar_scrolling_view_behavior"
       />
 
   <ProgressBar
       android:id="@+id/programsProgress"
-      android:layout_gravity="center"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_gravity="center"
       />
 
   <com.rd.PageIndicatorView
@@ -54,7 +55,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="bottom|center_horizontal"
-      android:layout_marginBottom="16dp"
+      android:layout_marginBottom="8dp"
       attrs:piv_viewPager="@id/programsViewPager"
       />
 

@@ -11,7 +11,7 @@ data class Program(
     val individualPrice: Boolean? = null,
     @Json(name = "secondary_price")
     val secondaryPrice: Int? = null,
-    val prescription: List<String?>? = null,
+    val prescription: List<String>? = null,
     @Json(name = "image_url")
     val imageUrl: String? = null,
     val name: String? = null,
@@ -28,7 +28,7 @@ data class Program(
       source.readString(),
       source.readValue(Boolean::class.java.classLoader) as Boolean?,
       source.readValue(Int::class.java.classLoader) as Int?,
-      ArrayList<String?>().apply { source.readList(this, String::class.java.classLoader) },
+      ArrayList<String>().apply { source.readList(this, String::class.java.classLoader) },
       source.readString(),
       source.readString(),
       source.readString(),
