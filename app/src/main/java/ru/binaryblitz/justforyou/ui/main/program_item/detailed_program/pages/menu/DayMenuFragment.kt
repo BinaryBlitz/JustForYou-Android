@@ -35,9 +35,8 @@ class DayMenuFragment : MvpAppCompatFragment() {
   private fun initViewElements() {
     var menu: Menu = arguments.getParcelable(ARG_DAY)
     val dayPosition = arguments.getInt(ARG_POSITION) + 1
-    val calories = menu.calories
     menuDayNumber.text = "$dayPosition " + getString(string.day_text)
-    menuCaloriesCount.text = "$calories " + getString(string.calories_text)
+    menuCaloriesCount.text = "${menu.calories}" + getString(string.calories_text)
     adapter = MenuAdapter()
     menuView.layoutManager = LinearLayoutManager(activity)
     menuView.adapter = adapter
@@ -75,8 +74,9 @@ class DayMenuFragment : MvpAppCompatFragment() {
 
       override fun setItem(item: MenuItem, position: Int) {
         itemView.menuItemName.text = item.content
-        itemView.menuItemCaloriesCount.text = item.calories.toString() + " Ккал"
-        itemView.menuItemTime.text = item.startsAt.toString() + "-" + item.endsAt.toString()
+        itemView.menuItemCaloriesCount.text = "${item.calories} " + itemView.context.getString(
+            R.string.calories_text)
+        itemView.menuItemTime.text = "${item.startsAt} - ${item.endsAt}"
       }
 
     }
