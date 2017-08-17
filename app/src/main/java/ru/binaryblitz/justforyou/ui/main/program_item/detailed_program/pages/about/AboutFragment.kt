@@ -23,8 +23,7 @@ class AboutFragment : MvpAppCompatFragment() {
     val aboutText = StringBuilder()
     for ((index) in program.prescription?.withIndex()!!) {
       val positionNumber = index + 1
-      aboutText.append(
-          positionNumber.toString() + ". " + (program.prescription as List<String>)[index] + "\n\n")
+      aboutText.append("$positionNumber. " + (program.prescription as List<String>)[index] + "\n\n")
     }
     programAbout.text = aboutText.toString()
 
@@ -36,8 +35,7 @@ class AboutFragment : MvpAppCompatFragment() {
     fun getInstance(type: Program): AboutFragment {
       val fragment = AboutFragment()
       val args = Bundle()
-      args.putParcelable(
-          ARG_PROGRAM, type)
+      args.putParcelable(ARG_PROGRAM, type)
       fragment.arguments = args
       return fragment
     }

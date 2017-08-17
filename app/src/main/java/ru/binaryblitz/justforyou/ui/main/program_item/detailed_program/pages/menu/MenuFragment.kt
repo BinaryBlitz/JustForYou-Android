@@ -52,19 +52,11 @@ class MenuFragment : MvpAppCompatFragment(), MenuView {
     viewPager.adapter = adapter
 
     leftViewPagerButton.setOnClickListener {
-      var tab = viewPager.currentItem
-      if (tab > 0) {
-        tab--
-        viewPager.currentItem = tab
-      } else if (tab == 0) {
-        viewPager.currentItem = tab
-      }
+      viewPager.arrowScroll(View.FOCUS_LEFT);
     }
 
     rightViewPagerButton.setOnClickListener {
-      var tab = viewPager.currentItem
-      tab++
-      viewPager.currentItem = tab
+      viewPager.arrowScroll(View.FOCUS_RIGHT);
     }
   }
 
@@ -90,8 +82,7 @@ class MenuFragment : MvpAppCompatFragment(), MenuView {
     fun getInstance(type: Program): MenuFragment {
       val fragment = MenuFragment()
       val args = Bundle()
-      args.putParcelable(
-          ARG_PROGRAM, type)
+      args.putParcelable(ARG_PROGRAM, type)
       fragment.arguments = args
       return fragment
     }

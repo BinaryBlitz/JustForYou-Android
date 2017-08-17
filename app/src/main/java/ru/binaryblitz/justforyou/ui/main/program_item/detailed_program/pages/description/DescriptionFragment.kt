@@ -28,8 +28,7 @@ class DescriptionFragment : MvpAppCompatFragment() {
     fun getInstance(type: Program): DescriptionFragment {
       val fragment = DescriptionFragment()
       val args = Bundle()
-      args.putParcelable(
-          ARG_PROGRAM, type)
+      args.putParcelable(ARG_PROGRAM, type)
       fragment.arguments = args
       return fragment
     }

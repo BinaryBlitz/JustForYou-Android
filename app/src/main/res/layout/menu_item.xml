@@ -55,7 +55,7 @@
             android:layout_gravity="center_horizontal"
             android:text="500 кКал"
             android:textAllCaps="true"
-            android:textColor="@color/primary_dark"
+            android:textColor="@color/primary"
             android:textSize="14sp"
             />
 

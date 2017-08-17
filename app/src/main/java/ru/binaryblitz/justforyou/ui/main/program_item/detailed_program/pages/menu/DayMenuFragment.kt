@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.menu_item.view.menuItemCaloriesCount
 import kotlinx.android.synthetic.main.menu_item.view.menuItemName
 import kotlinx.android.synthetic.main.menu_item.view.menuItemTime
 import ru.binaryblitz.justforyou.R
+import ru.binaryblitz.justforyou.R.string
 import ru.binaryblitz.justforyou.data.menu.Menu
 import ru.binaryblitz.justforyou.data.menu.MenuItem
 import ru.binaryblitz.justforyou.ui.base.BaseRecyclerAdapter
@@ -34,8 +35,9 @@ class DayMenuFragment : MvpAppCompatFragment() {
   private fun initViewElements() {
     var menu: Menu = arguments.getParcelable(ARG_DAY)
     val dayPosition = arguments.getInt(ARG_POSITION) + 1
-    menuDayNumber.text = dayPosition.toString() + " День"
-    menuCaloriesCount.text = menu.calories.toString() + " Ккал"
+    val calories = menu.calories
+    menuDayNumber.text = "$dayPosition " + getString(string.day_text)
+    menuCaloriesCount.text = "$calories " + getString(string.calories_text)
     adapter = MenuAdapter()
     menuView.layoutManager = LinearLayoutManager(activity)
     menuView.adapter = adapter
@@ -43,7 +45,9 @@ class DayMenuFragment : MvpAppCompatFragment() {
   }
 
   companion object {
-    val ARG_DAY: String = "block_item"
+    // Argument for day menu item parcelable extra
+    val ARG_DAY: String = "day_item"
+    // Number of current day in menu
     val ARG_POSITION: String = "position_item"
 
     fun getInstance(type: Menu, position: Int): DayMenuFragment {
