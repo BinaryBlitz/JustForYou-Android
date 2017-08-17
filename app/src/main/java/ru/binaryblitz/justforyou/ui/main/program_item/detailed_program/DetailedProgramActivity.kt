@@ -15,10 +15,10 @@ import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.R.drawable
 import ru.binaryblitz.justforyou.components.Extras
 import ru.binaryblitz.justforyou.data.programs.Program
-import ru.binaryblitz.justforyou.ui.main.EmptyFragment
 import ru.binaryblitz.justforyou.ui.main.ViewPagerAdapter
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.about.AboutFragment
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.description.DescriptionFragment
+import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.menu.MenuFragment
 
 class DetailedProgramActivity : AppCompatActivity() {
 
@@ -45,7 +45,7 @@ class DetailedProgramActivity : AppCompatActivity() {
     val adapter = ViewPagerAdapter(supportFragmentManager)
     adapter.addFragment(AboutFragment.getInstance(program), "Для кого")
     adapter.addFragment(DescriptionFragment.getInstance(program), "Описание")
-    adapter.addFragment(EmptyFragment(), "Меню")
+    adapter.addFragment(MenuFragment.getInstance(program), "Меню")
 
     viewPager.adapter = adapter
     programTabsLayout.setupWithViewPager(viewPager)
