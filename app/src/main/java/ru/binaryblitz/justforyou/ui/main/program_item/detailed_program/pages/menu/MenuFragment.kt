@@ -2,25 +2,27 @@ package ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.me
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener
+import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.PresenterType
-import kotlinx.android.synthetic.main.fragment_menu.menuProgressBarView
-import kotlinx.android.synthetic.main.fragment_menu.menuRefreshContainer
-import kotlinx.android.synthetic.main.fragment_menu.menuView
+import kotlinx.android.synthetic.main.fragment_menu.leftViewPagerButton
+import kotlinx.android.synthetic.main.fragment_menu.menuContainer
+import kotlinx.android.synthetic.main.fragment_menu.menuProgress
+import kotlinx.android.synthetic.main.fragment_menu.menuViewPager
+import kotlinx.android.synthetic.main.fragment_menu.rightViewPagerButton
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.data.menu.Menu
 import ru.binaryblitz.justforyou.data.programs.Program
+import ru.binaryblitz.justforyou.ui.main.ViewPagerAdapter
 
 
-class MenuFragment : MvpAppCompatFragment(), MenuView, OnRefreshListener {
+class MenuFragment : MvpAppCompatFragment(), MenuView {
   @InjectPresenter(type = PresenterType.LOCAL)
   lateinit var presenter: MenuPresenter
-//  lateinit var adapter: ProgramAdapter
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -38,36 +40,48 @@ class MenuFragment : MvpAppCompatFragment(), MenuView, OnRefreshListener {
   }
 
   fun initViewElements(view: View) {
-    menuRefreshContainer.setOnRefreshListener(this)
 
-//    adapter = ProgramAdapter()
-//    adapter.onItemSelectAction.subscribe { block -> Router.openProgramScreen(activity, block) }
-//    menuView.layoutManager = LinearLayoutManager(activity)
-//    menuView.adapter = adapter
+  }
+
+
+  private fun setupViewPager(viewPager: ViewPager, menu: List<Menu>) {
+    val adapter = ViewPagerAdapter(activity.supportFragmentManager)
+    for ((index) in menu.withIndex()) {
+      adapter.addFragment(DayMenuFragment.getInstance(menu[index], index), "Меню")
+    }
+    viewPager.adapter = adapter
+
+    leftViewPagerButton.setOnClickListener {
+      var tab = viewPager.currentItem
+      if (tab > 0) {
+        tab--
+        viewPager.currentItem = tab
+      } else if (tab == 0) {
+        viewPager.currentItem = tab
+      }
+    }
+
+    rightViewPagerButton.setOnClickListener {
+      var tab = viewPager.currentItem
+      tab++
+      viewPager.currentItem = tab
+    }
   }
 
   override fun showMenu(menu: List<Menu>) {
-    val a = 5
+    setupViewPager(menuViewPager, menu)
   }
 
   override fun showProgress() {
-    menuView.visibility = View.GONE
-    menuProgressBarView.visibility = View.VISIBLE
-    menuRefreshContainer.isRefreshing = false
+    menuProgress.visibility = View.VISIBLE
   }
 
   override fun hideProgress() {
-    menuView.visibility = View.VISIBLE
-    menuProgressBarView.visibility = View.GONE
-    menuRefreshContainer.isRefreshing = false
+    menuProgress.visibility = View.GONE
   }
 
   override fun showError(message: String) {
-    Snackbar.make(menuRefreshContainer, message, Snackbar.LENGTH_SHORT).show()
-  }
-
-  override fun onRefresh() {
-    presenter.getMenu(arguments.getParcelable<Program>(ARG_PROGRAM).id!!)
+    Snackbar.make(menuContainer, message, Snackbar.LENGTH_SHORT).show()
   }
 
   companion object {
@@ -83,24 +97,3 @@ class MenuFragment : MvpAppCompatFragment(), MenuView, OnRefreshListener {
     }
   }
 }
-//
-//class ProgramAdapter : BaseRecyclerAdapter<Block>() {
-//  var onItemSelectAction: PublishSubject<Block> = PublishSubject.create()
-//
-//  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder<Block> {
-//    val view = LayoutInflater.from(parent.context).inflate(R.layout.program_item, parent, false)
-//    return ViewHolder(view)
-//  }
-//
-//  private inner class ViewHolder(itemView: View) : RecyclerViewHolder<Block>(itemView) {
-//
-//    override fun setItem(item: Block, position: Int) {
-//      Picasso.with(itemView.context).load(item.imageUrl).fit().into(itemView.programImage)
-//      itemView.programTitle.text = item.name
-//      //TODO Обработка программ/программы
-//      itemView.programsCount.text = "" + item.programsCount + " Программ"
-//      itemView.setOnClickListener { onItemSelectAction.onNext(getItemAt(position)) }
-//    }
-//
-//  }
-//}

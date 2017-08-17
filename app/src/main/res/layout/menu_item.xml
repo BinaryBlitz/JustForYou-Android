@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/classContainerView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    android:background="@color/whiteColor"
+    android:clickable="true"
+    android:layout_margin="16dp"
+    android:foreground="?android:selectableItemBackground"
+    android:orientation="vertical"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="0dp"
+    >
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="8dp"
+      android:orientation="horizontal"
+      >
+
+    <LinearLayout
+        android:layout_margin="16dp"
+        android:layout_gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+      <TextView
+          android:id="@+id/menuItemName"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:maxLines="2"
+          android:textColor="@color/greyColor"
+          android:textSize="14sp"
+          android:textStyle="normal"
+          tools:text="Гипохолестириновое питание"
+          />
+
+      <RelativeLayout
+          android:layout_marginTop="16dp"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          >
+
+        <TextView
+            android:layout_alignParentStart="true"
+            android:id="@+id/menuItemCaloriesCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="500 кКал"
+            android:textAllCaps="true"
+            android:textColor="@color/primary_dark"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:visibility="gone"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/menuItemTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="08:00-09:00"
+            android:textAllCaps="true"
+            android:textColor="@color/greyColor"
+            android:textSize="14sp"
+            />
+
+
+      </RelativeLayout>
+
+    </LinearLayout>
+  </LinearLayout>
+</android.support.v7.widget.CardView>
