@@ -39,7 +39,7 @@
     <activity
         android:name=".ui.main.program_item.detailed_program.DetailedProgramActivity"
         android:label="@string/title_activity_detailed_program"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppThemeStatusBar">
     </activity>
 
   </application>

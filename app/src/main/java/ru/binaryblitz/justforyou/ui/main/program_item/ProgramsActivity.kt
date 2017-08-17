@@ -51,7 +51,7 @@ class ProgramsActivity : MvpAppCompatActivity(), ProgramsView {
     pageIndicatorView.setViewPager(viewPager)
     pageIndicatorView.radius = 4
     pageIndicatorView.setAnimationType(AnimationType.SLIDE)
-    pageIndicatorView.selectedColor = resources.getColor(R.color.primary_dark)
+    pageIndicatorView.selectedColor = resources.getColor(R.color.primary)
     pageIndicatorView.unselectedColor = resources.getColor(R.color.colorAccent)
   }
 

@@ -21,7 +21,7 @@
       android:clickable="true"
       android:foreground="?android:selectableItemBackground"
       android:orientation="vertical"
-      card_view:cardCornerRadius="16dp"
+      card_view:cardCornerRadius="4dp"
       card_view:cardElevation="4dp"
       >
     <LinearLayout
@@ -50,7 +50,7 @@
             android:layout_gravity="bottom"
             android:background="@drawable/program_item_gradient_shape"
             android:padding="16dp"
-            android:shadowColor="@color/primary"
+            android:shadowColor="@color/blackColor"
             android:shadowDx="1"
             android:shadowDy="1"
             android:shadowRadius="2"
@@ -69,7 +69,7 @@
           android:layout_height="wrap_content"
           android:layout_marginEnd="16dp"
           android:layout_marginStart="16dp"
-          android:layout_marginTop="4dp"
+          android:layout_marginTop="8dp"
           android:text="@string/app_name"
           android:textColor="@color/primary"
           android:textSize="14sp"
@@ -101,7 +101,7 @@
           android:text="Just for you Just for you Just for you  Just for you  Just for you
         Just for you  Just for you Just for you Just for you Just for you
         Just for you  Just for you  Just for you  Just for you "
-          android:textColor="@color/default_base_text"
+          android:textColor="@color/greyColor"
           android:textSize="16sp"
           android:textStyle="normal"
           autofit:minTextSize="14sp"
