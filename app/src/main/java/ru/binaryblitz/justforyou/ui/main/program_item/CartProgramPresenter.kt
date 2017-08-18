@@ -16,7 +16,7 @@ class CartProgramPresenter(var context: Context) {
   fun addProgramToCart(program: Program, view: View,
       cartProgramsLocalStorage: CartLocalStorage, numberPicker: NumberPicker) {
     cartProgramsLocalStorage.addProgramToCart(program.name, numberPicker.value,
-        program.primaryPrice!! * numberPicker.value, program)
+        program.primaryPrice!!, program)
 
     Snackbar.make(view, String.format(context.getString(string.cart_add), program.name),
         Snackbar.LENGTH_LONG).setAction(context.getString(string.cancel)) {

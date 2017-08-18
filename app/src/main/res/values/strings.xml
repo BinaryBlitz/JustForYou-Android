@@ -19,4 +19,6 @@
   <string name="per_ten_days">При заказе от 10 дней:</string>
   <string name="cart_add">Программа %1$s успешно добавлена в корзину</string>
   <string name="cancel">Отменить</string>
+  <string name="program_price">%1$d*%2$d дней = %3$d</string>
+  <string name="cart">Корзина</string>
 </resources>

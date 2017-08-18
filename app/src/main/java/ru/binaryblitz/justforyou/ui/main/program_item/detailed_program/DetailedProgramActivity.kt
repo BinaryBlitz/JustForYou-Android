@@ -23,8 +23,6 @@ import kotlinx.android.synthetic.main.fragment_program_item.programPricePerWeek
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.R.drawable
 import ru.binaryblitz.justforyou.components.Extras
-import ru.binaryblitz.justforyou.data.cart.CartLocalStorage
-import ru.binaryblitz.justforyou.data.cart.ProgramsStorage
 import ru.binaryblitz.justforyou.data.programs.Program
 import ru.binaryblitz.justforyou.ui.base.BaseActivity
 import ru.binaryblitz.justforyou.ui.main.ViewPagerAdapter
@@ -35,7 +33,6 @@ import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.men
 
 
 class DetailedProgramActivity : BaseActivity() {
-  var cartProgramsLocalStorage: CartLocalStorage = ProgramsStorage()
   lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
   lateinit var cartProgramPresenter: CartProgramPresenter
 
