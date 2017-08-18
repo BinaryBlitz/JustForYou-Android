@@ -29,8 +29,8 @@ class ProgramItemFragment : MvpAppCompatFragment() {
     programTitle.text = program.name
     Picasso.with(activity).load(program.imageUrl).fit().centerCrop().into(programImage)
     programDescription.text = program.description
-    programPricePerDay.text = "Цена за 1 день: " + program.primaryPrice.toString()
-    programPricePerWeek.text = "При заказе от 10 дней: " + program.secondaryPrice.toString()
+    programPricePerDay.text = getString(R.string.per_one_day) + "${program.primaryPrice}"
+    programPricePerWeek.text = getString(R.string.per_ten_days) + "${program.secondaryPrice}"
     programContainerView.setOnClickListener { Router.openDetailedProgramScreen(activity, program) }
   }
 

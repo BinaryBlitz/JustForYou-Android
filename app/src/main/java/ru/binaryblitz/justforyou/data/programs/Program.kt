@@ -14,7 +14,7 @@ data class Program(
     val prescription: List<String>? = null,
     @Json(name = "image_url")
     val imageUrl: String? = null,
-    val name: String? = null,
+    val name: String,
     val description: String? = null,
     val threshold: Int? = null,
     val id: Int? = null,

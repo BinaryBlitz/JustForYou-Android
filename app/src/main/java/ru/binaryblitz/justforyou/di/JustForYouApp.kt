@@ -1,6 +1,7 @@
 package ru.binaryblitz.justforyou.di
 
 import android.app.Application
+import io.realm.Realm
 import ru.binaryblitz.justforyou.di.modules.ContextModule
 
 class JustForYouApp : Application() {
@@ -11,6 +12,9 @@ class JustForYouApp : Application() {
     appComponent = DaggerAppComponent.builder()
         .contextModule(ContextModule(this))
         .build()
+
+    Realm.init(this)
+
   }
 
   companion object {

@@ -15,4 +15,7 @@
   <string name="title_activity_detailed_program">DetailedProgramActivity</string>
   <string name="day_text"> День</string>
   <string name="calories_text"> Ккал</string>
+  <string name="per_one_day">За 1 день:</string>
+  <string name="per_ten_days">При заказе от 10 дней:</string>
+  <string name="cart_add">Программа успешно добавлена в корзину</string>
 </resources>

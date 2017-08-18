@@ -1,7 +1,7 @@
 package ru.binaryblitz.justforyou.components
 
 /**
- * Created by ilyasavin on 8/16/17.
+ * Constants for screen transitions intent data
  */
 object Extras {
   public const val EXTRA_BLOCK: String = "extra_block"
