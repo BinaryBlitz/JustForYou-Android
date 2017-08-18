@@ -18,15 +18,12 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:layout_weight="1"
         android:background="@color/whiteColor"
-        app:title="Just for you"
-        app:layout_scrollFlags="scroll|enterAlways|snap"
-        app:popupTheme="@style/AppTheme.AppBarOverlay"
-        app:theme="@style/ToolbarStyleLight"
-        app:titleTextColor="@color/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
         style="@style/ToolbarStyleLight"
         />
-
   </android.support.design.widget.AppBarLayout>
 
   <ru.binaryblitz.justforyou.ui.base.NonSwipeableViewPager
