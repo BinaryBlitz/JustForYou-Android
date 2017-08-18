@@ -20,6 +20,8 @@ import kotlinx.android.synthetic.main.content_detailed_program.detailedProgramVi
 import kotlinx.android.synthetic.main.content_detailed_program.programTabsLayout
 import kotlinx.android.synthetic.main.fragment_program_item.programPricePerDay
 import kotlinx.android.synthetic.main.fragment_program_item.programPricePerWeek
+import kotlinx.android.synthetic.main.toolbar_cart_icon.badgeCount
+import kotlinx.android.synthetic.main.toolbar_cart_icon.cartView
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.R.drawable
 import ru.binaryblitz.justforyou.components.Extras
@@ -30,6 +32,7 @@ import ru.binaryblitz.justforyou.ui.main.program_item.CartProgramPresenter
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.about.AboutFragment
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.description.DescriptionFragment
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.menu.MenuFragment
+import ru.binaryblitz.justforyou.ui.router.Router
 
 
 class DetailedProgramActivity : BaseActivity() {
@@ -40,6 +43,11 @@ class DetailedProgramActivity : BaseActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_detailed_program)
     initViewElements()
+  }
+
+  override fun onResume() {
+    super.onResume()
+    updateCartBadgeCount(badgeCount, cartProgramsLocalStorage.getCartPrograms().size)
   }
 
   private fun initViewElements() {
@@ -83,7 +91,10 @@ class DetailedProgramActivity : BaseActivity() {
           numberPicker)
 
       hideDayPickerAlert()
+      updateCartBadgeCount(badgeCount, cartProgramsLocalStorage.getCartPrograms().size)
     }
+
+    initCartBadgeIcon()
   }
 
   fun showDayPickerAlert() {
@@ -103,6 +114,11 @@ class DetailedProgramActivity : BaseActivity() {
 
     viewPager.adapter = adapter
     programTabsLayout.setupWithViewPager(viewPager)
+  }
+
+  override fun initCartBadgeIcon() {
+    updateCartBadgeCount(badgeCount, cartProgramsLocalStorage.getCartPrograms().size)
+    cartView.setOnClickListener { Router.openCartScreen(this) }
   }
 
 }

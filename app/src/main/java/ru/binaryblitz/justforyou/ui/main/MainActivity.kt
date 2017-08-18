@@ -13,6 +13,9 @@ import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_main.bottomBar
 import kotlinx.android.synthetic.main.activity_main.tabsViewPager
 import kotlinx.android.synthetic.main.activity_main.toolbar
+import kotlinx.android.synthetic.main.toolbar_cart_icon.badgeCount
+import kotlinx.android.synthetic.main.toolbar_cart_icon.cartIcon
+import kotlinx.android.synthetic.main.toolbar_cart_icon.cartView
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.data.user.UserProfileStorage
 import ru.binaryblitz.justforyou.data.user.UserStorageImpl
@@ -67,6 +70,17 @@ class MainActivity : BaseActivity() {
     }
     setSupportActionBar(toolbar)
     initDrawer(toolbar, this)
+    initCartBadgeIcon()
+  }
+
+  override fun onResume() {
+    super.onResume()
+    updateCartBadgeCount(badgeCount, cartProgramsLocalStorage.getCartPrograms().size)
+  }
+
+  override fun initCartBadgeIcon() {
+    updateCartBadgeCount(badgeCount, cartProgramsLocalStorage.getCartPrograms().size)
+    cartView.setOnClickListener { Router.openCartScreen(this) }
   }
 
   private fun showTab(title: String, position: Int) {

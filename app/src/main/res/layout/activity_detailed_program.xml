@@ -23,13 +23,13 @@
         android:layout_height="@dimen/app_bar_height"
         android:animateLayoutChanges="true"
         android:fitsSystemWindows="true"
-        app:titleEnabled="true"
         app:contentScrim="@color/whiteColor"
         app:elevation="1dp"
         app:expandedTitleMarginEnd="64dp"
         app:expandedTitleMarginStart="48dp"
         app:layout_scrollFlags="scroll|exitUntilCollapsed"
         app:scrimAnimationDuration="200"
+        app:titleEnabled="true"
         >
 
       <FrameLayout
@@ -124,18 +124,28 @@
       </FrameLayout>
 
       <android.support.v7.widget.Toolbar
-          app:title=""
-          app:titleTextColor="@color/blackColor"
           android:id="@+id/toolbar"
           android:layout_width="match_parent"
           android:layout_height="?attr/actionBarSize"
           app:layout_collapseMode="pin"
           app:popupTheme="@style/AppTheme.PopupOverlay"
           app:theme="@style/ToolbarStyleLight"
+          app:title=""
+          app:titleTextColor="@color/blackColor"
           />
 
     </android.support.design.widget.CollapsingToolbarLayout>
   </android.support.design.widget.AppBarLayout>
+
+
+  <FrameLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="right|top"
+      android:layout_marginTop="32dp"
+      >
+    <include layout="@layout/toolbar_cart_icon"></include>
+  </FrameLayout>
 
   <View
       android:id="@+id/shadow2"
@@ -216,12 +226,12 @@
           />
 
       <NumberPicker
-          android:layout_gravity="center_horizontal"
-          android:layout_marginStart="32dp"
-          android:layout_marginEnd="32dp"
           android:id="@+id/numberPicker"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:layout_marginEnd="32dp"
+          android:layout_marginStart="32dp"
           ></NumberPicker>
 
       <Button

@@ -14,16 +14,37 @@
       android:theme="@style/AppTheme.AppBarOverlay"
       >
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <FrameLayout
+        android:id="@+id/toolbar_container"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_weight="1"
-        android:background="@color/whiteColor"
-        app:layout_scrollFlags="scroll|enterAlways"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        style="@style/ToolbarStyleLight"
-        />
+        android:layout_height="wrap_content"
+        >
+
+      <android.support.v7.widget.Toolbar
+          android:id="@+id/toolbar"
+          android:layout_width="match_parent"
+          android:layout_height="?attr/actionBarSize"
+          android:layout_weight="1"
+          android:background="@color/whiteColor"
+          app:layout_scrollFlags="scroll|enterAlways"
+          app:popupTheme="@style/AppTheme.PopupOverlay"
+          style="@style/ToolbarStyleLight"
+          >
+
+      </android.support.v7.widget.Toolbar>
+
+      <FrameLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_vertical|right"
+          android:layout_marginBottom="4dp"
+          >
+        <include layout="@layout/toolbar_cart_icon"></include>
+      </FrameLayout>
+
+    </FrameLayout>
+
+
   </android.support.design.widget.AppBarLayout>
 
   <ru.binaryblitz.justforyou.ui.base.NonSwipeableViewPager

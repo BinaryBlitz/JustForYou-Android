@@ -19,8 +19,6 @@ class CartProgramPresenter(var context: Context) {
         program.primaryPrice!!, program)
 
     Snackbar.make(view, String.format(context.getString(string.cart_add), program.name),
-        Snackbar.LENGTH_LONG).setAction(context.getString(string.cancel)) {
-      cartProgramsLocalStorage.removeProgramFromCart(program.id!!)
-    }.show()
+        Snackbar.LENGTH_LONG).show()
   }
 }

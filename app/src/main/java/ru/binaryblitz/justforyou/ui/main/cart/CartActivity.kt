@@ -12,17 +12,21 @@ import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_cart.cartProgramsList
 import kotlinx.android.synthetic.main.activity_program.toolbar
 import kotlinx.android.synthetic.main.cart_item.view.blockTitle
+import kotlinx.android.synthetic.main.cart_item.view.closeAlert
 import kotlinx.android.synthetic.main.cart_item.view.programTitle
 import kotlinx.android.synthetic.main.cart_item.view.programsPrice
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.R.string
+import ru.binaryblitz.justforyou.data.cart.CartLocalStorage
 import ru.binaryblitz.justforyou.data.cart.CartModel
+import ru.binaryblitz.justforyou.data.cart.ProgramsStorage
 import ru.binaryblitz.justforyou.ui.base.BaseRecyclerAdapter
 
 class CartActivity : MvpAppCompatActivity(), CartView {
   @InjectPresenter
   lateinit var presenter: CartPresenter
   lateinit var adapter: CartAdapter
+  var cartProgramsLocalStorage: CartLocalStorage = ProgramsStorage()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -42,6 +46,9 @@ class CartActivity : MvpAppCompatActivity(), CartView {
     adapter = CartAdapter()
     cartProgramsList.adapter = adapter
     adapter.setData(programs)
+    adapter.onItemSelectAction.subscribe { model ->
+      cartProgramsLocalStorage.removeProgramFromCart(model.programId!!)
+    }
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -65,6 +72,11 @@ class CartAdapter : BaseRecyclerAdapter<CartModel>() {
       itemView.programsPrice.text = String.format(
           itemView.context.getString(R.string.program_price),
           item.price, item.days, item.price!! * item.days!!)
+      itemView.closeAlert.setOnClickListener {
+        dataItems.remove(item)
+        notifyItemRemoved(position)
+        onItemSelectAction.onNext(item)
+      }
     }
 
   }

@@ -11,12 +11,15 @@ import kotlinx.android.synthetic.main.activity_program.programsCoordinator
 import kotlinx.android.synthetic.main.activity_program.programsProgress
 import kotlinx.android.synthetic.main.activity_program.programsViewPager
 import kotlinx.android.synthetic.main.activity_program.toolbar
+import kotlinx.android.synthetic.main.toolbar_cart_icon.badgeCount
+import kotlinx.android.synthetic.main.toolbar_cart_icon.cartView
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.components.Extras
 import ru.binaryblitz.justforyou.data.programs.Block
 import ru.binaryblitz.justforyou.data.programs.Program
 import ru.binaryblitz.justforyou.ui.base.BaseActivity
 import ru.binaryblitz.justforyou.ui.main.ViewPagerAdapter
+import ru.binaryblitz.justforyou.ui.router.Router
 
 class ProgramsActivity : BaseActivity(), ProgramsView {
   @InjectPresenter
@@ -37,6 +40,7 @@ class ProgramsActivity : BaseActivity(), ProgramsView {
     toolbar.title = title
     toolbar.setNavigationIcon(R.drawable.ic_arrow_back24b)
     toolbar.setNavigationOnClickListener { onBackPressed() }
+    initCartBadgeIcon()
   }
 
   private fun setupViewPager(viewPager: ViewPager, programs: List<Program>) {
@@ -70,6 +74,16 @@ class ProgramsActivity : BaseActivity(), ProgramsView {
 
   override fun showPrograms(programs: List<Program>) {
     setupViewPager(programsViewPager, programs)
+  }
+
+  override fun initCartBadgeIcon() {
+    updateCartBadgeCount(badgeCount, cartProgramsLocalStorage.getCartPrograms().size)
+    cartView.setOnClickListener { Router.openCartScreen(this) }
+  }
+
+  override fun onResume() {
+    super.onResume()
+    updateCartBadgeCount(badgeCount, cartProgramsLocalStorage.getCartPrograms().size)
   }
 
 }

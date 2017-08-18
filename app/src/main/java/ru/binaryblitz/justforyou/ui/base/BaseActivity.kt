@@ -3,15 +3,13 @@ package ru.binaryblitz.justforyou.ui.base
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.support.annotation.Nullable
-import android.view.Menu
-import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatActivity
-import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.data.cart.CartLocalStorage
 import ru.binaryblitz.justforyou.data.cart.ProgramsStorage
-import ru.binaryblitz.justforyou.ui.router.Router
 
-open class BaseActivity : MvpAppCompatActivity() {
+abstract class BaseActivity : MvpAppCompatActivity() {
   var cartProgramsLocalStorage: CartLocalStorage = ProgramsStorage()
 
   override fun setContentView(layoutResID: Int) {
@@ -23,19 +21,18 @@ open class BaseActivity : MvpAppCompatActivity() {
     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
   }
 
-  override fun onCreateOptionsMenu(menu: Menu): Boolean {
-    menuInflater.inflate(R.menu.menu_cart, menu)
-    return true
-  }
+  // Set screen router to cart icon view container
+  // and init views
+  abstract fun initCartBadgeIcon()
 
-  override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    val id = item.getItemId()
-
-    if (id == R.id.action_cart) {
-      Router.openCartScreen(this)
-      return true
+  fun updateCartBadgeCount(cartBadgeTextView: TextView, count: Int) {
+    runOnUiThread {
+      if (count == 0) {
+        cartBadgeTextView.visibility = View.INVISIBLE
+      } else {
+        cartBadgeTextView.visibility = View.VISIBLE
+        cartBadgeTextView.text = "$count"
+      }
     }
-
-    return super.onOptionsItemSelected(item)
   }
 }
