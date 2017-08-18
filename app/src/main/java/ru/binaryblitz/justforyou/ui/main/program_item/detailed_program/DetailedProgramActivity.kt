@@ -1,12 +1,17 @@
 package ru.binaryblitz.justforyou.ui.main.program_item.detailed_program
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
+import android.support.design.widget.BottomSheetBehavior
+import android.support.design.widget.BottomSheetBehavior.BottomSheetCallback
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_detailed_program.addToCartButton
 import kotlinx.android.synthetic.main.activity_detailed_program.coordinator
+import kotlinx.android.synthetic.main.activity_detailed_program.dayPickerAlertSheet
 import kotlinx.android.synthetic.main.activity_detailed_program.detailedProgramImage
+import kotlinx.android.synthetic.main.activity_detailed_program.numberPicker
 import kotlinx.android.synthetic.main.activity_detailed_program.proceedProgramButton
 import kotlinx.android.synthetic.main.activity_detailed_program.programTitle
 import kotlinx.android.synthetic.main.activity_detailed_program.toolbar
@@ -21,12 +26,16 @@ import ru.binaryblitz.justforyou.data.cart.CartLocalStorage
 import ru.binaryblitz.justforyou.data.cart.ProgramsStorage
 import ru.binaryblitz.justforyou.data.programs.Program
 import ru.binaryblitz.justforyou.ui.main.ViewPagerAdapter
+import ru.binaryblitz.justforyou.ui.main.program_item.CartProgramPresenter
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.about.AboutFragment
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.description.DescriptionFragment
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.menu.MenuFragment
 
+
 class DetailedProgramActivity : AppCompatActivity() {
   var cartProgramsLocalStorage: CartLocalStorage = ProgramsStorage()
+  lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
+  lateinit var cartProgramPresenter: CartProgramPresenter
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -35,6 +44,8 @@ class DetailedProgramActivity : AppCompatActivity() {
   }
 
   private fun initViewElements() {
+    cartProgramPresenter = CartProgramPresenter(this)
+
     val program: Program = intent.getParcelableExtra(Extras.EXTRA_PROGRAM)
     Picasso.with(this).load(program.imageUrl).fit().centerCrop().into(detailedProgramImage)
     toolbar.title = ""
@@ -44,11 +55,42 @@ class DetailedProgramActivity : AppCompatActivity() {
     programPricePerDay.text = getString(R.string.per_one_day) + "${program.primaryPrice}"
     programPricePerWeek.text = getString(R.string.per_ten_days) + "${program.secondaryPrice}"
     proceedProgramButton.setOnClickListener {
-      cartProgramsLocalStorage.addProgramToCart(program.name, 1, 1, program)
-      Snackbar.make(coordinator, getString(R.string.cart_add), Snackbar.LENGTH_LONG).show()
+      showDayPickerAlert()
     }
+    bottomSheetBehavior = BottomSheetBehavior.from(dayPickerAlertSheet as View)
+    bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetCallback() {
+      override fun onSlide(bottomSheet: View, slideOffset: Float) {
+      }
+
+      override fun onStateChanged(bottomSheet: View, newState: Int) {
+        if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+          proceedProgramButton.visibility = View.VISIBLE
+        }
+      }
+    }
+    )
+    hideDayPickerAlert()
 
     setupViewPager(detailedProgramViewPager, program)
+
+    numberPicker.maxValue = 31
+    numberPicker.minValue = 1
+
+    addToCartButton.setOnClickListener {
+      cartProgramPresenter.addProgramToCart(program, coordinator, cartProgramsLocalStorage,
+          numberPicker)
+
+      hideDayPickerAlert()
+    }
+  }
+
+  fun showDayPickerAlert() {
+    proceedProgramButton.visibility = View.GONE
+    bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+  }
+
+  fun hideDayPickerAlert() {
+    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
   }
 
   private fun setupViewPager(viewPager: ViewPager, program: Program) {
