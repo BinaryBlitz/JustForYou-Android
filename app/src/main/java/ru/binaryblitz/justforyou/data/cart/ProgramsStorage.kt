@@ -5,7 +5,7 @@ import ru.binaryblitz.justforyou.data.programs.Program
 
 
 /**
- * Created by ilyasavin on 8/17/17.
+ * Cart local storage implemented via realm database
  */
 class ProgramsStorage : CartLocalStorage {
   var realmLocalStorage: Realm = Realm.getDefaultInstance()

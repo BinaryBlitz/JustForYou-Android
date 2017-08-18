@@ -19,9 +19,6 @@ import java.util.concurrent.TimeUnit.MILLISECONDS
 import java.util.concurrent.TimeUnit.NANOSECONDS
 import javax.inject.Singleton
 
-/**
- * Created by ilyasavin on 8/8/17.
- */
 private const val DEFAULT_CONNECT_TIMEOUT = 60000L
 private val HTTP_LOG_LEVEL = if (BuildConfig.DEBUG) BODY else BASIC
 private val FITMOST_BASE_URL =
