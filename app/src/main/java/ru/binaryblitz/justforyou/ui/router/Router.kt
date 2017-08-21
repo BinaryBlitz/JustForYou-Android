@@ -10,6 +10,7 @@ import ru.binaryblitz.justforyou.ui.login.onboarding.OnBoardingActivity
 import ru.binaryblitz.justforyou.ui.main.MainActivity
 import ru.binaryblitz.justforyou.ui.main.program_item.ProgramsActivity
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.DetailedProgramActivity
+import ru.binaryblitz.justforyou.ui.main.settings.SettingsActivity
 
 /**
  * Class that holds all screen navigation and transitions.
@@ -41,6 +42,11 @@ object Router {
   fun openDetailedProgramScreen(context: Activity, program: Program) {
     val intent = Intent(context, DetailedProgramActivity::class.java)
     intent.putExtra(Extras.EXTRA_PROGRAM, program)
+    context.startActivity(intent)
+  }
+
+  fun openSettingsScreen(context: Activity) {
+    val intent = Intent(context, SettingsActivity::class.java)
     context.startActivity(intent)
   }
 

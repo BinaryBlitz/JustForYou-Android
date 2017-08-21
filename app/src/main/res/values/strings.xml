@@ -18,4 +18,5 @@
   <string name="per_one_day">За 1 день:</string>
   <string name="per_ten_days">При заказе от 10 дней:</string>
   <string name="cart_add">Программа успешно добавлена в корзину</string>
+  <string name="title_activity_settings">SettingsActivity</string>
 </resources>

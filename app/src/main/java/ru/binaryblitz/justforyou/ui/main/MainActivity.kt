@@ -10,6 +10,7 @@ import com.mikepenz.materialdrawer.DrawerBuilder
 import com.mikepenz.materialdrawer.model.DividerDrawerItem
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem
 import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_main.bottomBar
 import kotlinx.android.synthetic.main.activity_main.tabsViewPager
@@ -74,11 +75,12 @@ class MainActivity : AppCompatActivity() {
   }
 
   fun initDrawer(toolbar: android.support.v7.widget.Toolbar, activity: Activity) {
-    val itemPrograms = PrimaryDrawerItem().withName("Программы")
-    val itemPlaces = PrimaryDrawerItem().withName("Места")
-    val itemPaymentHistory = PrimaryDrawerItem().withName("История платежей")
-    val itemSubstitutions = PrimaryDrawerItem().withName("Замены")
-    val itemSpecial = PrimaryDrawerItem().withName("Акции")
+    val itemPrograms = PrimaryDrawerItem().withName("Программы").withSelectable(false)
+    val itemPlaces = PrimaryDrawerItem().withName("Места").withSelectable(false)
+    val itemPaymentHistory = PrimaryDrawerItem().withName("История платежей").withSelectable(false)
+    val itemSubstitutions = PrimaryDrawerItem().withName("Замены").withSelectable(false)
+    val itemSpecial = PrimaryDrawerItem().withName("Акции").withSelectable(false)
+    val itemSettings = SecondaryDrawerItem().withName("Настройки").withSelectable(false)
 
     val accountHeader: AccountHeader = AccountHeaderBuilder()
         .withActivity(this)
@@ -101,10 +103,19 @@ class MainActivity : AppCompatActivity() {
             itemPrograms,
             itemPlaces,
             itemPaymentHistory,
-            DividerDrawerItem(),
             itemSubstitutions,
-            itemSpecial
+            itemSpecial,
+            DividerDrawerItem(),
+            itemSettings
         )
+        .withOnDrawerItemClickListener { view, position, drawerItem ->
+          when (drawerItem) {
+            itemSettings -> {
+              Router.openSettingsScreen(this)
+            }
+          }
+          true
+        }
         .build()
   }
 
