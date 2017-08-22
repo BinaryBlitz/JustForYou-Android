@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.fragment_program_item.programPricePerDay
 import kotlinx.android.synthetic.main.fragment_program_item.programPricePerWeek
 import kotlinx.android.synthetic.main.fragment_program_item.programTitle
 import ru.binaryblitz.justforyou.R
+import ru.binaryblitz.justforyou.components.Constants
 import ru.binaryblitz.justforyou.data.cart.CartLocalStorage
 import ru.binaryblitz.justforyou.data.cart.ProgramsStorage
 import ru.binaryblitz.justforyou.data.programs.Program
@@ -45,8 +46,8 @@ class ProgramItemFragment : MvpAppCompatFragment() {
     proceedProgramButton.setOnClickListener { showDayPickerAlert() }
     closeAlert.setOnClickListener { hideDayPickerAlert() }
 
-    numberPicker.maxValue = 31
-    numberPicker.minValue = 1
+    numberPicker.maxValue = Constants.MAX_PROGRAM_DAYS
+    numberPicker.minValue = Constants.MIN_PROGRAM_DAYS
 
     addToCartButton.setOnClickListener {
       cartProgramPresenter.addProgramToCart(program, programItemContainer, cartProgramsLocalStorage,

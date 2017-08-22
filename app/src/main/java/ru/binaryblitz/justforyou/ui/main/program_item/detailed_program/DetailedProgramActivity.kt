@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.toolbar_cart_icon.badgeCount
 import kotlinx.android.synthetic.main.toolbar_cart_icon.cartView
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.R.drawable
+import ru.binaryblitz.justforyou.components.Constants
 import ru.binaryblitz.justforyou.components.Extras
 import ru.binaryblitz.justforyou.data.programs.Program
 import ru.binaryblitz.justforyou.ui.base.BaseActivity
@@ -83,8 +84,8 @@ class DetailedProgramActivity : BaseActivity() {
 
     setupViewPager(detailedProgramViewPager, program)
 
-    numberPicker.maxValue = 31
-    numberPicker.minValue = 1
+    numberPicker.maxValue = Constants.MAX_PROGRAM_DAYS
+    numberPicker.minValue = Constants.MIN_PROGRAM_DAYS
 
     addToCartButton.setOnClickListener {
       cartProgramPresenter.addProgramToCart(program, coordinator, cartProgramsLocalStorage,
