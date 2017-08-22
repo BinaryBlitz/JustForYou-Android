@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
+import kotlinx.android.synthetic.main.activity_login.firstNameEdit
 import kotlinx.android.synthetic.main.activity_settings.settingsContainer
 import kotlinx.android.synthetic.main.activity_settings.toolbar
 import kotlinx.android.synthetic.main.content_settings.aboutApp
@@ -43,7 +44,7 @@ class SettingsActivity : AppCompatActivity(), TextWatcher {
     toolbar.title = getString(string.settings)
     toolbar.setNavigationIcon(R.drawable.ic_arrow_back24b)
     toolbar.setNavigationOnClickListener { onBackPressed() }
-    nameEdit.setText(userProfileStorage.getUser().firstName)
+    firstNameEdit.setText(userProfileStorage.getUser().firstName)
     lastNameEdit.setText(userProfileStorage.getUser().lastName)
     nameEdit.addTextChangedListener(this)
     lastNameEdit.addTextChangedListener(this)

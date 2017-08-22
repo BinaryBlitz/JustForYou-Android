@@ -59,8 +59,7 @@ object Router {
     val intentBuilder = CustomTabsIntent.Builder()
 
     intentBuilder.setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary))
-    intentBuilder.setSecondaryToolbarColor(
-        ContextCompat.getColor(context, R.color.colorPrimaryDark))
+    intentBuilder.setSecondaryToolbarColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
     val customTabsIntent = intentBuilder.build()
 
     customTabsIntent.launchUrl(context, uri)
