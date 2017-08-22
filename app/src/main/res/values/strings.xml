@@ -17,9 +17,12 @@
   <string name="calories_text"> Ккал</string>
   <string name="per_one_day">За 1 день:</string>
   <string name="per_ten_days">При заказе от 10 дней:</string>
-  <string name="cart_add">Программа успешно добавлена в корзину</string>
   <string name="title_activity_settings">SettingsActivity</string>
   <string name="settings">Настройки</string>
   <string name="success_update_user">Профиль обновлен</string>
   <string name="just_for_you_about_link">https://justforyou.ru/about/</string>
+  <string name="cart_add">Программа %1$s успешно добавлена в корзину</string>
+  <string name="cancel">Отменить</string>
+  <string name="program_price">%1$d*%2$d дней = %3$d</string>
+  <string name="cart">Корзина</string>
 </resources>

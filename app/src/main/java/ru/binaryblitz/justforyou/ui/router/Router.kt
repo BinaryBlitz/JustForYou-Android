@@ -12,6 +12,7 @@ import ru.binaryblitz.justforyou.data.programs.Program
 import ru.binaryblitz.justforyou.ui.login.LoginActivity
 import ru.binaryblitz.justforyou.ui.login.onboarding.OnBoardingActivity
 import ru.binaryblitz.justforyou.ui.main.MainActivity
+import ru.binaryblitz.justforyou.ui.main.cart.CartActivity
 import ru.binaryblitz.justforyou.ui.main.program_item.ProgramsActivity
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.DetailedProgramActivity
 import ru.binaryblitz.justforyou.ui.main.settings.SettingsActivity
@@ -65,4 +66,8 @@ object Router {
     customTabsIntent.launchUrl(context, uri)
   }
 
+  fun openCartScreen(context: Activity) {
+    val intent = Intent(context, CartActivity::class.java)
+    context.startActivity(intent)
+  }
 }
