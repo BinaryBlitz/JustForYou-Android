@@ -37,6 +37,13 @@ class NetworkService(private val serviceApi: ApiService) {
         .map { it }
   }
 
+  fun updateUser(user: UserData, token: String): Single<Any> {
+    return serviceApi.updateUser(user, token)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .map { it }
+  }
+
   fun getUser(token: String): Single<UserInfo> {
     return serviceApi.getUser(token)
         .subscribeOn(Schedulers.io())
