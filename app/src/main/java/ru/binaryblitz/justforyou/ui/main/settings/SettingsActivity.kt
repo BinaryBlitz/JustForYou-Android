@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import kotlinx.android.synthetic.main.activity_settings.settingsContainer
 import kotlinx.android.synthetic.main.activity_settings.toolbar
+import kotlinx.android.synthetic.main.content_settings.aboutApp
 import kotlinx.android.synthetic.main.content_settings.lastNameEdit
 import kotlinx.android.synthetic.main.content_settings.nameEdit
 import ru.binaryblitz.justforyou.R
@@ -18,6 +19,7 @@ import ru.binaryblitz.justforyou.di.JustForYouApp
 import ru.binaryblitz.justforyou.network.NetworkService
 import ru.binaryblitz.justforyou.network.models.User
 import ru.binaryblitz.justforyou.network.models.UserData
+import ru.binaryblitz.justforyou.ui.router.Router
 import javax.inject.Inject
 
 
@@ -45,6 +47,10 @@ class SettingsActivity : AppCompatActivity(), TextWatcher {
     lastNameEdit.setText(userProfileStorage.getUser().lastName)
     nameEdit.addTextChangedListener(this)
     lastNameEdit.addTextChangedListener(this)
+    aboutApp.setOnClickListener {
+      Router.openJustForYouLink(this,
+          getString(string.just_for_you_about_link))
+    }
   }
 
   override fun afterTextChanged(p0: Editable?) {
@@ -60,8 +66,8 @@ class SettingsActivity : AppCompatActivity(), TextWatcher {
   private fun updateUser(user: UserInfo) {
     val updatedUser = UserInfo(lastNameEdit.text.toString(), nameEdit.text.toString(), user.balance,
         user.phoneNumber, user.id, user.email, user.apiToken)
-    networkService.updateUser(UserData(User(lastNameEdit.text.toString(),
-        null, nameEdit.text.toString(), null)), userProfileStorage.getToken())
+    networkService.updateUser(UserData(User(updatedUser.lastName,
+        null, updatedUser.firstName, null)), userProfileStorage.getToken())
         .subscribe(
             { response ->
               userProfileStorage.saveUser(updatedUser)
