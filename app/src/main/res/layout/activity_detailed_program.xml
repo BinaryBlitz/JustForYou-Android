@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
-    android:id="@+id/coordinator"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.DetailedProgramActivity"
@@ -29,6 +29,7 @@
         app:expandedTitleMarginStart="48dp"
         app:layout_scrollFlags="scroll|exitUntilCollapsed"
         app:scrimAnimationDuration="200"
+        app:titleEnabled="true"
         >
 
       <FrameLayout
@@ -129,10 +130,43 @@
           app:layout_collapseMode="pin"
           app:popupTheme="@style/AppTheme.PopupOverlay"
           app:theme="@style/ToolbarStyleLight"
+          app:title=""
+          app:titleTextColor="@color/blackColor"
           />
 
     </android.support.design.widget.CollapsingToolbarLayout>
   </android.support.design.widget.AppBarLayout>
+
+
+  <FrameLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="right|top"
+      android:layout_marginTop="32dp"
+      >
+    <include layout="@layout/toolbar_cart_icon"></include>
+  </FrameLayout>
+
+  <View
+      android:id="@+id/shadow2"
+      android:layout_width="match_parent"
+      android:layout_height="8dp"
+      android:background="@drawable/shadow"
+      app:layout_anchor="@id/proceedProgramButton"
+      />
+
+  <android.support.v7.widget.AppCompatButton
+      android:id="@+id/proceedProgramButton"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal|bottom"
+      android:layout_marginTop="8dp"
+      android:background="@color/colorPrimary"
+      android:clickable="true"
+      android:foreground="?android:selectableItemBackground"
+      android:text="Добавить в корзину"
+      android:textColor="@color/whiteColor"
+      />
 
   <LinearLayout
       android:layout_width="match_parent"
@@ -155,19 +189,67 @@
 
   </LinearLayout>
 
-  <android.support.v7.widget.AppCompatButton
-      android:id="@+id/proceedProgramButton"
+  <View
+      android:id="@+id/shadow"
+      android:layout_width="match_parent"
+      android:layout_height="8dp"
+      android:background="@drawable/shadow"
+      app:layout_anchor="@id/dayPickerAlertSheet"
+      />
+
+  <FrameLayout
+      android:id="@+id/dayPickerAlertSheet"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_gravity="center_horizontal|bottom"
-      android:layout_marginTop="8dp"
-      android:background="@color/colorPrimary"
-      android:clickable="true"
-      android:foreground="?android:selectableItemBackground"
-      android:paddingBottom="4dp"
-      android:paddingTop="4dp"
-      android:text="Добавить в корзину"
-      android:textColor="@color/whiteColor"
-      />
+      android:background="@color/whiteColor"
+      android:visibility="visible"
+      app:behavior_hideable="true"
+      app:elevation="8dp"
+      app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
+      >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/whiteColor"
+        android:orientation="vertical"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:layout_marginTop="16dp"
+          android:alpha="1"
+          android:text="Сколько дней вы хотите заказать"
+          android:textColor="@color/primary"
+          android:textSize="20sp"
+          />
+
+      <NumberPicker
+          android:id="@+id/numberPicker"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:layout_marginEnd="32dp"
+          android:layout_marginStart="32dp"
+          ></NumberPicker>
+
+      <Button
+          android:id="@+id/addToCartButton"
+          android:layout_width="match_parent"
+          android:layout_height="50dp"
+          android:layout_gravity="bottom"
+          android:background="@color/primary"
+          android:gravity="center"
+          android:text="Добавить"
+          android:textColor="#ffffff"
+          android:textSize="18sp"
+          style="@style/Widget.AppCompat.Button.Colored"
+          />
+
+
+    </LinearLayout>
+  </FrameLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>

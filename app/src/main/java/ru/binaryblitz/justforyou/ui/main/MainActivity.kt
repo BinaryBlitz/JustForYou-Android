@@ -2,7 +2,6 @@ package ru.binaryblitz.justforyou.ui.main
 
 import android.app.Activity
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import com.crashlytics.android.Crashlytics
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
@@ -14,9 +13,13 @@ import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_main.bottomBar
 import kotlinx.android.synthetic.main.activity_main.tabsViewPager
 import kotlinx.android.synthetic.main.activity_main.toolbar
+import kotlinx.android.synthetic.main.toolbar_cart_icon.badgeCount
+import kotlinx.android.synthetic.main.toolbar_cart_icon.cartIcon
+import kotlinx.android.synthetic.main.toolbar_cart_icon.cartView
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.data.user.UserProfileStorage
 import ru.binaryblitz.justforyou.data.user.UserStorageImpl
+import ru.binaryblitz.justforyou.ui.base.BaseActivity
 import ru.binaryblitz.justforyou.ui.main.blocks.ProgramsFragment
 import ru.binaryblitz.justforyou.ui.main.support.SupportFragment
 import ru.binaryblitz.justforyou.ui.router.Router
@@ -25,7 +28,7 @@ import ru.binaryblitz.justforyou.ui.router.Router
 /**
  * The main activity of app that controls the transitions between tabs from bottom bar
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
   private val PROGRAMMS_TAB: Int = 0
   private val CALENDAR_TAB: Int = 1
   private val SUPPORT_TAB: Int = 2
@@ -65,7 +68,19 @@ class MainActivity : AppCompatActivity() {
         R.id.action_support -> showTab("Поддержка", SUPPORT_TAB)
       }
     }
+    setSupportActionBar(toolbar)
     initDrawer(toolbar, this)
+    initCartBadgeIcon()
+  }
+
+  override fun onResume() {
+    super.onResume()
+    updateCartBadgeCount(badgeCount, cartProgramsLocalStorage.getCartPrograms().size)
+  }
+
+  override fun initCartBadgeIcon() {
+    updateCartBadgeCount(badgeCount, cartProgramsLocalStorage.getCartPrograms().size)
+    cartView.setOnClickListener { Router.openCartScreen(this) }
   }
 
   private fun showTab(title: String, position: Int) {
@@ -107,6 +122,5 @@ class MainActivity : AppCompatActivity() {
         )
         .build()
   }
-
 
 }

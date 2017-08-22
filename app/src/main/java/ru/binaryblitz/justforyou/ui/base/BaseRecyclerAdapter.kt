@@ -9,7 +9,7 @@ import java.util.ArrayList
  * Base abstract recycler view adapter for lists
  */
 abstract class BaseRecyclerAdapter<T> : Adapter<BaseRecyclerAdapter<T>.RecyclerViewHolder<T>>() {
-  private val dataItems = ArrayList<T>()
+  val dataItems = ArrayList<T>()
 
   fun setData(items: List<T>) {
     this.dataItems.clear()
