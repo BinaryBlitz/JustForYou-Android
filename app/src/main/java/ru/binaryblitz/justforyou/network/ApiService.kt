@@ -29,6 +29,9 @@ interface ApiService {
   @POST("/api/user.json")
   fun createUser(@Body user: UserData): Single<UserInfo>
 
+  @PATCH("/api/user.json")
+  fun updateUser(@Body user: UserData, @Query("api_token") token: String): Single<Any>
+
   @GET("/api/user.json")
   fun getUser(@Query("api_token") token: String): Single<UserInfo>
 

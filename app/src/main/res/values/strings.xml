@@ -19,4 +19,6 @@
   <string name="per_ten_days">При заказе от 10 дней:</string>
   <string name="cart_add">Программа успешно добавлена в корзину</string>
   <string name="title_activity_settings">SettingsActivity</string>
+  <string name="settings">Настройки</string>
+  <string name="success_update_user">Профиль обновлен</string>
 </resources>

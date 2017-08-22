@@ -1,13 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/whiteColor"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="ru.binaryblitz.justforyou.ui.main.settings.SettingsActivity"
-    tools:showIn="@layout/activity_settings"
     >
 
-</android.support.constraint.ConstraintLayout>
+  <LinearLayout
+      android:id="@+id/profileContainer"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:selectableItemBackground"
+        android:clickable="true"
+        >
+      <EditText
+          android:id="@+id/nameEdit"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="16dp"
+          android:hint="Имя"
+          android:inputType="textPersonName|textCapWords|textNoSuggestions"
+          style="@style/JustForYouEditTextStyle"
+          />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:selectableItemBackground"
+        android:clickable="true"
+        >
+      <EditText
+          android:id="@+id/lastNameEdit"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="16dp"
+          android:hint="Фамилия"
+          android:inputType="textPersonName|textCapWords|textNoSuggestions"
+          style="@style/JustForYouEditTextStyle"
+          />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/myPaymentCards"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="?android:selectableItemBackground"
+        android:clickable="true"
+        >
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_centerVertical="true"
+          android:layout_marginStart="20dp"
+          android:gravity="center_vertical"
+          android:text="Мои карты"
+          android:textColor="@color/blackColor"
+          android:textSize="16sp"
+          />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/notificationsView"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="?android:selectableItemBackground"
+        android:clickable="true"
+        >
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_centerVertical="true"
+          android:layout_marginStart="20dp"
+          android:gravity="center_vertical"
+          android:text="Push-уведомления"
+          android:textColor="@color/blackColor"
+          android:textSize="16sp"
+          />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/aboutApp"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="?android:selectableItemBackground"
+        android:clickable="true"
+        >
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_centerVertical="true"
+          android:layout_marginStart="20dp"
+          android:gravity="center_vertical"
+          android:text="О нас"
+          android:textColor="@color/blackColor"
+          android:textSize="16sp"
+          />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/ripple_rounded_btn"
+        android:clickable="true"
+        android:text="Выйти"
+        android:textColor="@color/whiteColor"
+        />
+  </LinearLayout>
+</ScrollView>

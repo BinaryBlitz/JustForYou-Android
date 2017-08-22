@@ -9,6 +9,7 @@ import ru.binaryblitz.justforyou.ui.login.LoginPresenter
 import ru.binaryblitz.justforyou.ui.main.blocks.BlocksPresenter
 import ru.binaryblitz.justforyou.ui.main.program_item.ProgramsPresenter
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.menu.MenuPresenter
+import ru.binaryblitz.justforyou.ui.main.settings.SettingsActivity
 import javax.inject.Singleton
 
 
@@ -21,4 +22,5 @@ interface AppComponent {
   fun inject(presenter: BlocksPresenter)
   fun inject(presenter: ProgramsPresenter)
   fun inject(presenter: MenuPresenter)
+  fun inject(settings: SettingsActivity)
 }
