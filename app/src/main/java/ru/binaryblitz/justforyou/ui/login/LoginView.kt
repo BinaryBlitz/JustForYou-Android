@@ -8,4 +8,7 @@ interface LoginView : MvpView, BaseLCEView {
   fun activateVerificationView(number: String)
   fun openUserView()
   fun successLogin()
+  fun showUserError()
+  fun showCodeError()
+  fun showNumberError()
 }
