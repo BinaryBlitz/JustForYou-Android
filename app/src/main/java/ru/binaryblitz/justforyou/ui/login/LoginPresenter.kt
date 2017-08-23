@@ -31,10 +31,9 @@ class LoginPresenter : BasePresenter<LoginView>() {
               phone = response.phoneNumber!!
               viewState.hideProgress()
               viewState.activateVerificationView(phone)
-
             },
             { errorResponse ->
-              viewState.showError(errorResponse.localizedMessage)
+              viewState.showNumberError()
               viewState.hideProgress()
             }
         )
@@ -53,7 +52,7 @@ class LoginPresenter : BasePresenter<LoginView>() {
               }
             },
             { errorResponse ->
-              viewState.showError(errorResponse.localizedMessage)
+              viewState.showCodeError()
               viewState.hideProgress()
             }
         )
@@ -69,7 +68,7 @@ class LoginPresenter : BasePresenter<LoginView>() {
               viewState.successLogin()
             },
             { errorResponse ->
-              viewState.showError(errorResponse.localizedMessage)
+              viewState.showUserError()
               viewState.hideProgress()
             }
         )
@@ -86,7 +85,7 @@ class LoginPresenter : BasePresenter<LoginView>() {
               viewState.successLogin()
             },
             { errorResponse ->
-              viewState.showError(errorResponse.localizedMessage)
+              viewState.showUserError()
               viewState.hideProgress()
             }
         )

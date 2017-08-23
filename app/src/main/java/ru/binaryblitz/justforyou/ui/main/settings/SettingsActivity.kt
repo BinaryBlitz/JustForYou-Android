@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.activity_settings.settingsContainer
 import kotlinx.android.synthetic.main.activity_settings.toolbar
 import kotlinx.android.synthetic.main.content_settings.aboutApp
 import kotlinx.android.synthetic.main.content_settings.lastNameEdit
-import kotlinx.android.synthetic.main.content_settings.nameEdit
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.R.string
 import ru.binaryblitz.justforyou.data.user.UserInfo
@@ -46,7 +45,7 @@ class SettingsActivity : AppCompatActivity(), TextWatcher {
     toolbar.setNavigationOnClickListener { onBackPressed() }
     firstNameEdit.setText(userProfileStorage.getUser().firstName)
     lastNameEdit.setText(userProfileStorage.getUser().lastName)
-    nameEdit.addTextChangedListener(this)
+    firstNameEdit.addTextChangedListener(this)
     lastNameEdit.addTextChangedListener(this)
     aboutApp.setOnClickListener {
       Router.openJustForYouLink(this,
@@ -65,7 +64,7 @@ class SettingsActivity : AppCompatActivity(), TextWatcher {
   }
 
   private fun updateUser(user: UserInfo) {
-    val updatedUser = UserInfo(lastNameEdit.text.toString(), nameEdit.text.toString(), user.balance,
+    val updatedUser = UserInfo(lastNameEdit.text.toString(), firstNameEdit.text.toString(), user.balance,
         user.phoneNumber, user.id, user.email, user.apiToken)
     networkService.updateUser(UserData(User(updatedUser.lastName,
         null, updatedUser.firstName, null)), userProfileStorage.getToken())

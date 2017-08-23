@@ -1,6 +1,7 @@
 package ru.binaryblitz.justforyou.ui.login
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.view.View
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
@@ -12,12 +13,14 @@ import kotlinx.android.synthetic.main.activity_login.finishLoginButton
 import kotlinx.android.synthetic.main.activity_login.firstNameEdit
 import kotlinx.android.synthetic.main.activity_login.lastNameEdit
 import kotlinx.android.synthetic.main.activity_login.loginContainerView
+import kotlinx.android.synthetic.main.activity_login.loginCoordinatorView
 import kotlinx.android.synthetic.main.activity_login.phoneNumberEdit
 import kotlinx.android.synthetic.main.activity_login.progressBar
 import kotlinx.android.synthetic.main.activity_login.statusText
 import kotlinx.android.synthetic.main.activity_login.toolbar
 import kotlinx.android.synthetic.main.activity_login.userContainerView
 import ru.binaryblitz.justforyou.R
+import ru.binaryblitz.justforyou.R.string
 import ru.binaryblitz.justforyou.ui.router.Router
 
 
@@ -69,6 +72,21 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
     }
   }
 
+  override fun showUserError() {
+    Snackbar.make(loginCoordinatorView, getString(string.user_creation_error),
+        Snackbar.LENGTH_SHORT).show()
+  }
+
+  override fun showCodeError() {
+    Snackbar.make(loginCoordinatorView, getString(R.string.wrong_code),
+        Snackbar.LENGTH_SHORT).show()
+  }
+
+  override fun showNumberError() {
+    Snackbar.make(loginCoordinatorView, getString(string.incorrect_number),
+        Snackbar.LENGTH_SHORT).show()
+  }
+
   override fun showProgress() {
     progressBar.visibility = View.VISIBLE
   }
@@ -78,7 +96,7 @@ class LoginActivity : MvpAppCompatActivity(), LoginView {
   }
 
   override fun showError(message: String) {
-    Toast.makeText(this, getString(R.string.wrong_code), Toast.LENGTH_SHORT).show()
+    Toast.makeText(this, getString(R.string.user_creation_error), Toast.LENGTH_SHORT).show()
   }
 
   override fun showPhoneForm() {
