@@ -27,4 +27,6 @@
   <string name="cart">Корзина</string>
   <string name="incorrect_number">Некорректный номер телефона</string>
   <string name="user_creation_error">Ошибка создания пользователя</string>
+  <string name="title_activity_order">OrderActivity</string>
+  <string name="new_order">Новый заказ</string>
 </resources>

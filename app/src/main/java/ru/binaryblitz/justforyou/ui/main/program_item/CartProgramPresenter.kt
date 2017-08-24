@@ -13,9 +13,9 @@ import ru.binaryblitz.justforyou.data.programs.Program
  */
 class CartProgramPresenter(var context: Context) {
 
-  fun addProgramToCart(program: Program, view: View,
+  fun addProgramToCart(blockName: String, program: Program, view: View,
       cartProgramsLocalStorage: CartLocalStorage, numberPicker: NumberPicker) {
-    cartProgramsLocalStorage.addProgramToCart(program.name, numberPicker.value,
+    cartProgramsLocalStorage.addProgramToCart(blockName, numberPicker.value,
         program.primaryPrice, program)
     Snackbar.make(view, String.format(context.getString(string.cart_add), program.name),
         Snackbar.LENGTH_LONG).show()

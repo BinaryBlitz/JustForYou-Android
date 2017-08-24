@@ -13,6 +13,7 @@ import ru.binaryblitz.justforyou.ui.login.LoginActivity
 import ru.binaryblitz.justforyou.ui.login.onboarding.OnBoardingActivity
 import ru.binaryblitz.justforyou.ui.main.MainActivity
 import ru.binaryblitz.justforyou.ui.main.cart.CartActivity
+import ru.binaryblitz.justforyou.ui.main.order.OrderActivity
 import ru.binaryblitz.justforyou.ui.main.program_item.ProgramsActivity
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.DetailedProgramActivity
 import ru.binaryblitz.justforyou.ui.main.settings.SettingsActivity
@@ -44,9 +45,10 @@ object Router {
     context.startActivity(intent)
   }
 
-  fun openDetailedProgramScreen(context: Activity, program: Program) {
+  fun openDetailedProgramScreen(context: Activity, program: Program, block: String) {
     val intent = Intent(context, DetailedProgramActivity::class.java)
     intent.putExtra(Extras.EXTRA_PROGRAM, program)
+    intent.putExtra(Extras.EXTRA_PROGRAM_BLOCK_NAME, block)
     context.startActivity(intent)
   }
 
@@ -60,7 +62,8 @@ object Router {
     val intentBuilder = CustomTabsIntent.Builder()
 
     intentBuilder.setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary))
-    intentBuilder.setSecondaryToolbarColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
+    intentBuilder.setSecondaryToolbarColor(
+        ContextCompat.getColor(context, R.color.colorPrimaryDark))
     val customTabsIntent = intentBuilder.build()
 
     customTabsIntent.launchUrl(context, uri)
@@ -68,6 +71,13 @@ object Router {
 
   fun openCartScreen(context: Activity) {
     val intent = Intent(context, CartActivity::class.java)
+    context.startActivity(intent)
+  }
+
+  fun openOrderScreen(context: Activity, program: Program, block: String) {
+    val intent = Intent(context, OrderActivity::class.java)
+    intent.putExtra(Extras.EXTRA_PROGRAM, program)
+    intent.putExtra(Extras.EXTRA_PROGRAM_BLOCK_NAME, block)
     context.startActivity(intent)
   }
 }

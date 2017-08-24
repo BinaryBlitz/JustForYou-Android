@@ -2,17 +2,10 @@ package ru.binaryblitz.justforyou.ui.main.program_item.detailed_program
 
 import android.graphics.Color
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.design.widget.BottomSheetBehavior.BottomSheetCallback
 import android.support.v4.view.ViewPager
-import android.view.View
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_detailed_program.addToCartButton
-import kotlinx.android.synthetic.main.activity_detailed_program.coordinator
-import kotlinx.android.synthetic.main.activity_detailed_program.dayPickerAlertSheet
 import kotlinx.android.synthetic.main.activity_detailed_program.detailedProgramCollapsingView
 import kotlinx.android.synthetic.main.activity_detailed_program.detailedProgramImage
-import kotlinx.android.synthetic.main.activity_detailed_program.numberPicker
 import kotlinx.android.synthetic.main.activity_detailed_program.proceedProgramButton
 import kotlinx.android.synthetic.main.activity_detailed_program.programTitle
 import kotlinx.android.synthetic.main.activity_detailed_program.toolbar
@@ -24,7 +17,6 @@ import kotlinx.android.synthetic.main.toolbar_cart_icon.badgeCount
 import kotlinx.android.synthetic.main.toolbar_cart_icon.cartView
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.R.drawable
-import ru.binaryblitz.justforyou.components.Constants
 import ru.binaryblitz.justforyou.components.Extras
 import ru.binaryblitz.justforyou.data.programs.Program
 import ru.binaryblitz.justforyou.ui.base.BaseActivity
@@ -37,7 +29,6 @@ import ru.binaryblitz.justforyou.ui.router.Router
 
 
 class DetailedProgramActivity : BaseActivity() {
-  lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
   lateinit var cartProgramPresenter: CartProgramPresenter
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,45 +57,11 @@ class DetailedProgramActivity : BaseActivity() {
     programPricePerDay.text = getString(R.string.per_one_day) + "${program.primaryPrice}"
     programPricePerWeek.text = getString(R.string.per_ten_days) + "${program.secondaryPrice}"
     proceedProgramButton.setOnClickListener {
-      showDayPickerAlert()
+      Router.openOrderScreen(this, program, intent.getStringExtra(Extras.EXTRA_PROGRAM_BLOCK_NAME))
     }
-    bottomSheetBehavior = BottomSheetBehavior.from(dayPickerAlertSheet as View)
-    bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetCallback() {
-      override fun onSlide(bottomSheet: View, slideOffset: Float) {
-      }
-
-      override fun onStateChanged(bottomSheet: View, newState: Int) {
-        if (newState == BottomSheetBehavior.STATE_HIDDEN) {
-          proceedProgramButton.visibility = View.VISIBLE
-        }
-      }
-    }
-    )
-    hideDayPickerAlert()
 
     setupViewPager(detailedProgramViewPager, program)
-
-    numberPicker.maxValue = Constants.MAX_PROGRAM_DAYS
-    numberPicker.minValue = Constants.MIN_PROGRAM_DAYS
-
-    addToCartButton.setOnClickListener {
-      cartProgramPresenter.addProgramToCart(program, coordinator, cartProgramsLocalStorage,
-          numberPicker)
-
-      hideDayPickerAlert()
-      updateCartBadgeCount(badgeCount, cartProgramsLocalStorage.getCartPrograms().size)
-    }
-
     initCartBadgeIcon()
-  }
-
-  fun showDayPickerAlert() {
-    proceedProgramButton.visibility = View.GONE
-    bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-  }
-
-  fun hideDayPickerAlert() {
-    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
   }
 
   private fun setupViewPager(viewPager: ViewPager, program: Program) {

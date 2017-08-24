@@ -50,6 +50,11 @@
     </activity>
     <activity android:name=".ui.main.cart.CartActivity">
     </activity>
+    <activity
+        android:name=".ui.main.order.OrderActivity"
+        android:label="@string/title_activity_order"
+        android:theme="@style/AppTheme">
+    </activity>
   </application>
 
 </manifest>

@@ -31,8 +31,9 @@ class ProgramsActivity : BaseActivity(), ProgramsView {
 
     val block: Block = intent.getParcelableExtra<Block>(Extras.EXTRA_BLOCK)
     presenter.getBlockPrograms(block.id!!)
+    blockName = block.name!!
 
-    initViewElements(block.name!!)
+    initViewElements(block.name)
   }
 
   private fun initViewElements(title: String) {
@@ -84,6 +85,10 @@ class ProgramsActivity : BaseActivity(), ProgramsView {
   override fun onResume() {
     super.onResume()
     updateCartBadgeCount(badgeCount, cartProgramsLocalStorage.getCartPrograms().size)
+  }
+
+  companion object {
+    var blockName: String = ""
   }
 
 }
