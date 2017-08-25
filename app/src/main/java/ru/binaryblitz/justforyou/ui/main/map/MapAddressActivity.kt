@@ -26,15 +26,21 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.activity_map_address.addAddressButton
 import kotlinx.android.synthetic.main.activity_map_address.addressSearch
 import kotlinx.android.synthetic.main.activity_map_address.addressSheet
 import kotlinx.android.synthetic.main.activity_map_address.locationButton
 import kotlinx.android.synthetic.main.activity_map_address.mapProgressBar
 import kotlinx.android.synthetic.main.activity_map_address.searchIcon
+import kotlinx.android.synthetic.main.layout_address.apartmentNumber
+import kotlinx.android.synthetic.main.layout_address.entranceNumber
+import kotlinx.android.synthetic.main.layout_address.floorNumber
 import kotlinx.android.synthetic.main.layout_address.street
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.R.id
 import ru.binaryblitz.justforyou.R.string
+import ru.binaryblitz.justforyou.network.responses.delivery_addresses.create.Address
+import ru.binaryblitz.justforyou.network.responses.delivery_addresses.create.AddressBodyData
 import ru.binaryblitz.justforyou.network.responses.map.ResultsItem
 
 class MapAddressActivity : MvpAppCompatActivity(), OnMapReadyCallback, MapAddressView,
@@ -49,6 +55,7 @@ class MapAddressActivity : MvpAppCompatActivity(), OnMapReadyCallback, MapAddres
   private var client: GoogleApiClient? = null
   private var defaultLatLng = LatLng(55.751574, 37.57385)
   private var searchQuery = ""
+  private lateinit var selectedAddressItem: ResultsItem
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -70,6 +77,16 @@ class MapAddressActivity : MvpAppCompatActivity(), OnMapReadyCallback, MapAddres
       presenter.getLocationFromQuery(searchQuery, getString(string.geocoder_key))
       hideSoftKeyboard(this)
     }
+    addAddressButton.setOnClickListener {
+
+      presenter.addNewAddress(
+          AddressBodyData(
+              Address(null, "${selectedAddressItem.addressComponents?.get(0)?.shortName}",
+                  selectedAddressItem.geometry.location.lat, entranceNumber.text.toString().toInt(),
+                  floorNumber.text.toString().toInt(), selectedAddressItem.formattedAddress,
+                  apartmentNumber.text.toString().toInt(),
+                  selectedAddressItem.geometry.location.lng)))
+    }
   }
 
   override fun onBackPressed() {
@@ -79,6 +96,11 @@ class MapAddressActivity : MvpAppCompatActivity(), OnMapReadyCallback, MapAddres
 
   override fun showAddressInfo() {
     bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+  }
+
+  override fun successAddressAddition() {
+    setResult(Activity.RESULT_OK)
+    finish()
   }
 
   override fun hideAddressInfo() {
@@ -201,6 +223,7 @@ class MapAddressActivity : MvpAppCompatActivity(), OnMapReadyCallback, MapAddres
     //and second is street number
     street.text = "${address.addressComponents?.get(1)?.longName}, " +
         "${address.addressComponents?.get(0)?.shortName}"
+    selectedAddressItem = address
   }
 
   override fun afterTextChanged(query: Editable?) {

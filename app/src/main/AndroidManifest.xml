@@ -68,6 +68,11 @@
         android:label="@string/title_activity_map_address"
         android:windowSoftInputMode="adjustResize">
     </activity>
+    <activity
+        android:name=".ui.main.delivery_addresses.DeliveryPlacesActivity"
+        android:label="@string/title_activity_delivery_places"
+        android:theme="@style/AppTheme">
+    </activity>
   </application>
 
 </manifest>

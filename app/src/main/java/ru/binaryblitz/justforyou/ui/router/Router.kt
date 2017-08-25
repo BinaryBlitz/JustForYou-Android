@@ -13,6 +13,7 @@ import ru.binaryblitz.justforyou.ui.login.LoginActivity
 import ru.binaryblitz.justforyou.ui.login.onboarding.OnBoardingActivity
 import ru.binaryblitz.justforyou.ui.main.MainActivity
 import ru.binaryblitz.justforyou.ui.main.cart.CartActivity
+import ru.binaryblitz.justforyou.ui.main.delivery_addresses.DeliveryPlacesActivity
 import ru.binaryblitz.justforyou.ui.main.map.MapAddressActivity
 import ru.binaryblitz.justforyou.ui.main.order.OrderActivity
 import ru.binaryblitz.justforyou.ui.main.program_item.ProgramsActivity
@@ -84,6 +85,11 @@ object Router {
 
   fun openMapScreen(context: Activity, requestCode: Int){
     val intent = Intent(context, MapAddressActivity::class.java)
+    context.startActivityForResult(intent, requestCode)
+  }
+
+  fun openPlacesScreen(context: Activity, requestCode: Int){
+    val intent = Intent(context, DeliveryPlacesActivity::class.java)
     context.startActivityForResult(intent, requestCode)
   }
 }

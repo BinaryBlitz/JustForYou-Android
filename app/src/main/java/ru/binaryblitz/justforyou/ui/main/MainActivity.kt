@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.activity_main.bottomBar
 import kotlinx.android.synthetic.main.activity_main.tabsViewPager
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import kotlinx.android.synthetic.main.toolbar_cart_icon.badgeCount
-import kotlinx.android.synthetic.main.toolbar_cart_icon.cartIcon
 import kotlinx.android.synthetic.main.toolbar_cart_icon.cartView
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.data.user.UserProfileStorage
@@ -128,6 +127,10 @@ class MainActivity : BaseActivity() {
             itemSettings -> {
               Router.openSettingsScreen(this)
             }
+            itemPlaces -> {
+              Router.openPlacesScreen(this, 0)
+            }
+
           }
           true
         }

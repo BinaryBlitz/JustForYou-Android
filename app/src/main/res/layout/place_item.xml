@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/placesContainerView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    android:background="@color/whiteColor"
+    android:foreground="?android:selectableItemBackground"
+    android:orientation="vertical"
+    >
+
+  <me.grantland.widget.AutofitTextView
+      android:id="@+id/placesTitle"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="16dp"
+      android:maxHeight="16sp"
+      android:maxLines="2"
+      android:textColor="@color/greyColor"
+      android:textSize="18sp"
+      android:textStyle="normal"
+      tools:text="Гипохолестириновое питание"
+      />
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:alpha="0.2"
+      android:background="@color/greyColor"
+      ></View>
+
+</LinearLayout>

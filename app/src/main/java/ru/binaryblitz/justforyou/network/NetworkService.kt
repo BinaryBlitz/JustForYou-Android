@@ -10,6 +10,8 @@ import ru.binaryblitz.justforyou.data.user.UserInfo
 import ru.binaryblitz.justforyou.network.models.UserData
 import ru.binaryblitz.justforyou.network.responses.CreateTokenResponse
 import ru.binaryblitz.justforyou.network.responses.VerifyTokenResponse
+import ru.binaryblitz.justforyou.network.responses.delivery_addresses.create.Address
+import ru.binaryblitz.justforyou.network.responses.delivery_addresses.create.AddressBodyData
 
 /**
  * A Service that performs network requests
@@ -67,6 +69,20 @@ class NetworkService(private val serviceApi: ApiService) {
 
   fun getMenu(programdId: Int, token: String): Single<List<Menu>> {
     return serviceApi.getMenu(programdId, token)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .map { it }
+  }
+
+  fun getDeliveryAddresses(token: String): Single<List<Address>> {
+    return serviceApi.getDeliveryAddresses(token)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .map { it }
+  }
+
+  fun createDeliveryAddress(address: AddressBodyData, token: String): Single<Any> {
+    return serviceApi.createDeliveryAddress(address, token)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .map { it }

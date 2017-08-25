@@ -30,4 +30,6 @@
   <string name="title_activity_order">OrderActivity</string>
   <string name="new_order">Новый заказ</string>
   <string name="title_activity_map_address">Выбор адреса доставки</string>
+  <string name="title_activity_delivery_places">DeliveryPlacesActivity</string>
+  <string name="addresses">Адреса</string>
 </resources>

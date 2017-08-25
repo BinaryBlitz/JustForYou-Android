@@ -9,6 +9,7 @@ import ru.binaryblitz.justforyou.network.NetworkService
 import ru.binaryblitz.justforyou.ui.login.LoginPresenter
 import ru.binaryblitz.justforyou.ui.main.blocks.BlocksPresenter
 import ru.binaryblitz.justforyou.ui.main.cart.CartPresenter
+import ru.binaryblitz.justforyou.ui.main.delivery_addresses.PlacesPresenter
 import ru.binaryblitz.justforyou.ui.main.map.MapAddressPresenter
 import ru.binaryblitz.justforyou.ui.main.program_item.ProgramsPresenter
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.menu.MenuPresenter
@@ -29,4 +30,5 @@ interface AppComponent {
   fun inject(settings: SettingsActivity)
   fun inject(presenter: CartPresenter)
   fun inject(presenter: MapAddressPresenter)
+  fun inject(presenter: PlacesPresenter)
 }

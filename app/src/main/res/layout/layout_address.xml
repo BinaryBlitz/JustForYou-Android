@@ -28,6 +28,7 @@
       >
 
     <EditText
+        android:inputType="numberDecimal"
         android:layout_weight="1"
         android:hint="Этаж"
         android:textColorHint="@color/greyColor"
@@ -41,6 +42,7 @@
         />
 
     <EditText
+        android:inputType="numberDecimal"
         android:layout_weight="1"
         android:hint="Квартира"
         android:textColorHint="@color/greyColor"
@@ -55,6 +57,7 @@
 
 
     <EditText
+        android:inputType="numberDecimal"
         android:layout_weight="1"
         android:hint="Подъезд"
         android:textColorHint="@color/greyColor"
