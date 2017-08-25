@@ -73,6 +73,11 @@
         android:label="@string/title_activity_delivery_places"
         android:theme="@style/AppTheme">
     </activity>
+    <activity
+        android:name=".ui.main.purchases.PurchasesActivity"
+        android:label="@string/title_activity_purchases"
+        android:theme="@style/AppTheme">
+    </activity>
   </application>
 
 </manifest>

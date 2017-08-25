@@ -130,6 +130,9 @@ class MainActivity : BaseActivity() {
             itemPlaces -> {
               Router.openPlacesScreen(this, 0)
             }
+            itemPrograms -> {
+              Router.openPurchasesScreen(this)
+            }
 
           }
           true

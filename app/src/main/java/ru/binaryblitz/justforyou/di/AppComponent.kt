@@ -13,6 +13,7 @@ import ru.binaryblitz.justforyou.ui.main.delivery_addresses.PlacesPresenter
 import ru.binaryblitz.justforyou.ui.main.map.MapAddressPresenter
 import ru.binaryblitz.justforyou.ui.main.program_item.ProgramsPresenter
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.menu.MenuPresenter
+import ru.binaryblitz.justforyou.ui.main.purchases.PurchasesPresenter
 import ru.binaryblitz.justforyou.ui.main.settings.SettingsActivity
 import javax.inject.Singleton
 
@@ -31,4 +32,5 @@ interface AppComponent {
   fun inject(presenter: CartPresenter)
   fun inject(presenter: MapAddressPresenter)
   fun inject(presenter: PlacesPresenter)
+  fun inject(presenter: PurchasesPresenter)
 }

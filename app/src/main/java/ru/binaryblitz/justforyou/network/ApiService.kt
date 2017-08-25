@@ -16,6 +16,7 @@ import ru.binaryblitz.justforyou.network.responses.CreateTokenResponse
 import ru.binaryblitz.justforyou.network.responses.VerifyTokenResponse
 import ru.binaryblitz.justforyou.network.responses.delivery_addresses.create.Address
 import ru.binaryblitz.justforyou.network.responses.delivery_addresses.create.AddressBodyData
+import ru.binaryblitz.justforyou.network.responses.purchases.PurchasesResponse
 
 /**
  * JustForYou API methods
@@ -53,5 +54,8 @@ interface ApiService {
   @POST("/api/addresses.json")
   fun createDeliveryAddress(@Body address: AddressBodyData,
       @Query("api_token") token: String): Single<Address>
+
+  @GET("/api/purchases.json")
+  fun getPurchases(@Query("api_token") token: String): Single<List<PurchasesResponse>>
 
 }

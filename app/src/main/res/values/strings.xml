@@ -32,4 +32,6 @@
   <string name="title_activity_map_address">Выбор адреса доставки</string>
   <string name="title_activity_delivery_places">DeliveryPlacesActivity</string>
   <string name="addresses">Адреса</string>
+  <string name="title_activity_purchases">PurchasesActivity</string>
+  <string name="my_purchases">Мои программы</string>
 </resources>
