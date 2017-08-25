@@ -98,12 +98,14 @@
 
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/addressContainer"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="?android:selectableItemBackground"
             android:clickable="true"
             >
           <TextView
+              android:id="@+id/addressText"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_centerVertical="true"

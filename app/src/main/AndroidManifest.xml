@@ -3,6 +3,9 @@
     package="ru.binaryblitz.justforyou">
 
   <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
   <application
       android:name=".di.JustForYouApp"
@@ -54,6 +57,16 @@
         android:name=".ui.main.order.OrderActivity"
         android:label="@string/title_activity_order"
         android:theme="@style/AppTheme">
+    </activity>
+
+    <meta-data
+        android:name="com.google.android.maps.v2.API_KEY"
+        android:value="@string/google_maps_key"/>
+
+    <activity
+        android:name=".ui.main.map.MapAddressActivity"
+        android:label="@string/title_activity_map_address"
+        android:windowSoftInputMode="adjustResize">
     </activity>
   </application>
 
