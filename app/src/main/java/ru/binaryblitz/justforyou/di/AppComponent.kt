@@ -15,6 +15,7 @@ import ru.binaryblitz.justforyou.ui.main.program_item.ProgramsPresenter
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.menu.MenuPresenter
 import ru.binaryblitz.justforyou.ui.main.purchases.PurchasesPresenter
 import ru.binaryblitz.justforyou.ui.main.settings.SettingsActivity
+import ru.binaryblitz.justforyou.ui.main.user_orders.UserOrdersPresenter
 import javax.inject.Singleton
 
 
@@ -33,4 +34,5 @@ interface AppComponent {
   fun inject(presenter: MapAddressPresenter)
   fun inject(presenter: PlacesPresenter)
   fun inject(presenter: PurchasesPresenter)
+  fun inject(presenter: UserOrdersPresenter)
 }
