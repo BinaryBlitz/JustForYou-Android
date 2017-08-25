@@ -34,4 +34,6 @@
   <string name="addresses">Адреса</string>
   <string name="title_activity_purchases">PurchasesActivity</string>
   <string name="my_purchases">Мои программы</string>
+  <string name="title_activity_user_orders">UserOrdersActivity</string>
+  <string name="payment_history">История платежей</string>
 </resources>

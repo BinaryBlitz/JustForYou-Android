@@ -133,6 +133,9 @@ class MainActivity : BaseActivity() {
             itemPrograms -> {
               Router.openPurchasesScreen(this)
             }
+            itemPaymentHistory -> {
+              Router.openOrdersScreen(this)
+            }
 
           }
           true

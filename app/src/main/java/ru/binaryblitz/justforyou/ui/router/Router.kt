@@ -20,6 +20,7 @@ import ru.binaryblitz.justforyou.ui.main.program_item.ProgramsActivity
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.DetailedProgramActivity
 import ru.binaryblitz.justforyou.ui.main.purchases.PurchasesActivity
 import ru.binaryblitz.justforyou.ui.main.settings.SettingsActivity
+import ru.binaryblitz.justforyou.ui.main.user_orders.UserOrdersActivity
 
 /**
  * Class that holds all screen navigation and transitions.
@@ -96,6 +97,11 @@ object Router {
 
   fun openPurchasesScreen(context: Activity) {
     val intent = Intent(context, PurchasesActivity::class.java)
+    context.startActivity(intent)
+  }
+
+  fun openOrdersScreen(context: Activity) {
+    val intent = Intent(context, UserOrdersActivity::class.java)
     context.startActivity(intent)
   }
 }
