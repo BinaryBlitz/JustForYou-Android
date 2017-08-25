@@ -1,9 +1,12 @@
 package ru.binaryblitz.justforyou.ui.main.order
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_order.toolbar
 import kotlinx.android.synthetic.main.content_order.addressContainer
+import kotlinx.android.synthetic.main.content_order.addressText
 import kotlinx.android.synthetic.main.content_order.blockTitle
 import kotlinx.android.synthetic.main.content_order.programTitle
 import ru.binaryblitz.justforyou.R
@@ -38,7 +41,14 @@ class OrderActivity : AppCompatActivity() {
     blockTitle.text = blockName
 
     addressContainer.setOnClickListener {
-      Router.openMapScreen(this, MAP_BUTTON_REQUEST_CODE)
+      Router.openPlacesScreen(this, MAP_BUTTON_REQUEST_CODE)
+    }
+  }
+
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+    if (resultCode == Activity.RESULT_OK && requestCode == MAP_BUTTON_REQUEST_CODE) {
+      addressText.text = data?.getStringExtra(Extras.EXTRA_ADDRESS_TEXT)
     }
   }
 }

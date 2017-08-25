@@ -10,6 +10,7 @@ import ru.binaryblitz.justforyou.ui.base.BaseLCEView
 interface MapAddressView : MvpView, BaseLCEView {
   fun showAddress(address: ResultsItem)
   fun showLocation(address: ResultsItem)
+  fun successAddressAddition()
   fun showAddressInfo()
   fun hideAddressInfo()
 }
