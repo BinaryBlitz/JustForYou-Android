@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
+import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.text.Editable
@@ -30,6 +31,7 @@ import kotlinx.android.synthetic.main.activity_map_address.addAddressButton
 import kotlinx.android.synthetic.main.activity_map_address.addressSearch
 import kotlinx.android.synthetic.main.activity_map_address.addressSheet
 import kotlinx.android.synthetic.main.activity_map_address.locationButton
+import kotlinx.android.synthetic.main.activity_map_address.mapAddressCoordinator
 import kotlinx.android.synthetic.main.activity_map_address.mapProgressBar
 import kotlinx.android.synthetic.main.activity_map_address.searchIcon
 import kotlinx.android.synthetic.main.layout_address.apartmentNumber
@@ -78,15 +80,27 @@ class MapAddressActivity : MvpAppCompatActivity(), OnMapReadyCallback, MapAddres
       hideSoftKeyboard(this)
     }
     addAddressButton.setOnClickListener {
-
-      presenter.addNewAddress(
-          AddressBodyData(
-              Address(null, "${selectedAddressItem.addressComponents?.get(0)?.shortName}",
-                  selectedAddressItem.geometry.location.lat, entranceNumber.text.toString().toInt(),
-                  floorNumber.text.toString().toInt(), selectedAddressItem.formattedAddress,
-                  apartmentNumber.text.toString().toInt(),
-                  selectedAddressItem.geometry.location.lng)))
+      if (isAddressFilled()) {
+        presenter.addNewAddress(
+            AddressBodyData(
+                Address(null, "${selectedAddressItem.addressComponents?.get(0)?.shortName}",
+                    selectedAddressItem.geometry.location.lat,
+                    entranceNumber.text.toString().toInt(),
+                    floorNumber.text.toString().toInt(), selectedAddressItem.formattedAddress,
+                    apartmentNumber.text.toString().toInt(),
+                    selectedAddressItem.geometry.location.lng)))
+      } else {
+        showError(getString(string.address_error))
+      }
     }
+  }
+
+  private fun isAddressFilled(): Boolean {
+    if (entranceNumber.text.isNotEmpty() && apartmentNumber.text.isNotEmpty()
+        && floorNumber.text.isNotEmpty()) {
+      return true
+    }
+    return false
   }
 
   override fun onBackPressed() {
@@ -215,7 +229,7 @@ class MapAddressActivity : MvpAppCompatActivity(), OnMapReadyCallback, MapAddres
   }
 
   override fun showError(message: String) {
-
+    Snackbar.make(mapAddressCoordinator, message, Snackbar.LENGTH_SHORT).show()
   }
 
   override fun showAddress(address: ResultsItem) {
