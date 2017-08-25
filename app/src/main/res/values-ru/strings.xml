@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="load_location_error">Ошибка. Пожалуйста попробуйте еще раз</string>
+  <string name="no_search_results">По запросу ничего не найдено</string>
+  <string name="unknown_location">Неизвестное место</string>
+  <string name="voice_search_promp">Произнесите адрес</string>
+  <string name="voice_search_extra_language">ru-RU</string>
+  <string name="toolbar_action_voice_title">Голосовой поиск</string>
+  <string name="search_hint">Введите адрес</string>
+</resources>

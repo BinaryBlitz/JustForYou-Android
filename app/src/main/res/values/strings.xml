@@ -29,4 +29,5 @@
   <string name="user_creation_error">Ошибка создания пользователя</string>
   <string name="title_activity_order">OrderActivity</string>
   <string name="new_order">Новый заказ</string>
+  <string name="title_activity_map_address">Выбор адреса доставки</string>
 </resources>

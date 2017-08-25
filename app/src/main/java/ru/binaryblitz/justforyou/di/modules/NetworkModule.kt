@@ -14,6 +14,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import ru.binaryblitz.justforyou.BuildConfig
 import ru.binaryblitz.justforyou.network.ApiService
+import ru.binaryblitz.justforyou.network.MapService
+import ru.binaryblitz.justforyou.network.MapsApiService
 import ru.binaryblitz.justforyou.network.NetworkService
 import java.util.concurrent.TimeUnit.MILLISECONDS
 import java.util.concurrent.TimeUnit.NANOSECONDS
@@ -23,6 +25,7 @@ private const val DEFAULT_CONNECT_TIMEOUT = 60000L
 private val HTTP_LOG_LEVEL = if (BuildConfig.DEBUG) BODY else BASIC
 private val FITMOST_BASE_URL =
     if (!BuildConfig.DEBUG) "https://justforyou-staging.herokuapp.com/" else "https://justforyou-production.herokuapp.com"
+private val GOOGLE_API_BASE_URL = "https://maps.googleapis.com/maps/api/"
 
 private fun createRetrofit(httpClient: OkHttpClient, moshi: Moshi, baseUrl: String): Retrofit {
   return Builder()
@@ -43,6 +46,16 @@ class NetworkModule {
     val fitmostApi = retrofit.create(ApiService::class.java)
 
     return NetworkService(fitmostApi)
+  }
+
+  @Provides
+  @Singleton
+  fun provideMapService(httpClient: OkHttpClient,
+      moshi: Moshi): MapService {
+    val retrofit = createRetrofit(httpClient, moshi, GOOGLE_API_BASE_URL)
+    val mapApi = retrofit.create(MapsApiService::class.java)
+
+    return MapService(mapApi)
   }
 
   @Provides

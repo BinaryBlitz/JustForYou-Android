@@ -1,0 +1,70 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_gravity="center_vertical"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    >
+  <TextView
+      android:layout_marginStart="4dp"
+      android:id="@+id/street"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="@color/blackColor"
+      android:textSize="24sp"
+      android:textStyle="normal"
+      tools:text="Calle Mallorca, 150"
+      />
+
+  <LinearLayout
+      android:layout_marginTop="8dp"
+      android:layout_weight="3"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      >
+
+    <EditText
+        android:layout_weight="1"
+        android:hint="Этаж"
+        android:textColorHint="@color/greyColor"
+        android:id="@+id/floorNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/greyColor"
+        android:textSize="16sp"
+        />
+
+    <EditText
+        android:layout_weight="1"
+        android:hint="Квартира"
+        android:textColorHint="@color/greyColor"
+        android:id="@+id/apartmentNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/greyColor"
+        android:textSize="16sp"
+        />
+
+
+    <EditText
+        android:layout_weight="1"
+        android:hint="Подъезд"
+        android:textColorHint="@color/greyColor"
+        android:id="@+id/entranceNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/greyColor"
+        android:textSize="16sp"
+        />
+
+  </LinearLayout>
+</LinearLayout>
