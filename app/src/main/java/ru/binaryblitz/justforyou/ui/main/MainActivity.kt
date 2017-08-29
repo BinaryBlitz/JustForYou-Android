@@ -104,6 +104,7 @@ class MainActivity : BaseActivity() {
                 resources.getDrawable(R.drawable.ic_person_24))
         )
         .withHeaderBackground(R.color.colorPrimary)
+        .withSelectionListEnabledForSingleProfile(false)
         .build()
 
     val result = DrawerBuilder()
