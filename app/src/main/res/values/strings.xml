@@ -43,4 +43,11 @@
   <string name="days_calendar_title">Выбор дней доставки</string>
   <string name="go_to_cart">Перейти в корзину</string>
   <string name="order_info_error">Заполните все данные !</string>
+  <string name="load_location_error">Ошибка. Пожалуйста попробуйте еще раз</string>
+  <string name="no_search_results">По запросу ничего не найдено</string>
+  <string name="unknown_location">Неизвестное место</string>
+  <string name="voice_search_promp">Произнесите адрес</string>
+  <string name="voice_search_extra_language">ru-RU</string>
+  <string name="toolbar_action_voice_title">Голосовой поиск</string>
+  <string name="search_hint">Введите адрес</string>
 </resources>
