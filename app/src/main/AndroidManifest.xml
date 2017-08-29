@@ -83,6 +83,11 @@
         android:label="@string/title_activity_user_orders"
         android:theme="@style/AppTheme">
     </activity>
+    <activity
+        android:name=".ui.main.CalendarActivity"
+        android:label="@string/title_activity_calendar"
+        android:theme="@style/AppTheme">
+    </activity>
   </application>
 
 </manifest>

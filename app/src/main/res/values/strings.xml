@@ -21,7 +21,7 @@
   <string name="settings">Настройки</string>
   <string name="success_update_user">Профиль обновлен</string>
   <string name="just_for_you_about_link">https://justforyou.ru/about/</string>
-  <string name="cart_add">Программа %1$s успешно добавлена в корзину</string>
+  <string name="cart_add">Программа %1$s успешно добавлена</string>
   <string name="cancel">Отменить</string>
   <string name="program_price">%1$d*%2$d дней = %3$d</string>
   <string name="cart">Корзина</string>
@@ -37,4 +37,10 @@
   <string name="title_activity_user_orders">UserOrdersActivity</string>
   <string name="payment_history">История платежей</string>
   <string name="address_error">Заполните все данные адреса!</string>
+  <string name="title_activity_calendar">CalendarActivity</string>
+  <string name="passed_day_error">Вы не можете выбрать прошедший день!</string>
+  <string name="days_selected">Выбрано %1$d дней</string>
+  <string name="days_calendar_title">Выбор дней доставки</string>
+  <string name="go_to_cart">Перейти в корзину</string>
+  <string name="order_info_error">Заполните все данные !</string>
 </resources>

@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.fragment_program_item.programPricePerDay
 import kotlinx.android.synthetic.main.fragment_program_item.programPricePerWeek
 import kotlinx.android.synthetic.main.fragment_program_item.programTitle
 import ru.binaryblitz.justforyou.R
+import ru.binaryblitz.justforyou.components.Extras
 import ru.binaryblitz.justforyou.data.programs.Program
 import ru.binaryblitz.justforyou.ui.router.Router
 
@@ -36,7 +37,7 @@ class ProgramItemFragment : MvpAppCompatFragment() {
       Router.openDetailedProgramScreen(activity, program, ProgramsActivity.blockName)
     }
     proceedProgramButton.setOnClickListener {
-      Router.openOrderScreen(activity, program, ProgramsActivity.blockName)
+      Router.openOrderScreen(activity, program, ProgramsActivity.blockName, Extras.orderRequestCode)
     }
   }
 

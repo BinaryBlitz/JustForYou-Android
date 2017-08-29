@@ -8,7 +8,6 @@
     android:background="@color/backgroundColor"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="ru.binaryblitz.justforyou.ui.main.order.OrderActivity"
-    tools:showIn="@layout/activity_order"
     >
 
   <LinearLayout
@@ -18,7 +17,7 @@
       >
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         android:background="@color/whiteColor"
         android:orientation="vertical"
@@ -80,12 +79,14 @@
           android:orientation="vertical"
           >
         <RelativeLayout
+            android:id="@+id/calendarContainer"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="?android:selectableItemBackground"
             android:clickable="true"
             >
           <TextView
+              android:id="@+id/daysText"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_centerVertical="true"
@@ -119,12 +120,14 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/deliveryTimeContainer"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="?android:selectableItemBackground"
             android:clickable="true"
             >
           <TextView
+              android:id="@+id/deliveryTimeText"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_centerVertical="true"
@@ -176,7 +179,19 @@
 
     </android.support.v7.widget.CardView>
 
+    <Button
+        android:textColor="@color/whiteColor"
+        android:layout_margin="16dp"
+        android:id="@+id/addToCartButton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:text="Добавить в корзину"
+        android:background="@drawable/ripple_rounded_btn"
+        />
 
   </LinearLayout>
+
 
 </android.support.v4.widget.NestedScrollView>

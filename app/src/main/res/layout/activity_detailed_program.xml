@@ -164,7 +164,7 @@
       android:background="@color/colorPrimary"
       android:clickable="true"
       android:foreground="?android:selectableItemBackground"
-      android:text="Добавить в корзину"
+      android:text="Купить"
       android:textColor="@color/whiteColor"
       />
 
