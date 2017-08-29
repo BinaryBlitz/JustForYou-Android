@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -46,7 +47,7 @@ import ru.binaryblitz.justforyou.network.responses.delivery_addresses.create.Add
 import ru.binaryblitz.justforyou.network.responses.map.ResultsItem
 
 class MapAddressActivity : MvpAppCompatActivity(), OnMapReadyCallback, MapAddressView,
-    GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, TextWatcher {
+    GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, View.OnKeyListener {
   @InjectPresenter
   lateinit var presenter: MapAddressPresenter
   private lateinit var googleMap: GoogleMap
@@ -72,11 +73,10 @@ class MapAddressActivity : MvpAppCompatActivity(), OnMapReadyCallback, MapAddres
     bottomSheetBehavior = BottomSheetBehavior.from(addressSheet as View)
     bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
     locationButton.setOnClickListener { requestLocationPermission() }
-    addressSearch.addTextChangedListener(this)
     addressSearch.setFocusable(false)
     addressSearch.setFocusableInTouchMode(true)
     searchIcon.setOnClickListener {
-      presenter.getLocationFromQuery(searchQuery, getString(string.geocoder_key))
+      presenter.getLocationFromQuery(addressSearch.text.toString(), getString(string.geocoder_key))
       hideSoftKeyboard(this)
     }
     addAddressButton.setOnClickListener {
@@ -93,6 +93,16 @@ class MapAddressActivity : MvpAppCompatActivity(), OnMapReadyCallback, MapAddres
         showError(getString(string.address_error))
       }
     }
+
+    addressSearch.setOnKeyListener(this)
+  }
+
+  override fun onKey(view: View?, keyCode: Int, keyEvent: KeyEvent): Boolean {
+    if (keyEvent.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+      searchIcon.performClick()
+      return true
+    }
+    return false
   }
 
   private fun isAddressFilled(): Boolean {
@@ -238,22 +248,6 @@ class MapAddressActivity : MvpAppCompatActivity(), OnMapReadyCallback, MapAddres
     street.text = "${address.addressComponents?.get(1)?.longName}, " +
         "${address.addressComponents?.get(0)?.shortName}"
     selectedAddressItem = address
-  }
-
-  override fun afterTextChanged(query: Editable?) {
-  }
-
-  override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-  }
-
-  override fun onTextChanged(query: CharSequence, p1: Int, p2: Int, p3: Int) {
-    if (query.length > 0) {
-      searchIcon.visibility = View.VISIBLE
-      searchQuery = query.toString()
-    } else {
-      searchIcon.visibility = View.GONE
-      searchQuery = ""
-    }
   }
 
   fun hideSoftKeyboard(activity: Activity) {
