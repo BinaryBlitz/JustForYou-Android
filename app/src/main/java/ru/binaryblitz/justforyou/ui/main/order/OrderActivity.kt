@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.activity_order.toolbar
 import kotlinx.android.synthetic.main.content_order.addressContainer
 import kotlinx.android.synthetic.main.content_order.addressText
 import kotlinx.android.synthetic.main.content_order.blockTitle
+import kotlinx.android.synthetic.main.content_order.calendarContainer
 import kotlinx.android.synthetic.main.content_order.programTitle
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.R.string
@@ -42,6 +43,9 @@ class OrderActivity : AppCompatActivity() {
 
     addressContainer.setOnClickListener {
       Router.openPlacesScreen(this, MAP_BUTTON_REQUEST_CODE)
+    }
+    calendarContainer.setOnClickListener {
+      Router.openCalendarScreen(this)
     }
   }
 

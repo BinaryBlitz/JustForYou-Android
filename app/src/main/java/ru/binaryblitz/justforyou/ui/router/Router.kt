@@ -11,6 +11,7 @@ import ru.binaryblitz.justforyou.data.programs.Block
 import ru.binaryblitz.justforyou.data.programs.Program
 import ru.binaryblitz.justforyou.ui.login.LoginActivity
 import ru.binaryblitz.justforyou.ui.login.onboarding.OnBoardingActivity
+import ru.binaryblitz.justforyou.ui.main.CalendarActivity
 import ru.binaryblitz.justforyou.ui.main.MainActivity
 import ru.binaryblitz.justforyou.ui.main.cart.CartActivity
 import ru.binaryblitz.justforyou.ui.main.delivery_addresses.DeliveryPlacesActivity
@@ -102,6 +103,11 @@ object Router {
 
   fun openOrdersScreen(context: Activity) {
     val intent = Intent(context, UserOrdersActivity::class.java)
+    context.startActivity(intent)
+  }
+
+  fun openCalendarScreen(context: Activity) {
+    val intent = Intent(context, CalendarActivity::class.java)
     context.startActivity(intent)
   }
 }
