@@ -1,23 +1,24 @@
 package ru.binaryblitz.justforyou.ui.main.program_item
 
-import android.content.Context
-import android.support.design.widget.Snackbar
-import android.view.View
-import android.widget.NumberPicker
-import ru.binaryblitz.justforyou.R.string
+import android.app.Activity
+import android.content.Intent
+import ru.binaryblitz.justforyou.components.Extras
 import ru.binaryblitz.justforyou.data.cart.CartLocalStorage
+import ru.binaryblitz.justforyou.data.cart.ProgramsStorage
 import ru.binaryblitz.justforyou.data.programs.Program
 
 /**
  * Common presenter for views that can add programs to the cart
  */
-class CartProgramPresenter(var context: Context) {
+class CartProgramPresenter(var context: Activity) {
+  var cartProgramsLocalStorage: CartLocalStorage = ProgramsStorage()
 
-  fun addProgramToCart(blockName: String, program: Program, view: View,
-      cartProgramsLocalStorage: CartLocalStorage, numberPicker: NumberPicker) {
-    cartProgramsLocalStorage.addProgramToCart(blockName, numberPicker.value,
+  fun addProgramToCart(blockName: String, program: Program, days: Int) {
+    cartProgramsLocalStorage.addProgramToCart(blockName, days,
         program.primaryPrice, program)
-    Snackbar.make(view, String.format(context.getString(string.cart_add), program.name),
-        Snackbar.LENGTH_LONG).show()
+    val intent = Intent()
+    intent.putExtra(Extras.EXTRA_PROGRAM, program.name)
+    context.setResult(Activity.RESULT_OK, intent)
+    context.finish()
   }
 }

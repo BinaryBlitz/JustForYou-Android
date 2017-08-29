@@ -1,9 +1,13 @@
 package ru.binaryblitz.justforyou.ui.main.program_item.detailed_program
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.view.ViewPager
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_detailed_program.coordinator
 import kotlinx.android.synthetic.main.activity_detailed_program.detailedProgramCollapsingView
 import kotlinx.android.synthetic.main.activity_detailed_program.detailedProgramImage
 import kotlinx.android.synthetic.main.activity_detailed_program.proceedProgramButton
@@ -17,6 +21,7 @@ import kotlinx.android.synthetic.main.toolbar_cart_icon.badgeCount
 import kotlinx.android.synthetic.main.toolbar_cart_icon.cartView
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.R.drawable
+import ru.binaryblitz.justforyou.R.string
 import ru.binaryblitz.justforyou.components.Extras
 import ru.binaryblitz.justforyou.data.programs.Program
 import ru.binaryblitz.justforyou.ui.base.BaseActivity
@@ -26,7 +31,6 @@ import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.abo
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.description.DescriptionFragment
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.menu.MenuFragment
 import ru.binaryblitz.justforyou.ui.router.Router
-
 
 class DetailedProgramActivity : BaseActivity() {
   lateinit var cartProgramPresenter: CartProgramPresenter
@@ -57,7 +61,8 @@ class DetailedProgramActivity : BaseActivity() {
     programPricePerDay.text = getString(R.string.per_one_day) + "${program.primaryPrice}"
     programPricePerWeek.text = getString(R.string.per_ten_days) + "${program.secondaryPrice}"
     proceedProgramButton.setOnClickListener {
-      Router.openOrderScreen(this, program, intent.getStringExtra(Extras.EXTRA_PROGRAM_BLOCK_NAME))
+      Router.openOrderScreen(this, program, intent.getStringExtra(Extras.EXTRA_PROGRAM_BLOCK_NAME),
+          Extras.orderRequestCode)
     }
 
     setupViewPager(detailedProgramViewPager, program)
@@ -79,4 +84,13 @@ class DetailedProgramActivity : BaseActivity() {
     cartView.setOnClickListener { Router.openCartScreen(this) }
   }
 
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+    if (resultCode == Activity.RESULT_OK && requestCode == Extras.orderRequestCode) {
+      val program = data?.getStringExtra(Extras.EXTRA_PROGRAM)
+      Snackbar.make(coordinator, String.format(getString(string.cart_add), program),
+          Snackbar.LENGTH_LONG).setAction(getString(string.go_to_cart),
+          { Router.openCartScreen(this) }).show()
+    }
+  }
 }

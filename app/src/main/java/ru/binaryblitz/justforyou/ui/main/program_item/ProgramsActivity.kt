@@ -1,5 +1,7 @@
 package ru.binaryblitz.justforyou.ui.main.program_item
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.view.ViewPager
@@ -14,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_program.toolbar
 import kotlinx.android.synthetic.main.toolbar_cart_icon.badgeCount
 import kotlinx.android.synthetic.main.toolbar_cart_icon.cartView
 import ru.binaryblitz.justforyou.R
+import ru.binaryblitz.justforyou.R.string
 import ru.binaryblitz.justforyou.components.Extras
 import ru.binaryblitz.justforyou.data.programs.Block
 import ru.binaryblitz.justforyou.data.programs.Program
@@ -56,7 +59,7 @@ class ProgramsActivity : BaseActivity(), ProgramsView {
     pageIndicatorView.radius = 4
     pageIndicatorView.setAnimationType(AnimationType.SLIDE)
     pageIndicatorView.selectedColor = resources.getColor(R.color.primary)
-    pageIndicatorView.unselectedColor = resources.getColor(R.color.colorAccent)
+    pageIndicatorView.unselectedColor = resources.getColor(R.color.md_yellow_800)
   }
 
   override fun showProgress() {
@@ -89,6 +92,16 @@ class ProgramsActivity : BaseActivity(), ProgramsView {
 
   companion object {
     var blockName: String = ""
+  }
+
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+    if (resultCode == Activity.RESULT_OK && requestCode == Extras.orderRequestCode) {
+      val program = data?.getStringExtra(Extras.EXTRA_PROGRAM)
+      Snackbar.make(programsCoordinator, String.format(getString(string.cart_add), program),
+          Snackbar.LENGTH_LONG).setAction(getString(string.go_to_cart),
+          { Router.openCartScreen(this) }).show()
+    }
   }
 
 }

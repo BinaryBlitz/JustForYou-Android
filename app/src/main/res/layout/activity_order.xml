@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
+    android:id="@+id/orderCoordinator"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -28,5 +29,64 @@
   </android.support.design.widget.AppBarLayout>
 
   <include layout="@layout/content_order"/>
+
+  <View
+      android:id="@+id/shadow"
+      android:layout_width="match_parent"
+      android:layout_height="8dp"
+      android:background="@drawable/shadow"
+      app:layout_anchor="@id/timePickerAlertSheet"
+      />
+
+  <FrameLayout
+      android:id="@+id/timePickerAlertSheet"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/whiteColor"
+      android:visibility="visible"
+      app:behavior_hideable="true"
+      app:elevation="8dp"
+      app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
+      >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/whiteColor"
+        android:orientation="vertical"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:layout_marginTop="16dp"
+          android:alpha="1"
+          android:text="Выберите время доставки"
+          android:textColor="@color/greyColor"
+          android:textSize="18sp"
+          />
+
+      <NumberPicker
+          android:layout_gravity="center_horizontal"
+          android:layout_marginStart="32dp"
+          android:layout_marginEnd="32dp"
+          android:id="@+id/numberPicker"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          ></NumberPicker>
+
+      <Button
+          android:id="@+id/saveDeliveryTimeButton"
+          android:layout_width="match_parent"
+          android:layout_height="50dp"
+          android:layout_gravity="bottom"
+          android:gravity="center"
+          android:text="Сохранить"
+          style="@style/Widget.AppCompat.Button.Colored"
+          />
+
+
+    </LinearLayout>
+  </FrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>

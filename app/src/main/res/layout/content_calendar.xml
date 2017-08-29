@@ -1,22 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="ru.binaryblitz.justforyou.ui.main.CalendarActivity"
     tools:showIn="@layout/activity_calendar"
     >
 
-  <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-      xmlns:app="http://schemas.android.com/apk/res-auto"
-      android:id="@+id/calendarView"
+  <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      app:mcv_selectionColor="@color/primary"
-      app:mcv_showOtherDates="all"
-      />
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      >
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mcv_selectionColor="@color/primary_light"
+        app:mcv_showOtherDates="all"
+        />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/saveDaysButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/ripple_rounded_btn"
+        android:clickable="true"
+        android:text="Продолжить"
+        android:textColor="@color/whiteColor"
+        />
+
+  </LinearLayout>
+
+
+</android.support.v4.widget.NestedScrollView>

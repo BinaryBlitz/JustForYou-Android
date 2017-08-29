@@ -79,11 +79,11 @@ object Router {
     context.startActivity(intent)
   }
 
-  fun openOrderScreen(context: Activity, program: Program, block: String) {
+  fun openOrderScreen(context: Activity, program: Program, block: String, requestCode: Int) {
     val intent = Intent(context, OrderActivity::class.java)
     intent.putExtra(Extras.EXTRA_PROGRAM, program)
     intent.putExtra(Extras.EXTRA_PROGRAM_BLOCK_NAME, block)
-    context.startActivity(intent)
+    context.startActivityForResult(intent, requestCode)
   }
 
   fun openMapScreen(context: Activity, requestCode: Int) {
@@ -106,8 +106,8 @@ object Router {
     context.startActivity(intent)
   }
 
-  fun openCalendarScreen(context: Activity) {
+  fun openCalendarScreen(context: Activity, requestCode: Int) {
     val intent = Intent(context, CalendarActivity::class.java)
-    context.startActivity(intent)
+    context.startActivityForResult(intent, requestCode)
   }
 }
