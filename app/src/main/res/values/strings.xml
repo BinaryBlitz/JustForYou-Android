@@ -50,4 +50,5 @@
   <string name="voice_search_extra_language">ru-RU</string>
   <string name="toolbar_action_voice_title">Голосовой поиск</string>
   <string name="search_hint">Введите адрес</string>
+  <string name="order_price">- %1$d\u20BD</string>
 </resources>
