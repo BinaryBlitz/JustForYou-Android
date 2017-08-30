@@ -72,7 +72,8 @@ class OrdersAdapter : BaseRecyclerAdapter<Order>() {
 
     override fun setItem(item: Order, position: Int) {
       itemView.orderTitle.text = item.programs?.get(0)?.name
-      itemView.orderPrice.text = "-${item.totalPrice} Р"
+      itemView.orderPrice.text = String.format(itemView.context.getString(string.order_price),
+          item.totalPrice)
     }
 
   }
