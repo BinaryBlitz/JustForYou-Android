@@ -21,6 +21,7 @@ import ru.binaryblitz.justforyou.ui.main.program_item.ProgramsActivity
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.DetailedProgramActivity
 import ru.binaryblitz.justforyou.ui.main.purchases.PurchasesActivity
 import ru.binaryblitz.justforyou.ui.main.settings.SettingsActivity
+import ru.binaryblitz.justforyou.ui.main.settings.payment_cards.PaymentCardsActivity
 import ru.binaryblitz.justforyou.ui.main.user_orders.UserOrdersActivity
 
 /**
@@ -109,5 +110,10 @@ object Router {
   fun openCalendarScreen(context: Activity, requestCode: Int) {
     val intent = Intent(context, CalendarActivity::class.java)
     context.startActivityForResult(intent, requestCode)
+  }
+
+  fun openPaymentCardsScreen(context: Activity) {
+    val intent = Intent(context, PaymentCardsActivity::class.java)
+    context.startActivity(intent)
   }
 }
