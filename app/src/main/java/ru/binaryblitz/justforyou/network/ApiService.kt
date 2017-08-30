@@ -18,6 +18,7 @@ import ru.binaryblitz.justforyou.network.responses.VerifyTokenResponse
 import ru.binaryblitz.justforyou.network.responses.delivery_addresses.create.Address
 import ru.binaryblitz.justforyou.network.responses.delivery_addresses.create.AddressBodyData
 import ru.binaryblitz.justforyou.network.responses.orders.Order
+import ru.binaryblitz.justforyou.network.responses.payment_cards.PaymentCard
 import ru.binaryblitz.justforyou.network.responses.purchases.PurchasesResponse
 
 /**
@@ -67,5 +68,8 @@ interface ApiService {
 
   @GET("/api/orders.json")
   fun getOrders(@Query("api_token") token: String): Single<List<Order>>
+
+  @GET("/api/payment_cards.json")
+  fun getPaymentCards(@Query("api_token") token: String): Single<List<PaymentCard>>
 
 }

@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_settings.settingsContainer
 import kotlinx.android.synthetic.main.activity_settings.toolbar
 import kotlinx.android.synthetic.main.content_settings.aboutApp
 import kotlinx.android.synthetic.main.content_settings.lastNameEdit
+import kotlinx.android.synthetic.main.content_settings.myPaymentCards
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.R.string
 import ru.binaryblitz.justforyou.data.user.UserInfo
@@ -51,6 +52,7 @@ class SettingsActivity : AppCompatActivity(), TextWatcher {
       Router.openJustForYouLink(this,
           getString(string.just_for_you_about_link))
     }
+    myPaymentCards.setOnClickListener { Router.openPaymentCardsScreen(this) }
   }
 
   override fun afterTextChanged(p0: Editable?) {
@@ -64,7 +66,8 @@ class SettingsActivity : AppCompatActivity(), TextWatcher {
   }
 
   private fun updateUser(user: UserInfo) {
-    val updatedUser = UserInfo(lastNameEdit.text.toString(), firstNameEdit.text.toString(), user.balance,
+    val updatedUser = UserInfo(lastNameEdit.text.toString(), firstNameEdit.text.toString(),
+        user.balance,
         user.phoneNumber, user.id, user.email, user.apiToken)
     networkService.updateUser(UserData(User(updatedUser.lastName,
         null, updatedUser.firstName, null)), userProfileStorage.getToken())

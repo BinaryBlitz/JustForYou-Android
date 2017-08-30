@@ -13,6 +13,7 @@ import ru.binaryblitz.justforyou.network.responses.VerifyTokenResponse
 import ru.binaryblitz.justforyou.network.responses.delivery_addresses.create.Address
 import ru.binaryblitz.justforyou.network.responses.delivery_addresses.create.AddressBodyData
 import ru.binaryblitz.justforyou.network.responses.orders.Order
+import ru.binaryblitz.justforyou.network.responses.payment_cards.PaymentCard
 import ru.binaryblitz.justforyou.network.responses.purchases.PurchasesResponse
 
 /**
@@ -106,6 +107,13 @@ class NetworkService(private val serviceApi: ApiService) {
 
   fun getOrders(token: String): Single<List<Order>> {
     return serviceApi.getOrders(token)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .map { it }
+  }
+
+  fun getPaymentCards(token: String): Single<List<PaymentCard>> {
+    return serviceApi.getPaymentCards(token)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .map { it }
