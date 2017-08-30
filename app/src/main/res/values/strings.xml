@@ -51,4 +51,7 @@
   <string name="toolbar_action_voice_title">Голосовой поиск</string>
   <string name="search_hint">Введите адрес</string>
   <string name="order_price">- %1$d\u20BD</string>
+  <string name="remove_address_question">Удалить адрес?</string>
+  <string name="yes">Да</string>
+  <string name="no">Нет</string>
 </resources>

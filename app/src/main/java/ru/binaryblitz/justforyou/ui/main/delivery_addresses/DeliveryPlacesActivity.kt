@@ -1,6 +1,7 @@
 package ru.binaryblitz.justforyou.ui.main.delivery_addresses
 
 import android.app.Activity
+import android.app.AlertDialog.Builder
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -69,6 +70,25 @@ class DeliveryPlacesActivity : MvpAppCompatActivity(), PlacesView {
       setResult(Activity.RESULT_OK, intent)
       finish()
     }
+    adapter.onItemRemoveAction.subscribe { address ->
+      openAlertDialog(address)
+    }
+  }
+
+  private fun openAlertDialog(
+      address: Address) {
+    val alert = Builder(this)
+    alert.setTitle(getString(string.remove_address_question))
+    alert.setPositiveButton(getString(string.yes)) {
+      dialog, whichButton ->
+      dialog.dismiss()
+      presenter.removeAddress(address.id!!)
+    }
+    alert.setNegativeButton(getString(string.no)) {
+      dialog, whichButton ->
+      dialog.dismiss()
+    }
+    alert.show()
   }
 
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -81,6 +101,7 @@ class DeliveryPlacesActivity : MvpAppCompatActivity(), PlacesView {
 
 class PlacesAdapter : BaseRecyclerAdapter<Address>() {
   var onItemSelectAction: PublishSubject<Address> = PublishSubject.create()
+  var onItemRemoveAction: PublishSubject<Address> = PublishSubject.create()
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder<Address> {
     val view = LayoutInflater.from(parent.context).inflate(R.layout.place_item, parent, false)
@@ -94,6 +115,12 @@ class PlacesAdapter : BaseRecyclerAdapter<Address>() {
       itemView.placesContainerView.setOnClickListener {
         onItemSelectAction.onNext(item)
       }
+      itemView.setOnLongClickListener { view -> removeItem(item) }
+    }
+
+    private fun removeItem(address: Address): Boolean {
+      onItemRemoveAction.onNext(address)
+      return true
     }
 
   }

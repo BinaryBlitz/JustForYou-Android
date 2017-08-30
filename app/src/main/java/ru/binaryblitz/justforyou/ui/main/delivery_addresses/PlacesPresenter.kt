@@ -33,4 +33,19 @@ class PlacesPresenter : BasePresenter<PlacesView>() {
         )
   }
 
+  fun removeAddress(addressId: Int) {
+    viewState.showProgress()
+    networkService.removeAddress(addressId, userProfileStorage.getToken())
+        .subscribe(
+            { response ->
+              viewState.hideProgress()
+              getPlaces()
+            },
+            { errorResponse ->
+              viewState.hideProgress()
+              getPlaces()
+            }
+        )
+  }
+
 }
