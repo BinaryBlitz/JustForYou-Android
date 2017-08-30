@@ -2,6 +2,7 @@ package ru.binaryblitz.justforyou.network
 
 import io.reactivex.Single
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.PATCH
 import retrofit2.http.POST
@@ -47,10 +48,15 @@ interface ApiService {
       @Query("api_token") token: String): Single<List<Program>>
 
   @GET("/api/programs/{programId}/days.json")
-  fun getMenu(@Path("programId") programId: Int, @Query("api_token") token: String): Single<List<Menu>>
+  fun getMenu(@Path("programId") programId: Int,
+      @Query("api_token") token: String): Single<List<Menu>>
 
   @GET("/api/addresses.json")
   fun getDeliveryAddresses(@Query("api_token") token: String): Single<List<Address>>
+
+  @DELETE("/api/addresses/{id}.json")
+  fun removeDeliveryAddress(@Path("id") id: Int,
+      @Query("api_token") token: String): Single<Address>
 
   @POST("/api/addresses.json")
   fun createDeliveryAddress(@Body address: AddressBodyData,

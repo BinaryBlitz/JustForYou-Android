@@ -90,6 +90,13 @@ class NetworkService(private val serviceApi: ApiService) {
         .map { it }
   }
 
+  fun removeAddress(addressId: Int, token: String): Single<Any> {
+    return serviceApi.removeDeliveryAddress(addressId, token)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .map { it }
+  }
+
   fun getPurchases(token: String): Single<List<PurchasesResponse>> {
     return serviceApi.getPurchases(token)
         .subscribeOn(Schedulers.io())
