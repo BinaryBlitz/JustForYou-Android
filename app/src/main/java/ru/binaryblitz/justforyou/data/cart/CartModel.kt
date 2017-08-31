@@ -13,4 +13,5 @@ open class CartModel : RealmObject() {
   var blockName: String? = null
   var days: Int? = null
   var price: Int? = null
+  // TODO Add delivery model
 }
