@@ -1,7 +1,9 @@
 package ru.binaryblitz.justforyou.data.cart
 
+import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.RealmClass
+import ru.binaryblitz.justforyou.network.responses.orders.DeliveriesItem
 
 /**
  * Cart model used for local storage
@@ -13,5 +15,5 @@ open class CartModel : RealmObject() {
   var blockName: String? = null
   var days: Int? = null
   var price: Int? = null
-  // TODO Add delivery model
+  var deliveries: RealmList<DeliveriesItem> = RealmList()
 }

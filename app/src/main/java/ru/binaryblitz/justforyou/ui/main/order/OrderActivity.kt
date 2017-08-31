@@ -27,7 +27,9 @@ import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.R.string
 import ru.binaryblitz.justforyou.components.Constants
 import ru.binaryblitz.justforyou.components.Extras
+import ru.binaryblitz.justforyou.components.utils.DateUtils
 import ru.binaryblitz.justforyou.data.programs.Program
+import ru.binaryblitz.justforyou.network.responses.orders.DeliveriesItem
 import ru.binaryblitz.justforyou.ui.main.program_item.CartProgramPresenter
 import ru.binaryblitz.justforyou.ui.router.Router
 
@@ -93,7 +95,16 @@ class OrderActivity : AppCompatActivity() {
     saveDeliveryTimeButton.setOnClickListener { hideTimePicker(true) }
     addToCartButton.setOnClickListener {
       if (isOrderInfoFilledCorrectly()) {
-        cartProgramPresenter.addProgramToCart(blockName, program, selectedDays?.size!!)
+        // Do some stuff with converting selectedDays to deliveryDays...
+        var deliveryDays: ArrayList<DeliveriesItem> = ArrayList()
+        for ((position) in selectedDays.withIndex()) {
+          var deliveryItem: DeliveriesItem = DeliveriesItem()
+          deliveryItem.addressId = address!!
+          deliveryItem.scheduledFor = DateUtils.convertToServerDate(selectedDays[position].date)
+          deliveryItem.comment = ""
+          deliveryDays.add(deliveryItem)
+        }
+        cartProgramPresenter.addProgramToCart(blockName, program, selectedDays.size, deliveryDays)
       } else {
         Snackbar.make(orderCoordinator, getString(string.order_info_error),
             Snackbar.LENGTH_SHORT).show()

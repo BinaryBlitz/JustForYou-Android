@@ -2,7 +2,7 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/programsCoordinator"
+    android:id="@+id/cartCoordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -48,14 +48,98 @@
         android:layout_height="match_parent"
         ></android.support.v7.widget.RecyclerView>
 
+
+    <Button
+        android:visibility="gone"
+        android:textColor="@color/whiteColor"
+        android:layout_margin="16dp"
+        android:id="@+id/makeOrderButton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:text="@string/pay_sum"
+        android:background="@drawable/ripple_rounded_btn"
+        />
+
   </FrameLayout>
 
   <ProgressBar
-      android:id="@+id/programsProgress"
+      android:id="@+id/cartProgress"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
       android:visibility="gone"
       />
+
+  <View
+      android:id="@+id/shadow"
+      android:layout_width="match_parent"
+      android:layout_height="8dp"
+      android:background="@drawable/shadow"
+      app:layout_anchor="@id/cardPickerAlertSheet"
+      />
+
+  <FrameLayout
+      android:id="@+id/cardPickerAlertSheet"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/colorPrimaryLight"
+      android:visibility="visible"
+      app:behavior_hideable="true"
+      app:elevation="8dp"
+      app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
+      >
+
+    <LinearLayout
+        android:id="@+id/paymentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/whiteColor"
+        android:orientation="vertical"
+        >
+      <TextView
+          android:textAlignment="center"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:layout_marginTop="16dp"
+          android:alpha="1"
+          android:text="Выберите карту которой вы хотите оплатить"
+          android:textColor="@color/blackColor"
+          android:textSize="18sp"
+          />
+
+      <android.support.v7.widget.RecyclerView
+          android:background="@color/backgroundColor"
+          android:layout_gravity="center_horizontal"
+          android:id="@+id/userCardView"
+          android:layout_width="match_parent"
+          android:layout_height="300dp"
+          ></android.support.v7.widget.RecyclerView>
+
+      <Button
+          android:layout_margin="16dp"
+          android:id="@+id/orderWithNewCardButton"
+          android:layout_width="match_parent"
+          android:layout_height="50dp"
+          android:layout_gravity="bottom"
+          android:gravity="center"
+          android:text="Оплатить новой"
+          style="@style/Widget.AppCompat.Button.Colored"
+          />
+
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/paymentProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        />
+  </FrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.order_item.view.orderPrice
 import kotlinx.android.synthetic.main.order_item.view.orderTitle
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.R.string
-import ru.binaryblitz.justforyou.network.responses.orders.Order
+import ru.binaryblitz.justforyou.network.responses.orders.PurchaseItem
 import ru.binaryblitz.justforyou.ui.base.BaseRecyclerAdapter
 
 class UserOrdersActivity : MvpAppCompatActivity(), UserOrdersView {
@@ -50,7 +50,7 @@ class UserOrdersActivity : MvpAppCompatActivity(), UserOrdersView {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
   }
 
-  override fun showOrders(addresses: List<Order>) {
+  override fun showOrders(addresses: List<PurchaseItem>) {
     adapter = OrdersAdapter()
     ordersView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     ordersView.adapter = adapter
@@ -59,18 +59,18 @@ class UserOrdersActivity : MvpAppCompatActivity(), UserOrdersView {
 
 }
 
-class OrdersAdapter : BaseRecyclerAdapter<Order>() {
-  var onItemSelectAction: PublishSubject<Order> = PublishSubject.create()
+class OrdersAdapter : BaseRecyclerAdapter<PurchaseItem>() {
+  var onItemSelectAction: PublishSubject<PurchaseItem> = PublishSubject.create()
 
   override fun onCreateViewHolder(parent: ViewGroup,
-      viewType: Int): RecyclerViewHolder<Order> {
+      viewType: Int): RecyclerViewHolder<PurchaseItem> {
     val view = LayoutInflater.from(parent.context).inflate(R.layout.order_item, parent, false)
     return ViewHolder(view)
   }
 
-  private inner class ViewHolder(itemView: View) : RecyclerViewHolder<Order>(itemView) {
+  private inner class ViewHolder(itemView: View) : RecyclerViewHolder<PurchaseItem>(itemView) {
 
-    override fun setItem(item: Order, position: Int) {
+    override fun setItem(item: PurchaseItem, position: Int) {
       itemView.orderTitle.text = item.programs?.get(0)?.name
       itemView.orderPrice.text = String.format(itemView.context.getString(string.order_price),
           item.totalPrice)
