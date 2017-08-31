@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_payment_cards.cardsProgress
 import kotlinx.android.synthetic.main.activity_payment_cards.toolbar
 import kotlinx.android.synthetic.main.content_payment_cards.cardsView
@@ -59,6 +60,8 @@ class PaymentCardsActivity : MvpAppCompatActivity(), PaymentCardsView {
 }
 
 class CardsAdapter : BaseRecyclerAdapter<PaymentCard>() {
+  var onItemSelectAction: PublishSubject<PaymentCard> = PublishSubject.create()
+
   override fun onCreateViewHolder(parent: ViewGroup,
       viewType: Int): RecyclerViewHolder<PaymentCard> {
     val view = LayoutInflater.from(parent.context).inflate(R.layout.payment_card_item, parent,
@@ -71,6 +74,7 @@ class CardsAdapter : BaseRecyclerAdapter<PaymentCard>() {
     override fun setItem(item: PaymentCard, position: Int) {
       itemView.cardHolder.text = item.holder
       itemView.cardNumber.text = item.number
+      itemView.setOnClickListener { onItemSelectAction.onNext(item) }
     }
 
   }

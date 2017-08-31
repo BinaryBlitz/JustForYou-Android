@@ -12,7 +12,13 @@ import ru.binaryblitz.justforyou.network.responses.CreateTokenResponse
 import ru.binaryblitz.justforyou.network.responses.VerifyTokenResponse
 import ru.binaryblitz.justforyou.network.responses.delivery_addresses.create.Address
 import ru.binaryblitz.justforyou.network.responses.delivery_addresses.create.AddressBodyData
-import ru.binaryblitz.justforyou.network.responses.orders.Order
+import ru.binaryblitz.justforyou.network.responses.orders.CardBody
+import ru.binaryblitz.justforyou.network.responses.orders.DeliveryBody
+import ru.binaryblitz.justforyou.network.responses.orders.OrderBody
+import ru.binaryblitz.justforyou.network.responses.orders.OrderResponse
+import ru.binaryblitz.justforyou.network.responses.orders.PaymentCardBody
+import ru.binaryblitz.justforyou.network.responses.orders.PurchaseItem
+import ru.binaryblitz.justforyou.network.responses.payment.Payment
 import ru.binaryblitz.justforyou.network.responses.payment_cards.PaymentCard
 import ru.binaryblitz.justforyou.network.responses.purchases.PurchasesResponse
 
@@ -105,7 +111,7 @@ class NetworkService(private val serviceApi: ApiService) {
         .map { it }
   }
 
-  fun getOrders(token: String): Single<List<Order>> {
+  fun getOrders(token: String): Single<List<PurchaseItem>> {
     return serviceApi.getOrders(token)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
@@ -114,6 +120,34 @@ class NetworkService(private val serviceApi: ApiService) {
 
   fun getPaymentCards(token: String): Single<List<PaymentCard>> {
     return serviceApi.getPaymentCards(token)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .map { it }
+  }
+
+  fun createOrder(orderBody: OrderBody, token: String): Single<OrderResponse> {
+    return serviceApi.createOrder(orderBody, token)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .map { it }
+  }
+
+  fun makeOrderPayment(orderId: Int, token: String) : Single<Payment> {
+    return serviceApi.makeOrderPayment(orderId, token)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .map { it }
+  }
+
+  fun payWithCreditCard(creditCardId: Int, orderId: Int, token: String) : Single<Payment> {
+    return serviceApi.makeOrderPaymentWithCard(orderId, CardBody(PaymentCardBody(creditCardId)), token)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .map { it }
+  }
+
+  fun addDeliveryDays(orderId: Int, deliveryBody: DeliveryBody, token: String) : Single<Payment> {
+    return serviceApi.addDeliveryDays(orderId, deliveryBody, token)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .map { it }

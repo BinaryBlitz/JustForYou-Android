@@ -55,4 +55,6 @@
   <string name="yes">Да</string>
   <string name="no">Нет</string>
   <string name="my_payment_cards">Мои карты</string>
+  <string name="success_payment">Платеж успешно выполнен!</string>
+  <string name="pay_sum">Оформить заказ на сумму %1$d\u20BD</string>
 </resources>

@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 data class Payment(
     @Json(name = "payment_url")
     val paymentUrl: String? = null,
-    val paid: Boolean? = null,
-    val createdAt: String? = null,
-    val id: Int? = null
+    val paid: Boolean,
+    val createdAt: String,
+    val id: Int
 )

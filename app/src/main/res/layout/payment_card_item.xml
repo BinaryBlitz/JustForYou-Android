@@ -2,7 +2,6 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/classContainerView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,6 +10,8 @@
     android:layout_marginTop="16dp"
     android:animateLayoutChanges="true"
     android:background="@color/whiteColor"
+    android:clickable="true"
+    android:foreground="?android:selectableItemBackground"
     android:orientation="vertical"
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="2dp"
@@ -34,10 +35,10 @@
           android:layout_height="wrap_content"
           android:maxHeight="16sp"
           android:maxLines="2"
+          android:text="Владелец карты"
           android:textColor="@color/greyColor"
           android:textSize="14sp"
           android:textStyle="normal"
-          android:text="Владелец карты"
           />
 
       <TextView
