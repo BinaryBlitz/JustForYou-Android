@@ -147,7 +147,7 @@ class NetworkService(private val serviceApi: ApiService) {
         .map { it }
   }
 
-  fun addDeliveryDays(orderId: Int, deliveryBody: DeliveryBody, token: String) : Single<Payment> {
+  fun addDeliveryDays(orderId: Int, deliveryBody: DeliveryBody, token: String) : Single<List<Delivery>> {
     return serviceApi.addDeliveryDays(orderId, deliveryBody, token)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())

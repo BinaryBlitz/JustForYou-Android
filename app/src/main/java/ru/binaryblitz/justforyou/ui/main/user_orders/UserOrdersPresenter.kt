@@ -24,7 +24,7 @@ class UserOrdersPresenter : BasePresenter<UserOrdersView>() {
         .subscribe(
             { orders ->
               viewState.hideProgress()
-              viewState.showOrders(orders)
+              viewState.showOrders(orders.sortedByDescending { it.id })
             },
             { errorResponse ->
               viewState.hideProgress()
