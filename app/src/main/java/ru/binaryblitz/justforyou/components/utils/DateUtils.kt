@@ -12,4 +12,8 @@ object DateUtils {
   fun convertToServerDate(date: Date): String {
     return SimpleDateFormat(serverDateFormat).format(date)
   }
+
+  fun parseServerDate(date: String): Date {
+    return SimpleDateFormat(serverDateFormat).parse(date)
+  }
 }

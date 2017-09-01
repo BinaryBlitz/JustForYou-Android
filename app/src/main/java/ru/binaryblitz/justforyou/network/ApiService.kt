@@ -15,6 +15,7 @@ import ru.binaryblitz.justforyou.data.user.UserInfo
 import ru.binaryblitz.justforyou.network.models.UserData
 import ru.binaryblitz.justforyou.network.responses.CreateTokenResponse
 import ru.binaryblitz.justforyou.network.responses.VerifyTokenResponse
+import ru.binaryblitz.justforyou.network.responses.deliveries.Delivery
 import ru.binaryblitz.justforyou.network.responses.delivery_addresses.create.Address
 import ru.binaryblitz.justforyou.network.responses.delivery_addresses.create.AddressBodyData
 import ru.binaryblitz.justforyou.network.responses.orders.CardBody
@@ -96,5 +97,8 @@ interface ApiService {
   @POST("/api/purchases/{orderId}/deliveries.json")
   fun addDeliveryDays(@Path("orderId") id: Int, @Body deliveryBody: DeliveryBody,
       @Query("api_token") token: String): Single<Payment>
+
+  @GET("/api/deliveries.json")
+  fun getDeliveries(@Query("api_token") token: String): Single<List<Delivery>>
 
 }
