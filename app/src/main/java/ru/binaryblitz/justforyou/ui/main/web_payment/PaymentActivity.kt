@@ -33,15 +33,24 @@ class PaymentActivity : AppCompatActivity() {
     paymentWebView.loadUrl(url)
     paymentWebView.webViewClient = object : WebViewClient() {
       override fun shouldOverrideUrlLoading(wView: WebView, url: String): Boolean {
-        if (url == succeedPaymentUrl || url.contains("success")) {
-          setResult(Activity.RESULT_OK)
-          finish()
-          return true
-        } else {
-          return false
-        }
+        return isUrlPaymentSucceed(url)
       }
     }
   }
 
+  override fun onBackPressed() {
+    if (!isUrlPaymentSucceed(paymentWebView.url)) {
+      super.onBackPressed()
+    }
+  }
+
+  private fun isUrlPaymentSucceed(url: String): Boolean {
+    if (url == succeedPaymentUrl || url.contains("success")) {
+      setResult(Activity.RESULT_OK)
+      finish()
+      return true
+    } else {
+      return false
+    }
+  }
 }

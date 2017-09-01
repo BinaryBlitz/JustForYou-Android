@@ -67,7 +67,6 @@ class CartPresenter : BasePresenter<CartView>() {
         .subscribe(
             { response ->
               viewState.openPaymentUrl(response.paymentUrl!!)
-              cartProgramsLocalStorage.clear()
               viewState.hidePaymentProgress()
             },
             { errorResponse ->
@@ -85,7 +84,6 @@ class CartPresenter : BasePresenter<CartView>() {
     networkService.payWithCreditCard(cardId, orderId, userProfileStorage.getToken())
         .subscribe(
             { response ->
-              viewState.showSuccessPaymentMessage()
               viewState.hidePaymentProgress()
               addDeliveryDaysToLastPurchase()
             },
@@ -126,6 +124,8 @@ class CartPresenter : BasePresenter<CartView>() {
         .subscribe(
             { response ->
               viewState.hideProgress()
+              cartProgramsLocalStorage.clear()
+              viewState.showSuccessPaymentMessage()
             },
             { errorResponse ->
               viewState.hideProgress()

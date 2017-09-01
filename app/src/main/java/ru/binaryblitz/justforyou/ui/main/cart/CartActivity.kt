@@ -80,12 +80,12 @@ class CartActivity : MvpAppCompatActivity(), CartView {
     creditCardsBehavior.state = BottomSheetBehavior.STATE_HIDDEN
   }
 
-  private fun setTotalAmout() {
+  private fun setTotalAmount() {
     var paymentAmount = 0
     if (presenter.programs.isNotEmpty()) {
       makeOrderButton.visibility = View.VISIBLE
       for ((position) in presenter.programs.withIndex()) {
-        paymentAmount += presenter.programs[position].price!!
+        paymentAmount += presenter.programs[position].price!! * presenter.programs[position].days!!
       }
     }
     makeOrderButton.text = String.format(getString(string.pay_sum), paymentAmount)
@@ -102,7 +102,7 @@ class CartActivity : MvpAppCompatActivity(), CartView {
     makeOrderButton.setOnClickListener {
       createOrder(programs)
     }
-    setTotalAmout()
+    setTotalAmount()
   }
 
   private fun createOrder(programs: List<CartModel>) {

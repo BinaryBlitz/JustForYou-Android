@@ -96,7 +96,7 @@ interface ApiService {
 
   @POST("/api/purchases/{orderId}/deliveries.json")
   fun addDeliveryDays(@Path("orderId") id: Int, @Body deliveryBody: DeliveryBody,
-      @Query("api_token") token: String): Single<Payment>
+      @Query("api_token") token: String): Single<List<Delivery>>
 
   @GET("/api/deliveries.json")
   fun getDeliveries(@Query("api_token") token: String): Single<List<Delivery>>
