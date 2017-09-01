@@ -57,4 +57,6 @@
   <string name="my_payment_cards">Мои карты</string>
   <string name="success_payment">Платеж успешно выполнен!</string>
   <string name="pay_sum">Оформить заказ на сумму %1$d\u20BD</string>
+  <string name="title_activity_payment">PaymentActivity</string>
+  <string name="payment_screen_title">Оплата заказа</string>
 </resources>

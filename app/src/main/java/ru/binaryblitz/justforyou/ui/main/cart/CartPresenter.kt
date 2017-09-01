@@ -29,7 +29,6 @@ class CartPresenter : BasePresenter<CartView>() {
   lateinit var networkService: NetworkService
   var orderId: Int = 0
   var purchaseId: Int = 0
-  var isBrowserPaymentOpened = false
 
   init {
     JustForYouApp.appComponent?.inject(this)
@@ -67,7 +66,6 @@ class CartPresenter : BasePresenter<CartView>() {
     networkService.makeOrderPayment(orderId, userProfileStorage.getToken())
         .subscribe(
             { response ->
-              isBrowserPaymentOpened = true
               viewState.openPaymentUrl(response.paymentUrl!!)
               cartProgramsLocalStorage.clear()
               viewState.hidePaymentProgress()
@@ -87,7 +85,6 @@ class CartPresenter : BasePresenter<CartView>() {
     networkService.payWithCreditCard(cardId, orderId, userProfileStorage.getToken())
         .subscribe(
             { response ->
-              isBrowserPaymentOpened = true
               viewState.showSuccessPaymentMessage()
               viewState.hidePaymentProgress()
               addDeliveryDaysToLastPurchase()

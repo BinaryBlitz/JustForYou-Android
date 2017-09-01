@@ -1,5 +1,6 @@
 package ru.binaryblitz.justforyou.ui.main.cart
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.BottomSheetBehavior.BottomSheetCallback
@@ -29,6 +30,7 @@ import kotlinx.android.synthetic.main.cart_item.view.programTitle
 import kotlinx.android.synthetic.main.cart_item.view.programsPrice
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.R.string
+import ru.binaryblitz.justforyou.components.Extras
 import ru.binaryblitz.justforyou.data.cart.CartLocalStorage
 import ru.binaryblitz.justforyou.data.cart.CartModel
 import ru.binaryblitz.justforyou.data.cart.ProgramsStorage
@@ -137,7 +139,7 @@ class CartActivity : MvpAppCompatActivity(), CartView {
   }
 
   override fun openPaymentUrl(url: String) {
-    Router.openJustForYouLink(this, url)
+    Router.openPaymentScreen(this, url, Extras.paymentRequestCode)
     hideProgress()
   }
 
@@ -153,7 +155,6 @@ class CartActivity : MvpAppCompatActivity(), CartView {
       }
     }
     presenter.addDeliveryDays(DeliveryBody(deliveryDays))
-    presenter.isBrowserPaymentOpened = false
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -184,6 +185,12 @@ class CartActivity : MvpAppCompatActivity(), CartView {
     paymentProgress.visibility = View.INVISIBLE
   }
 
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+    if (resultCode == RESULT_OK && requestCode == Extras.paymentRequestCode) {
+      presenter.addDeliveryDaysToLastPurchase()
+    }
+  }
 }
 
 class CartAdapter : BaseRecyclerAdapter<CartModel>() {
