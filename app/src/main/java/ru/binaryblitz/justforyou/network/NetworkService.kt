@@ -10,6 +10,7 @@ import ru.binaryblitz.justforyou.data.user.UserInfo
 import ru.binaryblitz.justforyou.network.models.UserData
 import ru.binaryblitz.justforyou.network.responses.CreateTokenResponse
 import ru.binaryblitz.justforyou.network.responses.VerifyTokenResponse
+import ru.binaryblitz.justforyou.network.responses.deliveries.Delivery
 import ru.binaryblitz.justforyou.network.responses.delivery_addresses.create.Address
 import ru.binaryblitz.justforyou.network.responses.delivery_addresses.create.AddressBodyData
 import ru.binaryblitz.justforyou.network.responses.orders.CardBody
@@ -148,6 +149,13 @@ class NetworkService(private val serviceApi: ApiService) {
 
   fun addDeliveryDays(orderId: Int, deliveryBody: DeliveryBody, token: String) : Single<Payment> {
     return serviceApi.addDeliveryDays(orderId, deliveryBody, token)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .map { it }
+  }
+
+  fun getDeliveries(token: String): Single<List<Delivery>> {
+    return serviceApi.getDeliveries(token)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .map { it }

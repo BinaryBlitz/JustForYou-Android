@@ -21,6 +21,7 @@ import ru.binaryblitz.justforyou.data.user.UserProfileStorage
 import ru.binaryblitz.justforyou.data.user.UserStorageImpl
 import ru.binaryblitz.justforyou.ui.base.BaseActivity
 import ru.binaryblitz.justforyou.ui.main.blocks.ProgramsFragment
+import ru.binaryblitz.justforyou.ui.main.deliveries.DeliveriesFragment
 import ru.binaryblitz.justforyou.ui.main.support.SupportFragment
 import ru.binaryblitz.justforyou.ui.router.Router
 
@@ -55,7 +56,7 @@ class MainActivity : BaseActivity() {
   private fun initViewElements() {
     val adapter = ViewPagerAdapter(supportFragmentManager)
     adapter.addFragment(ProgramsFragment.getInstance(), "programs_tag")
-    adapter.addFragment(EmptyFragment(), "empty_tag")
+    adapter.addFragment(DeliveriesFragment.getInstance(), "delivery_tag")
     adapter.addFragment(SupportFragment(), "empty_tag")
     adapter.addFragment(EmptyFragment(), "empty_tag")
     tabsViewPager.offscreenPageLimit = 4
