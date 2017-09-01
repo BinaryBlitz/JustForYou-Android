@@ -84,7 +84,6 @@
       android:id="@+id/cardPickerAlertSheet"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="@color/colorPrimaryLight"
       android:visibility="visible"
       app:behavior_hideable="true"
       app:elevation="8dp"
@@ -100,15 +99,23 @@
         android:orientation="vertical"
         >
       <TextView
+          android:layout_margin="16dp"
           android:textAlignment="center"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center_horizontal"
-          android:layout_marginTop="16dp"
           android:alpha="1"
           android:text="Выберите карту которой вы хотите оплатить"
           android:textColor="@color/blackColor"
           android:textSize="18sp"
+          />
+
+      <TextView
+          android:id="@+id/noCardsView"
+          android:text="У вас нет привязанных карт"
+          android:layout_gravity="center"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
           />
 
       <android.support.v7.widget.RecyclerView
@@ -116,7 +123,7 @@
           android:layout_gravity="center_horizontal"
           android:id="@+id/userCardView"
           android:layout_width="match_parent"
-          android:layout_height="300dp"
+          android:layout_height="wrap_content"
           ></android.support.v7.widget.RecyclerView>
 
       <Button

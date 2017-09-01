@@ -13,6 +13,13 @@ import ru.binaryblitz.justforyou.network.responses.orders.OrderBody
 import ru.binaryblitz.justforyou.ui.base.BasePresenter
 import javax.inject.Inject
 
+/**
+ * This presenter contains payment logic.
+ * First user creates an order,
+ * After that select payment method (add a new card or taking from previously added)
+ * Then if payment succeeds, add delivery days to the current purchase.
+ */
+
 @InjectViewState
 class CartPresenter : BasePresenter<CartView>() {
   var cartProgramsLocalStorage: CartLocalStorage = ProgramsStorage()
@@ -20,7 +27,9 @@ class CartPresenter : BasePresenter<CartView>() {
   lateinit var programs: List<CartModel>
   @Inject
   lateinit var networkService: NetworkService
-  private var orderId: Int = 0
+  var orderId: Int = 0
+  var purchaseId: Int = 0
+  var isBrowserPaymentOpened = false
 
   init {
     JustForYouApp.appComponent?.inject(this)
@@ -31,6 +40,9 @@ class CartPresenter : BasePresenter<CartView>() {
     viewState.showPrograms(programs)
   }
 
+  /**
+   * Creates an order, if succeed -> gets user payment cards
+   */
   fun createOrder(orderBody: OrderBody) {
     viewState.showProgress()
     networkService.createOrder(orderBody, userProfileStorage.getToken())
@@ -47,11 +59,15 @@ class CartPresenter : BasePresenter<CartView>() {
         )
   }
 
-  fun makePayment() {
+  /**
+   * Adds new credit card and makes payment in webview using url
+   */
+  fun addNewPaymentCard() {
     viewState.showPaymentProgress()
     networkService.makeOrderPayment(orderId, userProfileStorage.getToken())
         .subscribe(
             { response ->
+              isBrowserPaymentOpened = true
               viewState.openPaymentUrl(response.paymentUrl!!)
               cartProgramsLocalStorage.clear()
               viewState.hidePaymentProgress()
@@ -63,14 +79,18 @@ class CartPresenter : BasePresenter<CartView>() {
         )
   }
 
+  /**
+   * Creates payment using previously added user's credit card
+   */
   fun makePaymentWithCard(cardId: Int) {
     viewState.showPaymentProgress()
     networkService.payWithCreditCard(cardId, orderId, userProfileStorage.getToken())
         .subscribe(
             { response ->
-              cartProgramsLocalStorage.clear()
+              isBrowserPaymentOpened = true
               viewState.showSuccessPaymentMessage()
               viewState.hidePaymentProgress()
+              addDeliveryDaysToLastPurchase()
             },
             { errorResponse ->
               viewState.hidePaymentProgress()
@@ -79,9 +99,33 @@ class CartPresenter : BasePresenter<CartView>() {
         )
   }
 
-  fun addDeliveryDays(deliveryBody: DeliveryBody, orderId: Int) {
+  /**
+   * First, gets all purchases, sorts it by descending and takes latest purchaseId
+   * After that adds delivery days to that purchase
+   */
+  fun addDeliveryDaysToLastPurchase() {
     viewState.showProgress()
-    networkService.addDeliveryDays(orderId, deliveryBody, userProfileStorage.getToken())
+    networkService.getPurchases(userProfileStorage.getToken())
+        .subscribe(
+            { purchases ->
+              purchases.sortedByDescending { it.id }
+              purchaseId = purchases[0].id!!
+              viewState.hideProgress()
+              viewState.sendDeliveryDays()
+            },
+            { errorResponse ->
+              viewState.hideProgress()
+              viewState.showError(errorResponse.localizedMessage)
+            }
+        )
+  }
+
+  /**
+   * Adds delivery days to selected purchase item
+   */
+  fun addDeliveryDays(deliveryBody: DeliveryBody) {
+    viewState.showProgress()
+    networkService.addDeliveryDays(purchaseId, deliveryBody, userProfileStorage.getToken())
         .subscribe(
             { response ->
               viewState.hideProgress()
@@ -93,6 +137,9 @@ class CartPresenter : BasePresenter<CartView>() {
         )
   }
 
+  /**
+   * Gets all user's payment cards
+   */
   fun getCards() {
     viewState.showProgress()
     networkService.getPaymentCards(userProfileStorage.getToken())
