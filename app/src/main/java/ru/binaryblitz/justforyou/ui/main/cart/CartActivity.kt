@@ -12,10 +12,12 @@ import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import io.reactivex.subjects.PublishSubject
+import io.realm.RealmList
 import kotlinx.android.synthetic.main.activity_cart.cardPickerAlertSheet
 import kotlinx.android.synthetic.main.activity_cart.cartProgramsList
 import kotlinx.android.synthetic.main.activity_cart.cartProgress
 import kotlinx.android.synthetic.main.activity_cart.makeOrderButton
+import kotlinx.android.synthetic.main.activity_cart.noCardsView
 import kotlinx.android.synthetic.main.activity_cart.orderWithNewCardButton
 import kotlinx.android.synthetic.main.activity_cart.paymentContainer
 import kotlinx.android.synthetic.main.activity_cart.paymentProgress
@@ -32,6 +34,8 @@ import ru.binaryblitz.justforyou.data.cart.CartModel
 import ru.binaryblitz.justforyou.data.cart.ProgramsStorage
 import ru.binaryblitz.justforyou.data.user.UserProfileStorage
 import ru.binaryblitz.justforyou.data.user.UserStorageImpl
+import ru.binaryblitz.justforyou.network.responses.orders.DeliveriesItem
+import ru.binaryblitz.justforyou.network.responses.orders.DeliveryBody
 import ru.binaryblitz.justforyou.network.responses.orders.LineItemsAttributesItem
 import ru.binaryblitz.justforyou.network.responses.orders.Order
 import ru.binaryblitz.justforyou.network.responses.orders.OrderBody
@@ -109,19 +113,6 @@ class CartActivity : MvpAppCompatActivity(), CartView {
   }
 
   override fun orderCreated(order: OrderResponse) {
-    // try to make payment and then if success -> add Delivery days
-//    var deliveryDays: RealmList<DeliveriesItem> = RealmList()
-//    for ((position) in presenter.programs.withIndex()) {
-//      for ((deliveryItemPosition) in presenter.programs[position].deliveries.withIndex()) {
-//        var deliveryDay: DeliveriesItem = DeliveriesItem()
-//        deliveryDay.comment = presenter.programs[position].deliveries[deliveryItemPosition].comment
-//        deliveryDay.addressId = presenter.programs[position].deliveries[deliveryItemPosition].addressId
-//        deliveryDay.scheduledFor = presenter.programs[position].deliveries[deliveryItemPosition].scheduledFor
-//        deliveryDays.add(deliveryDay)
-//      }
-//    }
-//    presenter.addDeliveryDays(DeliveryBody(deliveryDays), order.id)
-
     presenter.getCards()
   }
 
@@ -137,7 +128,12 @@ class CartActivity : MvpAppCompatActivity(), CartView {
     userCardView.adapter = cardsAdapter
     cardsAdapter.setData(cards)
     cardsAdapter.onItemSelectAction.subscribe { card -> presenter.makePaymentWithCard(card.id) }
-    orderWithNewCardButton.setOnClickListener { presenter.makePayment() }
+    orderWithNewCardButton.setOnClickListener { presenter.addNewPaymentCard() }
+    if (cards.size == 0) {
+      noCardsView.visibility = View.VISIBLE
+    } else {
+      noCardsView.visibility = View.GONE
+    }
   }
 
   override fun openPaymentUrl(url: String) {
@@ -146,7 +142,18 @@ class CartActivity : MvpAppCompatActivity(), CartView {
   }
 
   override fun sendDeliveryDays() {
-    // add days after success order
+    var deliveryDays: RealmList<DeliveriesItem> = RealmList()
+    for ((position) in presenter.programs.withIndex()) {
+      for ((deliveryItemPosition) in presenter.programs[position].deliveries.withIndex()) {
+        var deliveryDay: DeliveriesItem = DeliveriesItem()
+        deliveryDay.comment = presenter.programs[position].deliveries[deliveryItemPosition].comment
+        deliveryDay.addressId = presenter.programs[position].deliveries[deliveryItemPosition].addressId
+        deliveryDay.scheduledFor = presenter.programs[position].deliveries[deliveryItemPosition].scheduledFor
+        deliveryDays.add(deliveryDay)
+      }
+    }
+    presenter.addDeliveryDays(DeliveryBody(deliveryDays))
+    presenter.isBrowserPaymentOpened = false
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
