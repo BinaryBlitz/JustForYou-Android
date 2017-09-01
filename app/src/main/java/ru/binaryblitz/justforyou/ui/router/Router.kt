@@ -23,6 +23,7 @@ import ru.binaryblitz.justforyou.ui.main.purchases.PurchasesActivity
 import ru.binaryblitz.justforyou.ui.main.settings.SettingsActivity
 import ru.binaryblitz.justforyou.ui.main.settings.payment_cards.PaymentCardsActivity
 import ru.binaryblitz.justforyou.ui.main.user_orders.UserOrdersActivity
+import ru.binaryblitz.justforyou.ui.main.web_payment.PaymentActivity
 
 /**
  * Class that holds all screen navigation and transitions.
@@ -116,4 +117,11 @@ object Router {
     val intent = Intent(context, PaymentCardsActivity::class.java)
     context.startActivity(intent)
   }
+
+  fun openPaymentScreen(context: Activity, link: String, requestCode: Int) {
+    val intent = Intent(context, PaymentActivity::class.java)
+    intent.putExtra(Extras.EXTRA_URL, link)
+    context.startActivityForResult(intent, requestCode)
+  }
+
 }
