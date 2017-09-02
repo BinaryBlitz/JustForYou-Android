@@ -1,7 +1,6 @@
 package ru.binaryblitz.justforyou.ui.login
 
 import com.arellomobile.mvp.InjectViewState
-import ru.binaryblitz.justforyou.data.user.UserProfileStorage
 import ru.binaryblitz.justforyou.data.user.UserStorageImpl
 import ru.binaryblitz.justforyou.di.JustForYouApp
 import ru.binaryblitz.justforyou.network.NetworkService
@@ -16,7 +15,8 @@ class LoginPresenter : BasePresenter<LoginView>() {
   lateinit var service: NetworkService
   lateinit var token: String
   lateinit var phone: String
-  private var userProfileStorage: UserProfileStorage = UserStorageImpl()
+  @Inject
+  lateinit var userProfileStorage: UserStorageImpl
 
   init {
     JustForYouApp.appComponent?.inject(this)

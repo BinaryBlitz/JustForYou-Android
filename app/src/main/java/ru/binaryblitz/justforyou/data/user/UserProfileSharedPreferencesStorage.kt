@@ -36,7 +36,7 @@ class UserStorageImpl : UserProfileStorage {
     editor.putInt(FIELD_ID, user.id)
     editor.putString(FIELD_EMAIL, user.email)
     editor.putString(FIELD_TOKEN, user.apiToken)
-    
+
     editor.apply()
   }
 

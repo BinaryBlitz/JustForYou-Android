@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.content_settings.myPaymentCards
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.R.string
 import ru.binaryblitz.justforyou.data.user.UserInfo
-import ru.binaryblitz.justforyou.data.user.UserProfileStorage
 import ru.binaryblitz.justforyou.data.user.UserStorageImpl
 import ru.binaryblitz.justforyou.di.JustForYouApp
 import ru.binaryblitz.justforyou.network.NetworkService
@@ -25,7 +24,8 @@ import javax.inject.Inject
 
 
 class SettingsActivity : AppCompatActivity(), TextWatcher {
-  var userProfileStorage: UserProfileStorage = UserStorageImpl()
+  @Inject
+  lateinit var userProfileStorage: UserStorageImpl
   @Inject
   lateinit var networkService: NetworkService
 

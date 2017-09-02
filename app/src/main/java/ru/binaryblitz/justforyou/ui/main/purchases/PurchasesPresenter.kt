@@ -1,7 +1,6 @@
 package ru.binaryblitz.justforyou.ui.main.purchases
 
 import com.arellomobile.mvp.InjectViewState
-import ru.binaryblitz.justforyou.data.user.UserProfileStorage
 import ru.binaryblitz.justforyou.data.user.UserStorageImpl
 import ru.binaryblitz.justforyou.di.JustForYouApp
 import ru.binaryblitz.justforyou.network.NetworkService
@@ -12,7 +11,8 @@ import javax.inject.Inject
 class PurchasesPresenter : BasePresenter<PurchasesView>() {
   @Inject
   lateinit var networkService: NetworkService
-  var userProfileStorage: UserProfileStorage = UserStorageImpl()
+  @Inject
+  lateinit var userProfileStorage: UserStorageImpl
 
   init {
     JustForYouApp.appComponent?.inject(this)

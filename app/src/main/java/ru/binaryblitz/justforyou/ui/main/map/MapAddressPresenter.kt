@@ -2,7 +2,6 @@ package ru.binaryblitz.justforyou.ui.main.map
 
 import com.arellomobile.mvp.InjectViewState
 import com.google.android.gms.maps.model.LatLng
-import ru.binaryblitz.justforyou.data.user.UserProfileStorage
 import ru.binaryblitz.justforyou.data.user.UserStorageImpl
 import ru.binaryblitz.justforyou.di.JustForYouApp
 import ru.binaryblitz.justforyou.network.MapService
@@ -17,7 +16,8 @@ class MapAddressPresenter : BasePresenter<MapAddressView>() {
   lateinit var mapService: MapService
   @Inject
   lateinit var networkService: NetworkService
-  var userProfileStorage: UserProfileStorage = UserStorageImpl()
+  @Inject
+  lateinit var userProfileStorage: UserStorageImpl
 
   init {
     JustForYouApp.appComponent?.inject(this)

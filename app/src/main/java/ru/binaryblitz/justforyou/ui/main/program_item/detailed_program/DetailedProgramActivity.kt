@@ -24,7 +24,7 @@ import ru.binaryblitz.justforyou.R.drawable
 import ru.binaryblitz.justforyou.R.string
 import ru.binaryblitz.justforyou.components.Extras
 import ru.binaryblitz.justforyou.data.programs.Program
-import ru.binaryblitz.justforyou.ui.base.BaseActivity
+import ru.binaryblitz.justforyou.ui.base.BaseCartActivity
 import ru.binaryblitz.justforyou.ui.main.ViewPagerAdapter
 import ru.binaryblitz.justforyou.ui.main.program_item.CartProgramPresenter
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.about.AboutFragment
@@ -32,7 +32,7 @@ import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.des
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.menu.MenuFragment
 import ru.binaryblitz.justforyou.ui.router.Router
 
-class DetailedProgramActivity : BaseActivity() {
+class DetailedProgramActivity : BaseCartActivity() {
   lateinit var cartProgramPresenter: CartProgramPresenter
 
   override fun onCreate(savedInstanceState: Bundle?) {

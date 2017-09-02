@@ -4,11 +4,12 @@ import com.arellomobile.mvp.InjectViewState
 import ru.binaryblitz.justforyou.data.cart.CartLocalStorage
 import ru.binaryblitz.justforyou.data.cart.CartModel
 import ru.binaryblitz.justforyou.data.cart.ProgramsStorage
-import ru.binaryblitz.justforyou.data.user.UserProfileStorage
 import ru.binaryblitz.justforyou.data.user.UserStorageImpl
 import ru.binaryblitz.justforyou.di.JustForYouApp
 import ru.binaryblitz.justforyou.network.NetworkService
 import ru.binaryblitz.justforyou.network.responses.orders.DeliveryBody
+import ru.binaryblitz.justforyou.network.responses.orders.LineItemsAttributesItem
+import ru.binaryblitz.justforyou.network.responses.orders.Order
 import ru.binaryblitz.justforyou.network.responses.orders.OrderBody
 import ru.binaryblitz.justforyou.ui.base.BasePresenter
 import javax.inject.Inject
@@ -22,8 +23,8 @@ import javax.inject.Inject
 
 @InjectViewState
 class CartPresenter : BasePresenter<CartView>() {
-  var cartProgramsLocalStorage: CartLocalStorage = ProgramsStorage()
-  var userProfileStorage: UserProfileStorage = UserStorageImpl()
+  @Inject  lateinit var cartProgramsLocalStorage: ProgramsStorage  @Inject
+  lateinit var userProfileStorage: UserStorageImpl
   lateinit var programs: List<CartModel>
   @Inject
   lateinit var networkService: NetworkService
@@ -42,7 +43,8 @@ class CartPresenter : BasePresenter<CartView>() {
   /**
    * Creates an order, if succeed -> gets user payment cards
    */
-  fun createOrder(orderBody: OrderBody) {
+  fun createOrder(attributes: List<LineItemsAttributesItem>) {
+    val orderBody  = OrderBody(Order(attributes, userProfileStorage.getUser().phoneNumber))
     viewState.showProgress()
     networkService.createOrder(orderBody, userProfileStorage.getToken())
         .subscribe(
@@ -85,7 +87,11 @@ class CartPresenter : BasePresenter<CartView>() {
         .subscribe(
             { response ->
               viewState.hidePaymentProgress()
-              addDeliveryDaysToLastPurchase()
+              if (response.paid) {
+                addDeliveryDaysToLastPurchase()
+              } else {
+                viewState.showError("Ошибка оплаты. Попробуйте другую карту.")
+              }
             },
             { errorResponse ->
               viewState.hidePaymentProgress()

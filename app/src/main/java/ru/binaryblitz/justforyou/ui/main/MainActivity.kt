@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.toolbar_cart_icon.cartView
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.data.user.UserProfileStorage
 import ru.binaryblitz.justforyou.data.user.UserStorageImpl
-import ru.binaryblitz.justforyou.ui.base.BaseActivity
+import ru.binaryblitz.justforyou.ui.base.BaseCartActivity
 import ru.binaryblitz.justforyou.ui.main.blocks.ProgramsFragment
 import ru.binaryblitz.justforyou.ui.main.deliveries.DeliveriesFragment
 import ru.binaryblitz.justforyou.ui.main.support.SupportFragment
@@ -29,11 +29,11 @@ import ru.binaryblitz.justforyou.ui.router.Router
 /**
  * The main activity of app that controls the transitions between tabs from bottom bar
  */
-class MainActivity : BaseActivity() {
+class MainActivity : BaseCartActivity() {
   private val PROGRAMMS_TAB: Int = 0
   private val CALENDAR_TAB: Int = 1
   private val SUPPORT_TAB: Int = 2
-  private var userProfileStorage: UserProfileStorage = UserStorageImpl()
+  val userProfileStorage: UserProfileStorage = UserStorageImpl()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -42,7 +42,6 @@ class MainActivity : BaseActivity() {
   }
 
   private fun checkIfAuthorized() {
-    val userProfileStorage: UserProfileStorage = UserStorageImpl()
     val ifNotAuthorized: Boolean = userProfileStorage.getToken().isNullOrEmpty()
     if (ifNotAuthorized) {
       finish()
