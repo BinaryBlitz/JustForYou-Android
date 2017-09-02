@@ -11,12 +11,14 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem
 import io.fabric.sdk.android.Fabric
+import kotlinx.android.synthetic.main.activity_main.appBar
 import kotlinx.android.synthetic.main.activity_main.bottomBar
 import kotlinx.android.synthetic.main.activity_main.tabsViewPager
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import kotlinx.android.synthetic.main.toolbar_cart_icon.badgeCount
 import kotlinx.android.synthetic.main.toolbar_cart_icon.cartView
 import ru.binaryblitz.justforyou.R
+import ru.binaryblitz.justforyou.components.utils.AnimationBuilderHelper
 import ru.binaryblitz.justforyou.data.user.UserProfileStorage
 import ru.binaryblitz.justforyou.data.user.UserStorageImpl
 import ru.binaryblitz.justforyou.ui.base.BaseCartActivity
@@ -71,6 +73,7 @@ class MainActivity : BaseCartActivity() {
     setSupportActionBar(toolbar)
     initDrawer(toolbar, this)
     initCartBadgeIcon()
+    AnimationBuilderHelper.initMainView(this, appBar, bottomBar)
   }
 
   override fun onResume() {

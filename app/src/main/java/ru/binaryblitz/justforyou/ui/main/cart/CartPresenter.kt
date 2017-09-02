@@ -1,7 +1,6 @@
 package ru.binaryblitz.justforyou.ui.main.cart
 
 import com.arellomobile.mvp.InjectViewState
-import ru.binaryblitz.justforyou.data.cart.CartLocalStorage
 import ru.binaryblitz.justforyou.data.cart.CartModel
 import ru.binaryblitz.justforyou.data.cart.ProgramsStorage
 import ru.binaryblitz.justforyou.data.user.UserStorageImpl
@@ -23,7 +22,8 @@ import javax.inject.Inject
 
 @InjectViewState
 class CartPresenter : BasePresenter<CartView>() {
-  @Inject  lateinit var cartProgramsLocalStorage: ProgramsStorage  @Inject
+  @Inject  lateinit var cartProgramsLocalStorage: ProgramsStorage
+  @Inject
   lateinit var userProfileStorage: UserStorageImpl
   lateinit var programs: List<CartModel>
   @Inject

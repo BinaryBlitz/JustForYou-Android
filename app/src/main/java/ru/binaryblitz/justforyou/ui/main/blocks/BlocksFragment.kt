@@ -79,6 +79,8 @@ class ProgramsFragment : MvpAppCompatFragment(), BlocksView, OnRefreshListener {
 
   override fun onRefresh() {
     presenter.getFoodBlocks()
+    programsView.scheduleLayoutAnimation()
+    programsView.invalidate()
   }
 
   companion object {
