@@ -7,17 +7,24 @@ import android.view.View
 import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatActivity
 import ru.binaryblitz.justforyou.data.cart.ProgramsStorage
+import ru.binaryblitz.justforyou.di.JustForYouApp
 import javax.inject.Inject
 
 abstract class BaseCartActivity : MvpAppCompatActivity() {
-  @Inject lateinit var cartProgramsLocalStorage: ProgramsStorage
+  @Inject
+  lateinit var cartProgramsLocalStorage: ProgramsStorage
+
+  init {
+    JustForYouApp.appComponent?.inject(this)
+  }
+
   override fun setContentView(layoutResID: Int) {
     super.setContentView(layoutResID)
   }
 
-  open override fun onCreate(@Nullable savedInstanceState: Bundle?) {
+  override fun onCreate(@Nullable savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
   }
 
   // Set screen router to cart icon view container

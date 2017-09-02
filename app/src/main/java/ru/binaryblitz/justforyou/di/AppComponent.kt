@@ -8,6 +8,7 @@ import ru.binaryblitz.justforyou.di.modules.ApplicationModule
 import ru.binaryblitz.justforyou.di.modules.ContextModule
 import ru.binaryblitz.justforyou.network.MapService
 import ru.binaryblitz.justforyou.network.NetworkService
+import ru.binaryblitz.justforyou.ui.base.BaseCartActivity
 import ru.binaryblitz.justforyou.ui.login.LoginPresenter
 import ru.binaryblitz.justforyou.ui.main.blocks.BlocksPresenter
 import ru.binaryblitz.justforyou.ui.main.cart.CartPresenter
@@ -43,4 +44,5 @@ interface AppComponent {
   fun inject(presenter: UserOrdersPresenter)
   fun inject(presenter: PaymentCardsPresenter)
   fun inject(presenter: DeliveriesPresenter)
+  fun inject(baseCartScreen: BaseCartActivity)
 }
