@@ -31,29 +31,25 @@ import kotlinx.android.synthetic.main.cart_item.view.programsPrice
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.R.string
 import ru.binaryblitz.justforyou.components.Extras
-import ru.binaryblitz.justforyou.data.cart.CartLocalStorage
 import ru.binaryblitz.justforyou.data.cart.CartModel
 import ru.binaryblitz.justforyou.data.cart.ProgramsStorage
-import ru.binaryblitz.justforyou.data.user.UserProfileStorage
-import ru.binaryblitz.justforyou.data.user.UserStorageImpl
 import ru.binaryblitz.justforyou.network.responses.orders.DeliveriesItem
 import ru.binaryblitz.justforyou.network.responses.orders.DeliveryBody
 import ru.binaryblitz.justforyou.network.responses.orders.LineItemsAttributesItem
-import ru.binaryblitz.justforyou.network.responses.orders.Order
-import ru.binaryblitz.justforyou.network.responses.orders.OrderBody
 import ru.binaryblitz.justforyou.network.responses.orders.OrderResponse
 import ru.binaryblitz.justforyou.network.responses.payment_cards.PaymentCard
 import ru.binaryblitz.justforyou.ui.base.BaseRecyclerAdapter
 import ru.binaryblitz.justforyou.ui.main.settings.payment_cards.CardsAdapter
 import ru.binaryblitz.justforyou.ui.router.Router
+import javax.inject.Inject
 
 class CartActivity : MvpAppCompatActivity(), CartView {
   @InjectPresenter
   lateinit var presenter: CartPresenter
   lateinit var adapter: CartAdapter
   lateinit var cardsAdapter: CardsAdapter
-  var cartProgramsLocalStorage: CartLocalStorage = ProgramsStorage()
-  var userProfileStorage: UserProfileStorage = UserStorageImpl()
+  @Inject
+  lateinit var cartProgramsLocalStorage: ProgramsStorage
   lateinit var creditCardsBehavior: BottomSheetBehavior<View>
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -111,7 +107,7 @@ class CartActivity : MvpAppCompatActivity(), CartView {
       attributes.add(
           LineItemsAttributesItem(programs[position].days, programs[position].programId))
     }
-    presenter.createOrder(OrderBody(Order(attributes, userProfileStorage.getUser().phoneNumber)))
+    presenter.createOrder(attributes)
   }
 
   override fun orderCreated(order: OrderResponse) {

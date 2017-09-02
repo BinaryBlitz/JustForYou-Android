@@ -2,8 +2,10 @@ package ru.binaryblitz.justforyou.di
 
 import android.content.Context
 import dagger.Component
+import ru.binaryblitz.justforyou.data.cart.ProgramsStorage
+import ru.binaryblitz.justforyou.data.user.UserStorageImpl
+import ru.binaryblitz.justforyou.di.modules.ApplicationModule
 import ru.binaryblitz.justforyou.di.modules.ContextModule
-import ru.binaryblitz.justforyou.di.modules.NetworkModule
 import ru.binaryblitz.justforyou.network.MapService
 import ru.binaryblitz.justforyou.network.NetworkService
 import ru.binaryblitz.justforyou.ui.login.LoginPresenter
@@ -22,11 +24,13 @@ import javax.inject.Singleton
 
 
 @Singleton
-@Component(modules = arrayOf(ContextModule::class, NetworkModule::class))
+@Component(modules = arrayOf(ContextModule::class, ApplicationModule::class))
 interface AppComponent {
   val context: Context
   val networkService: NetworkService
   val mapService: MapService
+  val cartProgramsStorage: ProgramsStorage
+  val profileStorage: UserStorageImpl
   fun inject(presenter: LoginPresenter)
   fun inject(presenter: BlocksPresenter)
   fun inject(presenter: ProgramsPresenter)

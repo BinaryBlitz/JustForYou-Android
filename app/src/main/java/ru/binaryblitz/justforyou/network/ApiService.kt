@@ -31,74 +31,78 @@ import ru.binaryblitz.justforyou.network.responses.purchases.PurchasesResponse
  * JustForYou API methods
  */
 interface ApiService {
-  @POST("api/verification_tokens")
+  companion object {
+    const val API_PATH = "/api"
+  }
+  
+  @POST("$API_PATH/verification_tokens")
   fun createToken(@Query("phone_number") phoneNumber: String): Single<CreateTokenResponse>
 
-  @PATCH("api/verification_tokens/{token}")
+  @PATCH("$API_PATH/verification_tokens/{token}")
   fun verifyToken(@Path("token") token: String, @Query("phone_number") phoneNumber: String,
       @Query("code") code: String): Single<VerifyTokenResponse>
 
-  @POST("/api/user.json")
+  @POST("$API_PATH//user.json")
   fun createUser(@Body user: UserData): Single<UserInfo>
 
-  @PATCH("/api/user.json")
+  @PATCH("$API_PATH//user.json")
   fun updateUser(@Body user: UserData, @Query("api_token") token: String): Single<Any>
 
-  @GET("/api/user.json")
+  @GET("$API_PATH//user.json")
   fun getUser(@Query("api_token") token: String): Single<UserInfo>
 
-  @GET("/api/blocks.json")
+  @GET("$API_PATH//blocks.json")
   fun getBlocks(@Query("api_token") token: String): Single<List<Block>>
 
-  @GET("/api/blocks/{blockId}/programs.json")
+  @GET("$API_PATH//blocks/{blockId}/programs.json")
   fun getPrograms(@Path("blockId") blockId: Int,
       @Query("api_token") token: String): Single<List<Program>>
 
-  @GET("/api/programs/{programId}/days.json")
+  @GET("$API_PATH//programs/{programId}/days.json")
   fun getMenu(@Path("programId") programId: Int,
       @Query("api_token") token: String): Single<List<Menu>>
 
-  @GET("/api/addresses.json")
+  @GET("$API_PATH//addresses.json")
   fun getDeliveryAddresses(@Query("api_token") token: String): Single<List<Address>>
 
-  @DELETE("/api/addresses/{id}.json")
+  @DELETE("$API_PATH//addresses/{id}.json")
   fun removeDeliveryAddress(@Path("id") id: Int,
       @Query("api_token") token: String): Single<Address>
 
-  @POST("/api/addresses.json")
+  @POST("$API_PATH//addresses.json")
   fun createDeliveryAddress(@Body address: AddressBodyData,
       @Query("api_token") token: String): Single<Address>
 
-  @GET("/api/purchases.json")
+  @GET("$API_PATH//purchases.json")
   fun getPurchases(@Query("api_token") token: String): Single<List<PurchasesResponse>>
 
-  @GET("/api/orders.json")
+  @GET("$API_PATH//orders.json")
   fun getOrders(@Query("api_token") token: String): Single<List<PurchaseItem>>
 
-  @GET("/api/payment_cards.json")
+  @GET("$API_PATH//payment_cards.json")
   fun getPaymentCards(@Query("api_token") token: String): Single<List<PaymentCard>>
 
-  @POST("/api/orders/{id}/payment.json")
+  @POST("$API_PATH//orders/{id}/payment.json")
   fun makeOrderPayment(@Path("id") id: Int,
       @Query("api_token") token: String): Single<Payment>
 
-  @POST("/api/orders/{id}/payment.json")
+  @POST("$API_PATH//orders/{id}/payment.json")
   fun makeOrderPaymentWithCard(@Path("id") id: Int, @Body cardBody: CardBody,
       @Query("api_token") token: String): Single<Payment>
 
-  @POST("/api/orders/{id}/payment.json")
+  @POST("$API_PATH//orders/{id}/payment.json")
   fun payWithCreditCard(@Path("id") id: Int,
       @Query("api_token") token: String): Single<Payment>
 
-  @POST("/api/orders.json")
+  @POST("$API_PATH//orders.json")
   fun createOrder(@Body orderBody: OrderBody,
       @Query("api_token") token: String): Single<OrderResponse>
 
-  @POST("/api/purchases/{orderId}/deliveries.json")
+  @POST("$API_PATH//purchases/{orderId}/deliveries.json")
   fun addDeliveryDays(@Path("orderId") id: Int, @Body deliveryBody: DeliveryBody,
       @Query("api_token") token: String): Single<List<Delivery>>
 
-  @GET("/api/deliveries.json")
+  @GET("$API_PATH//deliveries.json")
   fun getDeliveries(@Query("api_token") token: String): Single<List<Delivery>>
 
 }

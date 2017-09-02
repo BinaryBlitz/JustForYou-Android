@@ -20,11 +20,11 @@ import ru.binaryblitz.justforyou.R.string
 import ru.binaryblitz.justforyou.components.Extras
 import ru.binaryblitz.justforyou.data.programs.Block
 import ru.binaryblitz.justforyou.data.programs.Program
-import ru.binaryblitz.justforyou.ui.base.BaseActivity
+import ru.binaryblitz.justforyou.ui.base.BaseCartActivity
 import ru.binaryblitz.justforyou.ui.main.ViewPagerAdapter
 import ru.binaryblitz.justforyou.ui.router.Router
 
-class ProgramsActivity : BaseActivity(), ProgramsView {
+class ProgramsActivity : BaseCartActivity(), ProgramsView {
   @InjectPresenter
   lateinit var presenter: ProgramsPresenter
 

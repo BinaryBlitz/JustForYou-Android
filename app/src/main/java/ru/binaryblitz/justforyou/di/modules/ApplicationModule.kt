@@ -13,6 +13,8 @@ import retrofit2.Retrofit.Builder
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import ru.binaryblitz.justforyou.BuildConfig
+import ru.binaryblitz.justforyou.data.cart.ProgramsStorage
+import ru.binaryblitz.justforyou.data.user.UserStorageImpl
 import ru.binaryblitz.justforyou.network.ApiService
 import ru.binaryblitz.justforyou.network.MapService
 import ru.binaryblitz.justforyou.network.MapsApiService
@@ -37,7 +39,7 @@ private fun createRetrofit(httpClient: OkHttpClient, moshi: Moshi, baseUrl: Stri
 }
 
 @Module
-class NetworkModule {
+class ApplicationModule {
   @Provides
   @Singleton
   fun provideNetworkService(httpClient: OkHttpClient,
@@ -56,6 +58,18 @@ class NetworkModule {
     val mapApi = retrofit.create(MapsApiService::class.java)
 
     return MapService(mapApi)
+  }
+
+  @Provides
+  @Singleton
+  fun provideProfileStorage(): UserStorageImpl {
+    return UserStorageImpl()
+  }
+
+  @Provides
+  @Singleton
+  fun provideCartProgramsStorage(): ProgramsStorage {
+    return ProgramsStorage()
   }
 
   @Provides
