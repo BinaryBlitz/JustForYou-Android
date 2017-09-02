@@ -19,7 +19,7 @@
       android:layout_height="wrap_content"
       android:layout_alignParentBottom="true"
       android:layout_centerHorizontal="true"
-      android:layout_marginBottom="48dp"
+      android:layout_marginBottom="24dp"
       android:alpha="0.5"
       attrs:piv_viewPager="@id/viewPager"
       />
@@ -31,7 +31,7 @@
       android:layout_alignParentBottom="true"
       android:layout_centerHorizontal="true"
       android:layout_gravity="bottom"
-      android:layout_marginBottom="64dp"
+      android:layout_marginBottom="24dp"
       android:gravity="center"
       android:text="Начать"
       android:textColor="#ffffff"

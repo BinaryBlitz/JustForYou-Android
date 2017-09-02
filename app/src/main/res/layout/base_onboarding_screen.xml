@@ -3,7 +3,7 @@
     android:id="@+id/pageContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/whiteColor"
     >
 
   <TextView
@@ -21,9 +21,10 @@
       />
 
   <ImageView
+      android:layout_marginBottom="96dp"
       android:id="@+id/pageImageView"
-      android:layout_width="250dp"
-      android:layout_height="450dp"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
       android:layout_alignParentTop="true"
       android:layout_centerHorizontal="true"
       android:paddingTop="100dp"
