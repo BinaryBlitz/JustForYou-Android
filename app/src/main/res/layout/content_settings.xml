@@ -12,6 +12,7 @@
       android:id="@+id/profileContainer"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:layout_marginTop="16dp"
       android:orientation="vertical"
       >
 
@@ -25,8 +26,9 @@
       <EditText
           android:id="@+id/firstNameEdit"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_margin="16dp"
+          android:layout_height="64dp"
+          android:layout_marginEnd="16dp"
+          android:layout_marginStart="16dp"
           android:hint="Имя"
           android:inputType="textPersonName|textCapWords|textNoSuggestions"
           style="@style/JustForYouEditTextStyle"
@@ -43,8 +45,9 @@
       <EditText
           android:id="@+id/lastNameEdit"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_margin="16dp"
+          android:layout_height="64dp"
+          android:layout_marginEnd="16dp"
+          android:layout_marginStart="16dp"
           android:hint="Фамилия"
           android:inputType="textPersonName|textCapWords|textNoSuggestions"
           style="@style/JustForYouEditTextStyle"
