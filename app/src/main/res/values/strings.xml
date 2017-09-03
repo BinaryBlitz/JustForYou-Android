@@ -6,7 +6,7 @@
   <string name="title_dashboard">Dashboard</string>
   <string name="title_notifications">Notifications</string>
   <string name="about_user">Расскажите немного о себе:</string>
-  <string name="code_send_to">Код отправлен на</string>
+  <string name="code_send_to">Код отправлен на </string>
   <string name="login_text">Вход</string>
   <string name="wrong_code">Неправильный код!</string>
   <string name="title_activity_program">ProgramActivity</string>
@@ -59,4 +59,6 @@
   <string name="pay_sum">Оформить заказ на сумму %1$d\u20BD</string>
   <string name="title_activity_payment">PaymentActivity</string>
   <string name="payment_screen_title">Оплата заказа</string>
+  <string name="enter_number">Введите номер:</string>
+  <string name="enter_code">Введите код:</string>
 </resources>
