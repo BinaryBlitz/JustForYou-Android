@@ -5,6 +5,7 @@ import android.content.Intent
 import ru.binaryblitz.justforyou.components.Extras
 import ru.binaryblitz.justforyou.data.cart.ProgramsStorage
 import ru.binaryblitz.justforyou.data.programs.Program
+import ru.binaryblitz.justforyou.di.JustForYouApp
 import ru.binaryblitz.justforyou.network.responses.orders.DeliveriesItem
 import javax.inject.Inject
 
@@ -15,7 +16,12 @@ class CartProgramPresenter(var context: Activity) {
   @Inject
   lateinit var cartProgramsLocalStorage: ProgramsStorage
 
-  fun addProgramToCart(blockName: String, program: Program, days: Int, deliveries: List<DeliveriesItem>?) {
+  init {
+    JustForYouApp.appComponent?.inject(this)
+  }
+
+  fun addProgramToCart(blockName: String, program: Program, days: Int,
+      deliveries: List<DeliveriesItem>?) {
     cartProgramsLocalStorage.addProgramToCart(blockName, days,
         program.primaryPrice, program, deliveries)
     val intent = Intent()

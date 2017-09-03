@@ -22,7 +22,7 @@ import javax.inject.Inject
 
 @InjectViewState
 class CartPresenter : BasePresenter<CartView>() {
-  @Inject  lateinit var cartProgramsLocalStorage: ProgramsStorage
+  @Inject lateinit var cartProgramsLocalStorage: ProgramsStorage
   @Inject
   lateinit var userProfileStorage: UserStorageImpl
   lateinit var programs: List<CartModel>
@@ -44,7 +44,7 @@ class CartPresenter : BasePresenter<CartView>() {
    * Creates an order, if succeed -> gets user payment cards
    */
   fun createOrder(attributes: List<LineItemsAttributesItem>) {
-    val orderBody  = OrderBody(Order(attributes, userProfileStorage.getUser().phoneNumber))
+    val orderBody = OrderBody(Order(attributes, userProfileStorage.getUser().phoneNumber))
     viewState.showProgress()
     networkService.createOrder(orderBody, userProfileStorage.getToken())
         .subscribe(
@@ -156,6 +156,13 @@ class CartPresenter : BasePresenter<CartView>() {
               viewState.showError(errorResponse.localizedMessage)
             }
         )
+  }
+
+  /**
+   * Removes item from cart
+   */
+  fun removeFromCart(id: Int) {
+    cartProgramsLocalStorage.removeProgramFromCart(id)
   }
 
 }

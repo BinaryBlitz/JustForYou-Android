@@ -32,7 +32,6 @@ import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.R.string
 import ru.binaryblitz.justforyou.components.Extras
 import ru.binaryblitz.justforyou.data.cart.CartModel
-import ru.binaryblitz.justforyou.data.cart.ProgramsStorage
 import ru.binaryblitz.justforyou.network.responses.orders.DeliveriesItem
 import ru.binaryblitz.justforyou.network.responses.orders.DeliveryBody
 import ru.binaryblitz.justforyou.network.responses.orders.LineItemsAttributesItem
@@ -41,15 +40,12 @@ import ru.binaryblitz.justforyou.network.responses.payment_cards.PaymentCard
 import ru.binaryblitz.justforyou.ui.base.BaseRecyclerAdapter
 import ru.binaryblitz.justforyou.ui.main.settings.payment_cards.CardsAdapter
 import ru.binaryblitz.justforyou.ui.router.Router
-import javax.inject.Inject
 
 class CartActivity : MvpAppCompatActivity(), CartView {
   @InjectPresenter
   lateinit var presenter: CartPresenter
   lateinit var adapter: CartAdapter
   lateinit var cardsAdapter: CardsAdapter
-  @Inject
-  lateinit var cartProgramsLocalStorage: ProgramsStorage
   lateinit var creditCardsBehavior: BottomSheetBehavior<View>
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,6 +79,8 @@ class CartActivity : MvpAppCompatActivity(), CartView {
       for ((position) in presenter.programs.withIndex()) {
         paymentAmount += presenter.programs[position].price!! * presenter.programs[position].days!!
       }
+    } else {
+      makeOrderButton.visibility = View.GONE
     }
     makeOrderButton.text = String.format(getString(string.pay_sum), paymentAmount)
   }
@@ -93,7 +91,8 @@ class CartActivity : MvpAppCompatActivity(), CartView {
     cartProgramsList.adapter = adapter
     adapter.setData(programs)
     adapter.onItemSelectAction.subscribe { model ->
-      cartProgramsLocalStorage.removeProgramFromCart(model.programId!!)
+      presenter.removeFromCart(model.programId!!)
+      presenter.getProgramsFromCart()
     }
     makeOrderButton.setOnClickListener {
       createOrder(programs)

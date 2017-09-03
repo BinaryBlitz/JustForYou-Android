@@ -26,15 +26,12 @@ import ru.binaryblitz.justforyou.components.Extras
 import ru.binaryblitz.justforyou.data.programs.Program
 import ru.binaryblitz.justforyou.ui.base.BaseCartActivity
 import ru.binaryblitz.justforyou.ui.main.ViewPagerAdapter
-import ru.binaryblitz.justforyou.ui.main.program_item.CartProgramPresenter
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.about.AboutFragment
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.description.DescriptionFragment
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.menu.MenuFragment
 import ru.binaryblitz.justforyou.ui.router.Router
 
 class DetailedProgramActivity : BaseCartActivity() {
-  lateinit var cartProgramPresenter: CartProgramPresenter
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_detailed_program)
@@ -47,7 +44,6 @@ class DetailedProgramActivity : BaseCartActivity() {
   }
 
   private fun initViewElements() {
-    cartProgramPresenter = CartProgramPresenter(this)
     detailedProgramCollapsingView.setExpandedTitleColor(Color.parseColor("#00FFFFFF"))
 
     val program: Program = intent.getParcelableExtra(Extras.EXTRA_PROGRAM)
