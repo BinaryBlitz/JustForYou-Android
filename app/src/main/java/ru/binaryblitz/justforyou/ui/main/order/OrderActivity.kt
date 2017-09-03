@@ -100,7 +100,9 @@ class OrderActivity : AppCompatActivity() {
         for ((position) in selectedDays.withIndex()) {
           var deliveryItem: DeliveriesItem = DeliveriesItem()
           deliveryItem.addressId = address!!
-          deliveryItem.scheduledFor = DateUtils.convertToServerDate(selectedDays[position].date)
+          deliveryItem.scheduledFor = DateUtils.convertToServerDate(selectedDays[position].date,
+              deliveryTime?.subSequence(1, 2).toString().toInt(),
+              deliveryTime?.subSequence(3, 5).toString().toInt())
           deliveryItem.comment = ""
           deliveryDays.add(deliveryItem)
         }
