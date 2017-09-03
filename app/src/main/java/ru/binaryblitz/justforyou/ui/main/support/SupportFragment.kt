@@ -10,6 +10,7 @@ import com.arellomobile.mvp.MvpAppCompatFragment
 import kotlinx.android.synthetic.main.fragment_support.callSupport
 import kotlinx.android.synthetic.main.fragment_support.facebook
 import kotlinx.android.synthetic.main.fragment_support.instagram
+import kotlinx.android.synthetic.main.fragment_support.reviewButton
 import kotlinx.android.synthetic.main.fragment_support.sendSupport
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.ui.router.Router
@@ -36,6 +37,7 @@ class SupportFragment : MvpAppCompatFragment() {
     facebook.setOnClickListener {
       Router.openJustForYouLink(activity, "https://www.facebook.com/JUSTFORYOURUSSIA")
     }
+    reviewButton.setOnClickListener { Router.openGooglePlayLink(activity) }
   }
 
   fun dialPhoneNumber(phoneNumber: String) {
