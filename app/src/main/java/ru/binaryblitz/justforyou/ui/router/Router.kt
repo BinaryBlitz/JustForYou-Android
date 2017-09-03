@@ -1,6 +1,7 @@
 package ru.binaryblitz.justforyou.ui.router
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.support.customtabs.CustomTabsIntent
@@ -24,6 +25,7 @@ import ru.binaryblitz.justforyou.ui.main.settings.SettingsActivity
 import ru.binaryblitz.justforyou.ui.main.settings.payment_cards.PaymentCardsActivity
 import ru.binaryblitz.justforyou.ui.main.user_orders.UserOrdersActivity
 import ru.binaryblitz.justforyou.ui.main.web_payment.PaymentActivity
+
 
 /**
  * Class that holds all screen navigation and transitions.
@@ -129,6 +131,21 @@ object Router {
     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
     context.finish()
     context.startActivity(intent)
+  }
+
+  fun openGooglePlayLink(context: Activity) {
+    val uri = Uri.parse("market://details?id=" + context.packageName)
+    val goToMarket = Intent(Intent.ACTION_VIEW, uri)
+    goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or
+        Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
+        Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+    try {
+      context.startActivity(goToMarket)
+    } catch (e: ActivityNotFoundException) {
+      context.startActivity(Intent(Intent.ACTION_VIEW,
+          Uri.parse("http://play.google.com/store/apps/details?id=" + context.packageName)))
+    }
+
   }
 
 }
