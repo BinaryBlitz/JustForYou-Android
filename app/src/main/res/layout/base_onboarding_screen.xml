@@ -21,13 +21,13 @@
       />
 
   <ImageView
-      android:layout_marginBottom="96dp"
+      android:layout_marginBottom="36dp"
       android:id="@+id/pageImageView"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_alignParentTop="true"
       android:layout_centerHorizontal="true"
-      android:paddingTop="100dp"
+      android:paddingTop="16dp"
       android:scaleType="centerCrop"
       />
 
