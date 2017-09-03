@@ -2,6 +2,7 @@ package ru.binaryblitz.justforyou.ui.main.deliveries
 
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +13,14 @@ import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
 import io.reactivex.subjects.PublishSubject
+import kotlinx.android.synthetic.main.content_deliveries.deliveriesDayList
 import kotlinx.android.synthetic.main.content_deliveries.deliveriesView
 import kotlinx.android.synthetic.main.content_deliveries.swipeCalendar
+import kotlinx.android.synthetic.main.delivery_item.view.deliveryAddress
+import kotlinx.android.synthetic.main.delivery_item.view.programName
+import kotlinx.android.synthetic.main.delivery_item.view.timeDeliveryText
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.components.utils.DateUtils
-import ru.binaryblitz.justforyou.data.programs.Program
 import ru.binaryblitz.justforyou.network.responses.deliveries.Delivery
 import ru.binaryblitz.justforyou.ui.base.BaseRecyclerAdapter
 
@@ -27,7 +31,7 @@ import ru.binaryblitz.justforyou.ui.base.BaseRecyclerAdapter
 class DeliveriesFragment : MvpAppCompatFragment(), DeliveriesView, OnRefreshListener, OnDateSelectedListener {
   @InjectPresenter(type = PresenterType.LOCAL)
   lateinit var presenter: DeliveriesPresenter
-  lateinit var adapter: ProgramAdapter
+  var adapter: DeliveriesAdapter = DeliveriesAdapter()
   private val decorator: DayDecorator = DayDecorator()
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +52,9 @@ class DeliveriesFragment : MvpAppCompatFragment(), DeliveriesView, OnRefreshList
   fun initViewElements(view: View) {
     deliveriesView.selectionMode = MaterialCalendarView.SELECTION_MODE_NONE
     deliveriesView.setOnDateChangedListener(this)
-    swipeCalendar.setOnRefreshListener (this)
+    swipeCalendar.setOnRefreshListener(this)
+    deliveriesDayList.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,
+        true)
   }
 
   override fun onDateSelected(widget: MaterialCalendarView, date: CalendarDay, selected: Boolean) {
@@ -60,7 +66,8 @@ class DeliveriesFragment : MvpAppCompatFragment(), DeliveriesView, OnRefreshList
           DateUtils.parseServerDate(deliveries[position].scheduledFor!!), true)
       deliveriesView.selectionColor = activity.resources.getColor(R.color.primary_light)
     }
-
+    deliveriesDayList.adapter = adapter
+    adapter.setData(deliveries)
   }
 
   override fun showProgress() {
@@ -86,17 +93,21 @@ class DeliveriesFragment : MvpAppCompatFragment(), DeliveriesView, OnRefreshList
   }
 }
 
-class ProgramAdapter : BaseRecyclerAdapter<Program>() {
-  var onItemSelectAction: PublishSubject<Program> = PublishSubject.create()
+class DeliveriesAdapter : BaseRecyclerAdapter<Delivery>() {
+  var onItemSelectAction: PublishSubject<Delivery> = PublishSubject.create()
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder<Program> {
-    val view = LayoutInflater.from(parent.context).inflate(R.layout.program_item, parent, false)
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder<Delivery> {
+    val view = LayoutInflater.from(parent.context).inflate(R.layout.delivery_item, parent, false)
     return ViewHolder(view)
   }
 
-  private inner class ViewHolder(itemView: View) : RecyclerViewHolder<Program>(itemView) {
+  private inner class ViewHolder(itemView: View) : RecyclerViewHolder<Delivery>(itemView) {
 
-    override fun setItem(item: Program, position: Int) {
+    override fun setItem(item: Delivery, position: Int) {
+      itemView.timeDeliveryText.text = DateUtils.parseServerDate(
+          item.scheduledFor!!).toLocaleString()
+      itemView.programName.text = item.purchase?.program?.name
+      itemView.deliveryAddress.text = item.address?.content
     }
 
   }
