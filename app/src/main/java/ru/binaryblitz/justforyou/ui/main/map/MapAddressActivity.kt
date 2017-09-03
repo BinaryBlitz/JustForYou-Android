@@ -8,12 +8,9 @@ import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.google.android.gms.common.ConnectionResult
@@ -72,6 +69,7 @@ class MapAddressActivity : MvpAppCompatActivity(), OnMapReadyCallback, MapAddres
     mapFragment.getMapAsync(this)
     bottomSheetBehavior = BottomSheetBehavior.from(addressSheet as View)
     bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+    requestLocationPermission()
     locationButton.setOnClickListener { requestLocationPermission() }
     addressSearch.setFocusable(false)
     addressSearch.setFocusableInTouchMode(true)
@@ -145,7 +143,7 @@ class MapAddressActivity : MvpAppCompatActivity(), OnMapReadyCallback, MapAddres
     googleMap.uiSettings?.isRotateGesturesEnabled = true
     googleMap.uiSettings?.isTiltGesturesEnabled = false
     googleMap.uiSettings?.isMyLocationButtonEnabled = false
-    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
         == PackageManager.PERMISSION_GRANTED) {
       googleMap?.isMyLocationEnabled = true
     }
@@ -179,9 +177,9 @@ class MapAddressActivity : MvpAppCompatActivity(), OnMapReadyCallback, MapAddres
   }
 
   fun requestLocationPermission() {
-    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
         != PackageManager.PERMISSION_GRANTED) {
-      ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
+      ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
           permissionRequestCode)
     } else {
       googleMap.isMyLocationEnabled = true
@@ -224,8 +222,8 @@ class MapAddressActivity : MvpAppCompatActivity(), OnMapReadyCallback, MapAddres
       permissionRequestCode -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
         requestLocationPermission()
       } else {
-        Toast.makeText(this, "No permissions!",
-            Toast.LENGTH_SHORT).show()
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+            permissionRequestCode)
       }
     }
   }
