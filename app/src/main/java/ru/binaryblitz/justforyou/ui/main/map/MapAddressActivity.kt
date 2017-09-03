@@ -47,7 +47,7 @@ class MapAddressActivity : MvpAppCompatActivity(), OnMapReadyCallback, MapAddres
     GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, View.OnKeyListener {
   @InjectPresenter
   lateinit var presenter: MapAddressPresenter
-  private lateinit var googleMap: GoogleMap
+  private var googleMap: GoogleMap? = null
   private var currentMarker: Marker? = null
   lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
   private val defaultZoom = 11.0f
@@ -149,7 +149,7 @@ class MapAddressActivity : MvpAppCompatActivity(), OnMapReadyCallback, MapAddres
     }
 
     googleMap.setOnMapClickListener { latLng: LatLng? ->
-      this.googleMap.setOnMapClickListener { latLng: LatLng ->
+      this.googleMap?.setOnMapClickListener { latLng: LatLng ->
         addMarker(latLng)
         presenter.getAddressFromLocation(latLng, getString(R.string.geocoder_key))
       }
@@ -158,12 +158,12 @@ class MapAddressActivity : MvpAppCompatActivity(), OnMapReadyCallback, MapAddres
 
   private fun addMarker(latLng: LatLng) {
     if (currentMarker == null) {
-      currentMarker = this.googleMap.addMarker(MarkerOptions().position(latLng))
+      currentMarker = this.googleMap?.addMarker(MarkerOptions().position(latLng))
     } else {
       currentMarker?.position = latLng
     }
-    googleMap.moveCamera(CameraUpdateFactory.newLatLng(currentMarker?.position));
-    googleMap.animateCamera(CameraUpdateFactory.zoomTo(defaultZoom * 1.7f))
+    googleMap?.moveCamera(CameraUpdateFactory.newLatLng(currentMarker?.position));
+    googleMap?.animateCamera(CameraUpdateFactory.zoomTo(defaultZoom * 1.7f))
   }
 
   override fun onResume() {
@@ -182,11 +182,13 @@ class MapAddressActivity : MvpAppCompatActivity(), OnMapReadyCallback, MapAddres
       ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
           permissionRequestCode)
     } else {
-      googleMap.isMyLocationEnabled = true
-      if (client?.isConnected!!) {
-        getUserLocation()
-      } else {
-        client?.connect()
+      if (googleMap != null) {
+        googleMap?.isMyLocationEnabled = true
+        if (client?.isConnected!!) {
+          getUserLocation()
+        } else {
+          client?.connect()
+        }
       }
     }
   }
