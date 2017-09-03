@@ -2,7 +2,9 @@ package ru.binaryblitz.justforyou.data.user
 
 import android.content.Context
 import android.content.SharedPreferences
+import ru.binaryblitz.justforyou.data.cart.ProgramsStorage
 import ru.binaryblitz.justforyou.di.JustForYouApp
+
 
 /**
  * An implementation of UserProfileStorage based on Android SharedPreferences
@@ -82,6 +84,13 @@ class UserStorageImpl : UserProfileStorage {
   private fun getEmail(preferences: SharedPreferences): String {
     val email = preferences.getString(FIELD_EMAIL, "")
     return email
+  }
+
+  fun logoutUser() {
+    val preferences = getProfileSharedPreferences()
+    preferences.edit().clear().apply()
+    val cartStorage: ProgramsStorage = ProgramsStorage()
+    cartStorage.clear()
   }
 
 }

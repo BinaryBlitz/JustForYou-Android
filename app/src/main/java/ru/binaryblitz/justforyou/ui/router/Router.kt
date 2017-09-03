@@ -124,4 +124,11 @@ object Router {
     context.startActivityForResult(intent, requestCode)
   }
 
+  fun openMainScreenAfterLogout(context: Activity) {
+    val intent = Intent(context, MainActivity::class.java)
+    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+    context.finish()
+    context.startActivity(intent)
+  }
+
 }

@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_settings.settingsContainer
 import kotlinx.android.synthetic.main.activity_settings.toolbar
 import kotlinx.android.synthetic.main.content_settings.aboutApp
 import kotlinx.android.synthetic.main.content_settings.lastNameEdit
+import kotlinx.android.synthetic.main.content_settings.logoutButton
 import kotlinx.android.synthetic.main.content_settings.myPaymentCards
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.R.string
@@ -53,6 +54,10 @@ class SettingsActivity : AppCompatActivity(), TextWatcher {
           getString(string.just_for_you_about_link))
     }
     myPaymentCards.setOnClickListener { Router.openPaymentCardsScreen(this) }
+    logoutButton.setOnClickListener {
+      userProfileStorage.logoutUser()
+      Router.openMainScreenAfterLogout(this)
+    }
   }
 
   override fun afterTextChanged(p0: Editable?) {
