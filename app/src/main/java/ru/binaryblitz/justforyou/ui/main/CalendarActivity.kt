@@ -18,7 +18,7 @@ import ru.binaryblitz.justforyou.components.Extras
 import java.util.Calendar
 
 class CalendarActivity : AppCompatActivity(), OnDateSelectedListener {
-  val currentDate = Calendar.getInstance()
+  val currentDate = CalendarDay.today()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -45,9 +45,17 @@ class CalendarActivity : AppCompatActivity(), OnDateSelectedListener {
   }
 
   override fun onDateSelected(widget: MaterialCalendarView, date: CalendarDay, selected: Boolean) {
+    val todayDate = Calendar.getInstance()
+    val hour = todayDate.get(Calendar.HOUR_OF_DAY)
     if (widget.selectedDates.size > 0) {
-      if (date.isAfter(CalendarDay.from(currentDate))) {
-        toolbar.title = String.format(getString(R.string.days_selected), widget.selectedDates.size)
+      if (date.isAfter(currentDate)) {
+        if (date.day == todayDate.get(Calendar.DAY_OF_MONTH) + 1 && hour >= 11) {
+          Snackbar.make(calendarCoordinator, getString(string.hour_error),
+              Snackbar.LENGTH_SHORT).show()
+          widget.setDateSelected(date, false)
+        }
+        toolbar.title = String.format(getString(R.string.days_selected),
+            widget.selectedDates.size)
       } else {
         Snackbar.make(calendarCoordinator, getString(R.string.passed_day_error),
             Snackbar.LENGTH_SHORT).show()
