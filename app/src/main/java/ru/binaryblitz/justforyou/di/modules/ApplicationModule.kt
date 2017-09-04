@@ -26,7 +26,7 @@ import javax.inject.Singleton
 private const val DEFAULT_CONNECT_TIMEOUT = 60000L
 private val HTTP_LOG_LEVEL = if (BuildConfig.DEBUG) BODY else BASIC
 private val FITMOST_BASE_URL =
-    if (!BuildConfig.DEBUG) "https://justforyou-staging.herokuapp.com/" else "https://justforyou-production.herokuapp.com"
+    if (BuildConfig.DEBUG) "https://justforyou-staging.herokuapp.com/" else "https://justforyou-production.herokuapp.com"
 private val GOOGLE_API_BASE_URL = "https://maps.googleapis.com/maps/api/"
 
 private fun createRetrofit(httpClient: OkHttpClient, moshi: Moshi, baseUrl: String): Retrofit {
