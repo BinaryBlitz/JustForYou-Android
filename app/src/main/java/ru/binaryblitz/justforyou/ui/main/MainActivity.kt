@@ -51,17 +51,19 @@ class MainActivity : BaseCartActivity() {
     } else {
       setContentView(R.layout.activity_main)
       initViewElements()
-      sendDeviceToken()
     }
   }
 
   private fun initViewElements() {
+    setSupportActionBar(toolbar)
+    initDrawer(toolbar, this)
+    initCartBadgeIcon()
+    AnimationBuilderHelper.initMainView(this, appBar, bottomBar)
     val adapter = ViewPagerAdapter(supportFragmentManager)
     adapter.addFragment(ProgramsFragment.getInstance(), "programs_tag")
     adapter.addFragment(DeliveriesFragment.getInstance(), "delivery_tag")
     adapter.addFragment(SupportFragment(), "empty_tag")
-    adapter.addFragment(EmptyFragment(), "empty_tag")
-    tabsViewPager.offscreenPageLimit = 4
+    tabsViewPager.offscreenPageLimit = 3
     tabsViewPager.adapter = adapter
     bottomBar.selectTabAtPosition(PROGRAMMS_TAB)
     bottomBar.setOnTabSelectListener { position ->
@@ -71,10 +73,6 @@ class MainActivity : BaseCartActivity() {
         R.id.action_support -> showTab("Поддержка", SUPPORT_TAB)
       }
     }
-    setSupportActionBar(toolbar)
-    initDrawer(toolbar, this)
-    initCartBadgeIcon()
-    AnimationBuilderHelper.initMainView(this, appBar, bottomBar)
   }
 
   override fun onResume() {
@@ -149,14 +147,6 @@ class MainActivity : BaseCartActivity() {
           true
         }
         .build()
-  }
-
-  private fun sendDeviceToken() {
-//    if (userProfileStorage.isNotificationsEnabled()) {
-//      service.sendDeviceToken(TokenData(UserToken(userProfileStorage.getDeviceToken(), "android")),
-//          userProfileStorage.getToken())
-//          .subscribe({ user -> }, { errorResponse -> })
-//    }
   }
 
 }

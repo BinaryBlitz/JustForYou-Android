@@ -6,6 +6,8 @@ import ru.binaryblitz.justforyou.di.JustForYouApp
 import ru.binaryblitz.justforyou.network.NetworkService
 import ru.binaryblitz.justforyou.network.models.User
 import ru.binaryblitz.justforyou.network.models.UserData
+import ru.binaryblitz.justforyou.network.models.token.TokenData
+import ru.binaryblitz.justforyou.network.models.token.UserToken
 import ru.binaryblitz.justforyou.ui.base.BasePresenter
 import javax.inject.Inject
 
@@ -65,6 +67,7 @@ class LoginPresenter : BasePresenter<LoginView>() {
             { user ->
               viewState.hideProgress()
               userProfileStorage.saveUser(user)
+              sendDeviceToken()
               viewState.successLogin()
             },
             { errorResponse ->
@@ -82,6 +85,7 @@ class LoginPresenter : BasePresenter<LoginView>() {
               viewState.hideProgress()
               user.apiToken = token
               userProfileStorage.saveUser(user)
+              sendDeviceToken()
               viewState.successLogin()
             },
             { errorResponse ->
@@ -89,5 +93,13 @@ class LoginPresenter : BasePresenter<LoginView>() {
               viewState.hideProgress()
             }
         )
+  }
+
+  private fun sendDeviceToken() {
+    if (userProfileStorage.isNotificationsEnabled()) {
+      service.sendDeviceToken(TokenData(UserToken(userProfileStorage.getDeviceToken(), "android")),
+          userProfileStorage.getToken())
+          .subscribe({ user -> }, { errorResponse -> })
+    }
   }
 }
