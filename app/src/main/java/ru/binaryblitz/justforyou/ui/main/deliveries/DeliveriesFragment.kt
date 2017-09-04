@@ -15,6 +15,7 @@ import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.content_deliveries.deliveriesDayList
 import kotlinx.android.synthetic.main.content_deliveries.deliveriesView
+import kotlinx.android.synthetic.main.content_deliveries.expandButton
 import kotlinx.android.synthetic.main.content_deliveries.swipeCalendar
 import kotlinx.android.synthetic.main.delivery_item.view.deliveryAddress
 import kotlinx.android.synthetic.main.delivery_item.view.programName
@@ -33,6 +34,7 @@ class DeliveriesFragment : MvpAppCompatFragment(), DeliveriesView, OnRefreshList
   lateinit var presenter: DeliveriesPresenter
   var adapter: DeliveriesAdapter = DeliveriesAdapter()
   private val decorator: DayDecorator = DayDecorator()
+  private var isCalendarExpanded = true
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -55,6 +57,8 @@ class DeliveriesFragment : MvpAppCompatFragment(), DeliveriesView, OnRefreshList
     swipeCalendar.setOnRefreshListener(this)
     deliveriesDayList.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,
         true)
+    expandButton.setOnClickListener { if (isCalendarExpanded) hideCalendar() else showCalendar() }
+    deliveriesView.topbarVisible = false
   }
 
   override fun onDateSelected(widget: MaterialCalendarView, date: CalendarDay, selected: Boolean) {
@@ -67,7 +71,7 @@ class DeliveriesFragment : MvpAppCompatFragment(), DeliveriesView, OnRefreshList
       deliveriesView.selectionColor = activity.resources.getColor(R.color.primary_light)
     }
     deliveriesDayList.adapter = adapter
-    adapter.setData(deliveries)
+    adapter.setData(deliveries.sortedByDescending { it.id })
   }
 
   override fun showProgress() {
@@ -84,6 +88,19 @@ class DeliveriesFragment : MvpAppCompatFragment(), DeliveriesView, OnRefreshList
   override fun onRefresh() {
     presenter.getDeliveries()
   }
+
+  fun showCalendar() {
+    deliveriesView.visibility = View.VISIBLE
+    expandButton.setImageResource(R.drawable.ic_expand_less_black_24dp)
+    isCalendarExpanded = true
+  }
+
+  fun hideCalendar() {
+    deliveriesView.visibility = View.GONE
+    expandButton.setImageResource(R.drawable.ic_expand_more_black_24dp)
+    isCalendarExpanded = false
+  }
+
 
   companion object {
     fun getInstance(): DeliveriesFragment {

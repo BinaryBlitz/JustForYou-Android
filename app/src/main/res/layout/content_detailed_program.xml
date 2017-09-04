@@ -35,6 +35,16 @@
           android:scaleType="fitXY"
           />
 
+      <View
+          android:layout_gravity="bottom"
+          android:id="@+id/shadow"
+          android:layout_width="match_parent"
+          android:layout_height="2dp"
+          android:alpha="0.6"
+          android:background="@drawable/shadow"
+          />
+
+
       <android.support.design.widget.TabLayout
           android:id="@+id/programTabsLayout"
           android:layout_width="match_parent"

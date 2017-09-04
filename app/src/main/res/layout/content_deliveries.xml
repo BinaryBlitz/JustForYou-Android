@@ -7,16 +7,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:animateLayoutChanges="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="ru.binaryblitz.justforyou.ui.main.CalendarActivity"
     >
   <android.support.v4.widget.NestedScrollView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:animateLayoutChanges="true"
       >
     <LinearLayout
+        android:animateLayoutChanges="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
         android:orientation="vertical"
         >
       <com.prolificinteractive.materialcalendarview.MaterialCalendarView
@@ -24,35 +28,41 @@
           android:id="@+id/deliveriesView"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_margin="4dp"
+          android:background="@color/whiteColor"
+          android:paddingBottom="4dp"
+          app:mcv_headerTextAppearance="@style/CalendarAppearance"
           app:mcv_selectionColor="@color/primary_light"
           app:mcv_showOtherDates="all"
           />
 
-      <Button
-          android:id="@+id/changeDeliveriesDays"
+      <View
+          android:id="@+id/shadow"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="16dp"
-          android:layout_marginEnd="16dp"
-          android:layout_marginStart="16dp"
-          android:layout_marginTop="16dp"
-          android:background="@drawable/ripple_rounded_btn"
+          android:layout_height="2dp"
+          android:alpha="0.6"
+          android:background="@drawable/shadow"
+          />
+
+      <ImageView
+          android:id="@+id/expandButton"
+          android:layout_width="32dp"
+          android:layout_height="32dp"
+          android:layout_gravity="center_horizontal"
+          android:layout_marginBottom="4dp"
+          android:background="?android:selectableItemBackground"
           android:clickable="true"
-          android:text="Изменить даты доставки"
-          android:textColor="@color/whiteColor"
-          android:visibility="gone"
+          android:src="@drawable/ic_expand_less_black_24dp"
           />
 
       <android.support.v7.widget.RecyclerView
           android:id="@+id/deliveriesDayList"
           android:layout_width="match_parent"
-          android:layout_height="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@color/backgroundColor"
           ></android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 
   </android.support.v4.widget.NestedScrollView>
-
 
 </android.support.v4.widget.SwipeRefreshLayout>
