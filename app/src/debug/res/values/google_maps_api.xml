@@ -1,4 +1,0 @@
-<resources>
-  <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBXyuLA2PifwBb9KcCBYAiHrwRz04-VSDI</string>
-  <string name="geocoder_key" templateMergeStrategy="preserve" translatable="false">AIzaSyA-tcLJPi2KyBFJB1kSHJKDIdnKVcV-TLs</string>
-</resources>
