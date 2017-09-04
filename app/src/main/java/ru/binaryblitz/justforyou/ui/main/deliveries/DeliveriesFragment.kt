@@ -1,6 +1,7 @@
 package ru.binaryblitz.justforyou.ui.main.deliveries
 
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -8,10 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.PresenterType
-import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
-import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.content_deliveries.deliveriesDayList
 import kotlinx.android.synthetic.main.content_deliveries.deliveriesView
@@ -21,6 +19,7 @@ import kotlinx.android.synthetic.main.delivery_item.view.deliveryAddress
 import kotlinx.android.synthetic.main.delivery_item.view.programName
 import kotlinx.android.synthetic.main.delivery_item.view.timeDeliveryText
 import ru.binaryblitz.justforyou.R
+import ru.binaryblitz.justforyou.R.color
 import ru.binaryblitz.justforyou.components.utils.DateUtils
 import ru.binaryblitz.justforyou.network.responses.deliveries.Delivery
 import ru.binaryblitz.justforyou.ui.base.BaseRecyclerAdapter
@@ -29,11 +28,10 @@ import ru.binaryblitz.justforyou.ui.base.BaseRecyclerAdapter
 /**
  * Fragment view that contains the calendar of deliveries
  */
-class DeliveriesFragment : MvpAppCompatFragment(), DeliveriesView, OnRefreshListener, OnDateSelectedListener {
-  @InjectPresenter(type = PresenterType.LOCAL)
+class DeliveriesFragment : MvpAppCompatFragment(), DeliveriesView, OnRefreshListener{
+  @InjectPresenter()
   lateinit var presenter: DeliveriesPresenter
   var adapter: DeliveriesAdapter = DeliveriesAdapter()
-  private val decorator: DayDecorator = DayDecorator()
   private var isCalendarExpanded = true
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +51,6 @@ class DeliveriesFragment : MvpAppCompatFragment(), DeliveriesView, OnRefreshList
 
   fun initViewElements(view: View) {
     deliveriesView.selectionMode = MaterialCalendarView.SELECTION_MODE_NONE
-    deliveriesView.setOnDateChangedListener(this)
     swipeCalendar.setOnRefreshListener(this)
     deliveriesDayList.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,
         true)
@@ -61,21 +58,30 @@ class DeliveriesFragment : MvpAppCompatFragment(), DeliveriesView, OnRefreshList
     deliveriesView.topbarVisible = false
   }
 
-  override fun onDateSelected(widget: MaterialCalendarView, date: CalendarDay, selected: Boolean) {
-  }
-
   override fun showDeliveries(deliveries: List<Delivery>) {
-    for ((position) in deliveries.withIndex()) {
-      deliveriesView.setDateSelected(
-          DateUtils.parseServerDate(deliveries[position].scheduledFor!!), true)
-      deliveriesView.selectionColor = activity.resources.getColor(R.color.primary_light)
-    }
+    val handler = Handler()
+    handler.postDelayed(object : Runnable {
+      override fun run() {
+        // Workaround to stop UI-freezing at rendering diffucult calendar
+        renderCalendar(deliveries)
+      }
+    }, 1000)
     deliveriesDayList.adapter = adapter
     adapter.setData(deliveries.sortedByDescending { it.id })
   }
 
+  private fun renderCalendar(
+      deliveries: List<Delivery>) {
+    for ((position) in deliveries.withIndex()) {
+      deliveriesView.setDateSelected(
+          DateUtils.parseServerDate(deliveries[position].scheduledFor!!), true)
+      deliveriesView.selectionColor = activity.resources.getColor(color.primary_light)
+      hideProgress()
+    }
+  }
+
   override fun showProgress() {
-    swipeCalendar.isRefreshing = false
+    swipeCalendar.isRefreshing = true
   }
 
   override fun hideProgress() {

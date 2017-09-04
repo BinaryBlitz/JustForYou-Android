@@ -7,20 +7,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:animateLayoutChanges="true"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="ru.binaryblitz.justforyou.ui.main.CalendarActivity"
     >
   <android.support.v4.widget.NestedScrollView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:animateLayoutChanges="true"
       >
     <LinearLayout
         android:animateLayoutChanges="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:focusableInTouchMode="true"
         android:orientation="vertical"
         >
       <com.prolificinteractive.materialcalendarview.MaterialCalendarView
@@ -30,7 +26,6 @@
           android:layout_height="wrap_content"
           android:background="@color/whiteColor"
           android:paddingBottom="4dp"
-          app:mcv_headerTextAppearance="@style/CalendarAppearance"
           app:mcv_selectionColor="@color/primary_light"
           app:mcv_showOtherDates="all"
           />
@@ -39,7 +34,7 @@
           android:id="@+id/shadow"
           android:layout_width="match_parent"
           android:layout_height="2dp"
-          android:alpha="0.6"
+          android:alpha="1"
           android:background="@drawable/shadow"
           />
 
