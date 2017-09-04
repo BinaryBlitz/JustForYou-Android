@@ -35,9 +35,9 @@
       android:alpha="0.2"
       android:id="@+id/rightViewPagerButton"
       android:layout_gravity="right"
-      android:layout_height="48dp"
+      android:layout_height="36dp"
       android:layout_margin="16dp"
-      android:layout_width="48dp"
+      android:layout_width="36dp"
       android:src="@drawable/ic_chevron_right_black_24dp"
       />
 </FrameLayout>

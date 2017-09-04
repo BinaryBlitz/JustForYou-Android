@@ -66,7 +66,7 @@ class MainActivity : BaseCartActivity() {
     bottomBar.setOnTabSelectListener { position ->
       when (position) {
         R.id.action_programms -> showTab("Программы", PROGRAMMS_TAB)
-        R.id.action_delivery -> showTab("Доставка", CALENDAR_TAB)
+        R.id.action_delivery -> showTab("Заказы", CALENDAR_TAB)
         R.id.action_support -> showTab("Поддержка", SUPPORT_TAB)
       }
     }
@@ -89,6 +89,11 @@ class MainActivity : BaseCartActivity() {
   private fun showTab(title: String, position: Int) {
     toolbar.title = title
     tabsViewPager.currentItem = position
+    if (position == CALENDAR_TAB) {
+      appBar.elevation = 0f
+    } else {
+      appBar.elevation = 4f
+    }
   }
 
   fun initDrawer(toolbar: android.support.v7.widget.Toolbar, activity: Activity) {
@@ -121,7 +126,7 @@ class MainActivity : BaseCartActivity() {
             itemPrograms,
             itemPlaces,
             itemPaymentHistory,
-//            itemSubstitutions,
+            //            itemSubstitutions,
             itemSpecial,
             DividerDrawerItem(),
             itemSettings

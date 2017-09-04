@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import kotlinx.android.synthetic.main.activity_order.numberPicker
+import kotlinx.android.synthetic.main.activity_order.orderAppbar
 import kotlinx.android.synthetic.main.activity_order.orderCoordinator
 import kotlinx.android.synthetic.main.activity_order.saveDeliveryTimeButton
 import kotlinx.android.synthetic.main.activity_order.timePickerAlertSheet
@@ -112,6 +113,10 @@ class OrderActivity : AppCompatActivity() {
             Snackbar.LENGTH_SHORT).show()
       }
     }
+
+    orderAppbar.elevation = 0f
+    toolbar.elevation = 0f
+    orderAppbar.bringToFront()
   }
 
   private fun isOrderInfoFilledCorrectly(): Boolean {
