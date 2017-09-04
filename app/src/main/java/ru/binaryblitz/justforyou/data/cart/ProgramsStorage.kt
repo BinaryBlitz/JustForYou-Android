@@ -1,6 +1,7 @@
 package ru.binaryblitz.justforyou.data.cart
 
 import io.realm.Realm
+import io.realm.RealmConfiguration
 import ru.binaryblitz.justforyou.data.programs.Program
 import ru.binaryblitz.justforyou.network.responses.orders.DeliveriesItem
 
@@ -9,7 +10,15 @@ import ru.binaryblitz.justforyou.network.responses.orders.DeliveriesItem
  * Cart local storage implemented via realm database
  */
 class ProgramsStorage : CartLocalStorage {
-  var realmLocalStorage: Realm = Realm.getDefaultInstance()
+  var realmLocalStorage: Realm
+
+  init {
+    val realmConfiguration = RealmConfiguration.Builder()
+        .name(Realm.DEFAULT_REALM_NAME)
+        .deleteRealmIfMigrationNeeded()
+        .build()
+    realmLocalStorage = Realm.getInstance(realmConfiguration)
+  }
 
   override fun getCartPrograms(): List<CartModel> {
     val query = realmLocalStorage.where(CartModel::class.java)

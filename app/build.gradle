@@ -52,6 +52,7 @@ dependencies {
   implementation 'com.android.support:appcompat-v7:26.0.1'
   implementation 'com.prolificinteractive:material-calendarview:1.4.3'
   implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+  implementation 'com.google.firebase:firebase-messaging:11.0.2'
   kapt 'com.arello-mobile:moxy-compiler:1.5.3'
   provided 'org.glassfish:javax.annotation:10.0-b28'
   implementation 'com.redmadrobot:inputmask:2.3.0'
@@ -84,3 +85,6 @@ dependencies {
     transitive = true
   }
 }
+
+
+apply plugin: 'com.google.gms.google-services'

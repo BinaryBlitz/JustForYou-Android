@@ -8,6 +8,7 @@ import ru.binaryblitz.justforyou.data.programs.Block
 import ru.binaryblitz.justforyou.data.programs.Program
 import ru.binaryblitz.justforyou.data.user.UserInfo
 import ru.binaryblitz.justforyou.network.models.UserData
+import ru.binaryblitz.justforyou.network.models.token.TokenData
 import ru.binaryblitz.justforyou.network.responses.CreateTokenResponse
 import ru.binaryblitz.justforyou.network.responses.VerifyTokenResponse
 import ru.binaryblitz.justforyou.network.responses.deliveries.Delivery
@@ -44,6 +45,13 @@ class NetworkService(private val serviceApi: ApiService) {
 
   fun createUser(user: UserData): Single<UserInfo> {
     return serviceApi.createUser(user)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .map { it }
+  }
+
+  fun sendDeviceToken(token: TokenData, apiToken: String): Single<UserInfo> {
+    return serviceApi.updateDeviceToken(token, apiToken)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .map { it }
@@ -133,21 +141,23 @@ class NetworkService(private val serviceApi: ApiService) {
         .map { it }
   }
 
-  fun makeOrderPayment(orderId: Int, token: String) : Single<Payment> {
+  fun makeOrderPayment(orderId: Int, token: String): Single<Payment> {
     return serviceApi.makeOrderPayment(orderId, token)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .map { it }
   }
 
-  fun payWithCreditCard(creditCardId: Int, orderId: Int, token: String) : Single<Payment> {
-    return serviceApi.makeOrderPaymentWithCard(orderId, CardBody(PaymentCardBody(creditCardId)), token)
+  fun payWithCreditCard(creditCardId: Int, orderId: Int, token: String): Single<Payment> {
+    return serviceApi.makeOrderPaymentWithCard(orderId, CardBody(PaymentCardBody(creditCardId)),
+        token)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .map { it }
   }
 
-  fun addDeliveryDays(orderId: Int, deliveryBody: DeliveryBody, token: String) : Single<List<Delivery>> {
+  fun addDeliveryDays(orderId: Int, deliveryBody: DeliveryBody,
+      token: String): Single<List<Delivery>> {
     return serviceApi.addDeliveryDays(orderId, deliveryBody, token)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())

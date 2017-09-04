@@ -8,11 +8,14 @@ import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatActivity
 import ru.binaryblitz.justforyou.data.cart.ProgramsStorage
 import ru.binaryblitz.justforyou.di.JustForYouApp
+import ru.binaryblitz.justforyou.network.NetworkService
 import javax.inject.Inject
 
 abstract class BaseCartActivity : MvpAppCompatActivity() {
   @Inject
   lateinit var cartProgramsLocalStorage: ProgramsStorage
+  @Inject
+  lateinit var service: NetworkService
 
   init {
     JustForYouApp.appComponent?.inject(this)

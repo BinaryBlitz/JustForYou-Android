@@ -76,19 +76,21 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:visibility="gone"
         android:id="@+id/notificationsView"
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:background="?android:selectableItemBackground"
         android:clickable="true"
+        android:visibility="visible"
         >
-      <TextView
+
+      <Switch
+          android:checked="true"
+          android:id="@+id/notificationsSwitch"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_centerVertical="true"
+          android:layout_height="match_parent"
+          android:layout_marginEnd="16dp"
           android:layout_marginStart="20dp"
-          android:gravity="center_vertical"
           android:text="Push-уведомления"
           android:textColor="@color/blackColor"
           android:textSize="16sp"
