@@ -47,7 +47,8 @@ class DetailedProgramActivity : BaseCartActivity() {
     detailedProgramCollapsingView.setExpandedTitleColor(Color.parseColor("#00FFFFFF"))
 
     val program: Program = intent.getParcelableExtra(Extras.EXTRA_PROGRAM)
-    Picasso.with(this).load(program.imageUrl).fit().centerCrop().into(detailedProgramImage)
+    Picasso.with(this).load(program.imageUrl).placeholder(
+        R.drawable.program_placeholder).fit().centerCrop().into(detailedProgramImage)
     setSupportActionBar(toolbar)
     toolbar.title = ""
     detailedProgramCollapsingView.title = program.name

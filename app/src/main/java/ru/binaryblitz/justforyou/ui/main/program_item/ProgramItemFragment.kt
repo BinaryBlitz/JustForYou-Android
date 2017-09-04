@@ -29,7 +29,8 @@ class ProgramItemFragment : MvpAppCompatFragment() {
     val program: Program = arguments.getParcelable(ARG_BLOCK)
     val cartProgramPresenter = CartProgramPresenter(activity)
     programTitle.text = program.name
-    Picasso.with(activity).load(program.imageUrl).fit().centerCrop().into(programImage)
+    Picasso.with(activity).load(program.imageUrl).placeholder(
+        R.drawable.program_placeholder).fit().centerCrop().into(programImage)
     programDescription.text = program.description
     programPricePerDay.text = getString(R.string.per_one_day) + "${program.primaryPrice}"
     programPricePerWeek.text = getString(R.string.per_ten_days) + "${program.secondaryPrice}"

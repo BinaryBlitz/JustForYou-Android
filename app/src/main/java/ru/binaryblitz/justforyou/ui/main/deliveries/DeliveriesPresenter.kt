@@ -23,8 +23,10 @@ class DeliveriesPresenter : BasePresenter<DeliveriesView>() {
     networkService.getDeliveries(userProfileStorage.getToken())
         .subscribe(
             { deliveries ->
-              viewState.hideProgress()
               viewState.showDeliveries(deliveries)
+              if (deliveries.isEmpty()) {
+                viewState.hideProgress()
+              }
             },
             { errorResponse ->
               viewState.showError(errorResponse.localizedMessage)

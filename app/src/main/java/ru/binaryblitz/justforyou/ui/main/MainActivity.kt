@@ -55,9 +55,6 @@ class MainActivity : BaseCartActivity() {
   }
 
   private fun initViewElements() {
-    setSupportActionBar(toolbar)
-    initDrawer(toolbar, this)
-    initCartBadgeIcon()
     AnimationBuilderHelper.initMainView(this, appBar, bottomBar)
     val adapter = ViewPagerAdapter(supportFragmentManager)
     adapter.addFragment(ProgramsFragment.getInstance(), "programs_tag")
@@ -73,6 +70,9 @@ class MainActivity : BaseCartActivity() {
         R.id.action_support -> showTab("Поддержка", SUPPORT_TAB)
       }
     }
+    setSupportActionBar(toolbar)
+    initDrawer(toolbar, this)
+    initCartBadgeIcon()
   }
 
   override fun onResume() {
