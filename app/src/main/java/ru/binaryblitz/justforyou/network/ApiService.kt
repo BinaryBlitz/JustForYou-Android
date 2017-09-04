@@ -13,6 +13,7 @@ import ru.binaryblitz.justforyou.data.programs.Block
 import ru.binaryblitz.justforyou.data.programs.Program
 import ru.binaryblitz.justforyou.data.user.UserInfo
 import ru.binaryblitz.justforyou.network.models.UserData
+import ru.binaryblitz.justforyou.network.models.token.TokenData
 import ru.binaryblitz.justforyou.network.responses.CreateTokenResponse
 import ru.binaryblitz.justforyou.network.responses.VerifyTokenResponse
 import ru.binaryblitz.justforyou.network.responses.deliveries.Delivery
@@ -34,7 +35,7 @@ interface ApiService {
   companion object {
     const val API_PATH = "/api"
   }
-  
+
   @POST("$API_PATH/verification_tokens")
   fun createToken(@Query("phone_number") phoneNumber: String): Single<CreateTokenResponse>
 
@@ -104,5 +105,9 @@ interface ApiService {
 
   @GET("$API_PATH//deliveries.json")
   fun getDeliveries(@Query("api_token") token: String): Single<List<Delivery>>
+
+  @PATCH("$API_PATH//user.json")
+  fun updateDeviceToken(@Body tokenData: TokenData,
+      @Query("api_token") token: String): Single<UserInfo>
 
 }

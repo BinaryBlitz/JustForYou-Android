@@ -84,7 +84,7 @@
   <FrameLayout
       android:id="@+id/cardPickerAlertSheet"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+      android:layout_height="300dp"
       android:visibility="visible"
       app:behavior_hideable="true"
       app:elevation="8dp"
@@ -108,7 +108,7 @@
           android:alpha="1"
           android:text="Выберите карту которой вы хотите оплатить"
           android:textColor="@color/blackColor"
-          android:textSize="18sp"
+          android:textSize="14sp"
           />
 
       <TextView
@@ -124,7 +124,7 @@
           android:layout_gravity="center_horizontal"
           android:id="@+id/userCardView"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content"
+          android:layout_height="150dp"
           android:paddingBottom="16dp"
           ></android.support.v7.widget.RecyclerView>
 

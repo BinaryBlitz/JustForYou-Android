@@ -17,6 +17,8 @@ private const val FIELD_PHONE = "phone"
 private const val FIELD_ID = "id"
 private const val FIELD_EMAIL = "email"
 private const val FIELD_TOKEN = "token"
+private const val FIELD_DEVICE_TOKEN = "device_token"
+private const val FIELD_NOTIFICATIONS = "device_notifications"
 
 class UserStorageImpl : UserProfileStorage {
   var context: Context = JustForYouApp.appComponent!!.context
@@ -42,6 +44,30 @@ class UserStorageImpl : UserProfileStorage {
     editor.apply()
   }
 
+  override fun saveDeviceToken(token: String) {
+    val preferences = getProfileSharedPreferences()
+    val editor = preferences.edit()
+    editor.putString(FIELD_DEVICE_TOKEN, token)
+    editor.apply()
+  }
+
+  override fun setPushNotificationsEnabled(enabled: Boolean) {
+    val preferences = getProfileSharedPreferences()
+    val editor = preferences.edit()
+    editor.putBoolean(FIELD_NOTIFICATIONS, enabled)
+    editor.apply()
+  }
+
+  override fun isNotificationsEnabled(): Boolean {
+    val preferences = getProfileSharedPreferences()
+    return getNotifications(preferences)
+  }
+
+  override fun getDeviceToken(): String {
+    val preferences = getProfileSharedPreferences()
+    return getDeviceToken(preferences)
+  }
+
   override fun getToken(): String {
     val preferences = getProfileSharedPreferences()
     return getToken(preferences)
@@ -54,6 +80,16 @@ class UserStorageImpl : UserProfileStorage {
   private fun getToken(preferences: SharedPreferences): String {
     val tokenField = preferences.getString(FIELD_TOKEN, "")
     return tokenField
+  }
+
+  private fun getDeviceToken(preferences: SharedPreferences): String {
+    val tokenField = preferences.getString(FIELD_DEVICE_TOKEN, "")
+    return tokenField
+  }
+
+  private fun getNotifications(preferences: SharedPreferences): Boolean {
+    val isEnabled = preferences.getBoolean(FIELD_NOTIFICATIONS, true)
+    return isEnabled
   }
 
   private fun getLastName(preferences: SharedPreferences): String {
@@ -92,5 +128,6 @@ class UserStorageImpl : UserProfileStorage {
     val cartStorage: ProgramsStorage = ProgramsStorage()
     cartStorage.clear()
   }
+
 
 }

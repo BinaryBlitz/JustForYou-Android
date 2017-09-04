@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.CompoundButton
 import kotlinx.android.synthetic.main.activity_login.firstNameEdit
 import kotlinx.android.synthetic.main.activity_settings.settingsContainer
 import kotlinx.android.synthetic.main.activity_settings.toolbar
@@ -12,6 +13,7 @@ import kotlinx.android.synthetic.main.content_settings.aboutApp
 import kotlinx.android.synthetic.main.content_settings.lastNameEdit
 import kotlinx.android.synthetic.main.content_settings.logoutButton
 import kotlinx.android.synthetic.main.content_settings.myPaymentCards
+import kotlinx.android.synthetic.main.content_settings.notificationsSwitch
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.R.string
 import ru.binaryblitz.justforyou.data.user.UserInfo
@@ -20,6 +22,8 @@ import ru.binaryblitz.justforyou.di.JustForYouApp
 import ru.binaryblitz.justforyou.network.NetworkService
 import ru.binaryblitz.justforyou.network.models.User
 import ru.binaryblitz.justforyou.network.models.UserData
+import ru.binaryblitz.justforyou.network.models.token.TokenData
+import ru.binaryblitz.justforyou.network.models.token.UserToken
 import ru.binaryblitz.justforyou.ui.router.Router
 import javax.inject.Inject
 
@@ -58,6 +62,23 @@ class SettingsActivity : AppCompatActivity(), TextWatcher {
       userProfileStorage.logoutUser()
       Router.openMainScreenAfterLogout(this)
     }
+
+    notificationsSwitch.isChecked = userProfileStorage.isNotificationsEnabled()
+    notificationsSwitch.setOnCheckedChangeListener(
+        CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+          if (isChecked) {
+            networkService.sendDeviceToken(TokenData(
+                UserToken(userProfileStorage.getDeviceToken(), "android")),
+                userProfileStorage.getToken())
+                .subscribe({ user -> }, { errorResponse -> })
+          } else {
+            networkService.sendDeviceToken(TokenData(
+                UserToken("", "")),
+                userProfileStorage.getToken())
+                .subscribe({ user -> }, { errorResponse -> })
+          }
+          userProfileStorage.setPushNotificationsEnabled(isChecked)
+        })
   }
 
   override fun afterTextChanged(p0: Editable?) {

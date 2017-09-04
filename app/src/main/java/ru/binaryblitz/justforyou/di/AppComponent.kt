@@ -10,6 +10,7 @@ import ru.binaryblitz.justforyou.network.MapService
 import ru.binaryblitz.justforyou.network.NetworkService
 import ru.binaryblitz.justforyou.ui.base.BaseCartActivity
 import ru.binaryblitz.justforyou.ui.login.LoginPresenter
+import ru.binaryblitz.justforyou.ui.main.MainActivity
 import ru.binaryblitz.justforyou.ui.main.blocks.BlocksPresenter
 import ru.binaryblitz.justforyou.ui.main.cart.CartPresenter
 import ru.binaryblitz.justforyou.ui.main.deliveries.DeliveriesPresenter
@@ -33,6 +34,7 @@ interface AppComponent {
   val mapService: MapService
   val cartProgramsStorage: ProgramsStorage
   val profileStorage: UserStorageImpl
+  fun inject(mainScreen: MainActivity)
   fun inject(presenter: LoginPresenter)
   fun inject(presenter: BlocksPresenter)
   fun inject(presenter: ProgramsPresenter)

@@ -51,6 +51,7 @@ class MainActivity : BaseCartActivity() {
     } else {
       setContentView(R.layout.activity_main)
       initViewElements()
+      sendDeviceToken()
     }
   }
 
@@ -101,7 +102,7 @@ class MainActivity : BaseCartActivity() {
     val itemPlaces = PrimaryDrawerItem().withName("Места").withSelectable(false)
     val itemPaymentHistory = PrimaryDrawerItem().withName("История платежей").withSelectable(false)
 //    val itemSubstitutions = PrimaryDrawerItem().withName("Замены").withSelectable(false)
-    val itemSpecial = PrimaryDrawerItem().withName("Акции").withSelectable(false)
+//    val itemSpecial = PrimaryDrawerItem().withName("Акции").withSelectable(false)
     val itemSettings = SecondaryDrawerItem().withName("Настройки").withSelectable(false)
 
     val accountHeader: AccountHeader = AccountHeaderBuilder()
@@ -126,8 +127,6 @@ class MainActivity : BaseCartActivity() {
             itemPrograms,
             itemPlaces,
             itemPaymentHistory,
-            //            itemSubstitutions,
-            itemSpecial,
             DividerDrawerItem(),
             itemSettings
         )
@@ -150,6 +149,14 @@ class MainActivity : BaseCartActivity() {
           true
         }
         .build()
+  }
+
+  private fun sendDeviceToken() {
+//    if (userProfileStorage.isNotificationsEnabled()) {
+//      service.sendDeviceToken(TokenData(UserToken(userProfileStorage.getDeviceToken(), "android")),
+//          userProfileStorage.getToken())
+//          .subscribe({ user -> }, { errorResponse -> })
+//    }
   }
 
 }
