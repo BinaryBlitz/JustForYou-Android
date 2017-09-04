@@ -16,8 +16,8 @@ android {
     applicationId "ru.binaryblitz.justforyou"
     minSdkVersion 21
     targetSdkVersion 26
-    versionCode 7
-    versionName "0.2"
+    versionCode 8
+    versionName "1.0"
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     multiDexEnabled true
   }
