@@ -8,15 +8,16 @@ const val programCaseTwo = "программы"
 const val programCaseThree = "программ"
 
 object StringUtils {
+
   /**
    * Selects the correct form of the program name depending on count
    */
-  fun programCase(count: Long): String {
+  fun programCase(count: Int): String {
     var countProgram = count
-    var stringForm = java.lang.Long.toString(countProgram) + " "
+    var stringForm = "" + countProgram + " "
     countProgram = abs(countProgram)
 
-    if ((countProgram % 10).equals(1) && !(countProgram % 100).equals(11)) {
+    if (countProgram % 10 <= 1 && countProgram % 100 != 11) {
       stringForm += programCaseOne
     } else if (countProgram % 10 in 2..4 && (countProgram % 100 < 10 || countProgram % 100 >= 20)) {
       stringForm += programCaseTwo
