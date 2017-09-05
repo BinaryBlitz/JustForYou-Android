@@ -6,7 +6,7 @@ import com.squareup.moshi.Json
 
 data class Block(
     @Json(name = "programs_count")
-    val programsCount: Int? = null,
+    val programsCount: Int,
     val color: String? = null,
     @Json(name = "image_url")
     val imageUrl: String? = null,
@@ -14,7 +14,7 @@ data class Block(
     val id: Int? = null
 ) : Parcelable {
   constructor(source: Parcel) : this(
-      source.readValue(Int::class.java.classLoader) as Int?,
+      source.readValue(Int::class.java.classLoader) as Int,
       source.readString(),
       source.readString(),
       source.readString(),
