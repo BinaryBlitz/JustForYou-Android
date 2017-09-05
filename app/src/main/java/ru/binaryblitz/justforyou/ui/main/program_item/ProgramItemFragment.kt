@@ -14,6 +14,8 @@ import kotlinx.android.synthetic.main.fragment_program_item.programPricePerDay
 import kotlinx.android.synthetic.main.fragment_program_item.programPricePerWeek
 import kotlinx.android.synthetic.main.fragment_program_item.programTitle
 import ru.binaryblitz.justforyou.R
+import ru.binaryblitz.justforyou.R.string
+import ru.binaryblitz.justforyou.components.Constants
 import ru.binaryblitz.justforyou.components.Extras
 import ru.binaryblitz.justforyou.data.programs.Program
 import ru.binaryblitz.justforyou.ui.router.Router
@@ -34,10 +36,19 @@ class ProgramItemFragment : MvpAppCompatFragment() {
     programDescription.text = program.description
     programPricePerDay.text = getString(R.string.per_one_day) + "${program.primaryPrice}"
     programPricePerWeek.text = getString(R.string.per_ten_days) + "${program.secondaryPrice}"
+    if (program.individualPrice) {
+      programPricePerDay.text = getString(string.individual_price)
+      programPricePerWeek.visibility = View.GONE
+      proceedProgramButton.text = getString(string.call_manager)
+    }
     programContainerView.setOnClickListener {
       Router.openDetailedProgramScreen(activity, program, ProgramsActivity.blockName)
     }
     proceedProgramButton.setOnClickListener {
+      if (program.individualPrice) {
+        Router.dialPhoneNumber(activity, Constants.supportNumber)
+        return@setOnClickListener
+      }
       Router.openOrderScreen(activity, program, ProgramsActivity.blockName, Extras.orderRequestCode)
     }
   }

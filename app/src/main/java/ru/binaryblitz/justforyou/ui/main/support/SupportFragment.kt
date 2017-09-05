@@ -13,12 +13,11 @@ import kotlinx.android.synthetic.main.fragment_support.instagram
 import kotlinx.android.synthetic.main.fragment_support.reviewButton
 import kotlinx.android.synthetic.main.fragment_support.sendSupport
 import ru.binaryblitz.justforyou.R
+import ru.binaryblitz.justforyou.components.Constants
 import ru.binaryblitz.justforyou.ui.router.Router
 
 
 class SupportFragment : MvpAppCompatFragment() {
-  val supportNumber = "+7(495) 241 49 63"
-  val email = "info@justforyou.ru"
 
   override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
       savedInstanceState: Bundle?): View? {
@@ -27,9 +26,9 @@ class SupportFragment : MvpAppCompatFragment() {
 
   override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    callSupport.setOnClickListener { dialPhoneNumber(supportNumber) }
+    callSupport.setOnClickListener { Router.dialPhoneNumber(activity, Constants.supportNumber) }
     sendSupport.setOnClickListener {
-      sendEmail(email)
+      sendEmail(Constants.email)
     }
     instagram.setOnClickListener {
       Router.openJustForYouLink(activity, "https://www.instagram.com/justforyou_ru/")
@@ -40,13 +39,6 @@ class SupportFragment : MvpAppCompatFragment() {
     reviewButton.setOnClickListener { Router.openGooglePlayLink(activity) }
   }
 
-  fun dialPhoneNumber(phoneNumber: String) {
-    val intent = Intent(Intent.ACTION_DIAL)
-    intent.data = Uri.parse("tel:" + phoneNumber)
-    if (intent.resolveActivity(activity.getPackageManager()) != null) {
-      startActivity(intent)
-    }
-  }
 
   fun sendEmail(email: String) {
     val emailIntent = Intent(Intent.ACTION_SENDTO, Uri.fromParts(
