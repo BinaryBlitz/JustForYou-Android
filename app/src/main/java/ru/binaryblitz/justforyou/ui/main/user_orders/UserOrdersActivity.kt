@@ -12,10 +12,12 @@ import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_user_orders.ordersProgress
 import kotlinx.android.synthetic.main.activity_user_orders.toolbar
 import kotlinx.android.synthetic.main.content_user_orders.ordersView
+import kotlinx.android.synthetic.main.order_item.view.orderDate
 import kotlinx.android.synthetic.main.order_item.view.orderPrice
 import kotlinx.android.synthetic.main.order_item.view.orderTitle
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.R.string
+import ru.binaryblitz.justforyou.components.utils.DateUtils
 import ru.binaryblitz.justforyou.network.responses.orders.PurchaseItem
 import ru.binaryblitz.justforyou.ui.base.BaseRecyclerAdapter
 
@@ -71,9 +73,12 @@ class OrdersAdapter : BaseRecyclerAdapter<PurchaseItem>() {
   private inner class ViewHolder(itemView: View) : RecyclerViewHolder<PurchaseItem>(itemView) {
 
     override fun setItem(item: PurchaseItem, position: Int) {
-      itemView.orderTitle.text = item.programs?.get(0)?.name
+      if (item.programs?.size != 0) {
+        itemView.orderTitle.text = item.programs?.get(0)?.name
+      }
       itemView.orderPrice.text = String.format(itemView.context.getString(string.order_price),
           item.totalPrice)
+      itemView.orderDate.text = DateUtils.parseServerDate(item.createdAt!!).toString()
     }
 
   }
