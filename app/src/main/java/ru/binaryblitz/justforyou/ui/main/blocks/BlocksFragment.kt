@@ -105,7 +105,7 @@ class ProgramAdapter : BaseRecyclerAdapter<Block>() {
     override fun setItem(item: Block, position: Int) {
       Picasso.with(itemView.context).load(item.imageUrl).fit().into(itemView.programImage)
       itemView.programTitle.text = item.name
-      itemView.programsCount.text = StringUtils.programCase(item.programsCount.toLong())
+      itemView.programsCount.text = StringUtils.programCase(item.programsCount)
       itemView.setOnClickListener { onItemSelectAction.onNext(getItemAt(position)) }
     }
 
