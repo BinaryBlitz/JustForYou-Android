@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.program_item.view.programImage
 import kotlinx.android.synthetic.main.program_item.view.programTitle
 import kotlinx.android.synthetic.main.program_item.view.programsCount
 import ru.binaryblitz.justforyou.R
+import ru.binaryblitz.justforyou.components.utils.StringUtils
 import ru.binaryblitz.justforyou.data.programs.Block
 import ru.binaryblitz.justforyou.ui.base.BaseRecyclerAdapter
 import ru.binaryblitz.justforyou.ui.router.Router
@@ -104,8 +105,7 @@ class ProgramAdapter : BaseRecyclerAdapter<Block>() {
     override fun setItem(item: Block, position: Int) {
       Picasso.with(itemView.context).load(item.imageUrl).fit().into(itemView.programImage)
       itemView.programTitle.text = item.name
-      //TODO Обработка программ/программы
-      itemView.programsCount.text = "" + item.programsCount + " Программ"
+      itemView.programsCount.text = StringUtils.programCase(item.programsCount.toLong())
       itemView.setOnClickListener { onItemSelectAction.onNext(getItemAt(position)) }
     }
 
