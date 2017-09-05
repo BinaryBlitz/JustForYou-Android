@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.view.ViewPager
+import android.view.View
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detailed_program.coordinator
 import kotlinx.android.synthetic.main.activity_detailed_program.detailedProgramCollapsingView
@@ -22,6 +23,7 @@ import kotlinx.android.synthetic.main.toolbar_cart_icon.cartView
 import ru.binaryblitz.justforyou.R
 import ru.binaryblitz.justforyou.R.drawable
 import ru.binaryblitz.justforyou.R.string
+import ru.binaryblitz.justforyou.components.Constants
 import ru.binaryblitz.justforyou.components.Extras
 import ru.binaryblitz.justforyou.data.programs.Program
 import ru.binaryblitz.justforyou.ui.base.BaseCartActivity
@@ -57,7 +59,16 @@ class DetailedProgramActivity : BaseCartActivity() {
     toolbar.setNavigationOnClickListener { onBackPressed() }
     programPricePerDay.text = getString(R.string.per_one_day) + "${program.primaryPrice}"
     programPricePerWeek.text = getString(R.string.per_ten_days) + "${program.secondaryPrice}"
+    if (program.individualPrice) {
+      programPricePerDay.text = getString(string.individual_price)
+      programPricePerWeek.visibility = View.GONE
+      proceedProgramButton.text = getString(string.call_manager)
+    }
     proceedProgramButton.setOnClickListener {
+      if (program.individualPrice) {
+        Router.dialPhoneNumber(this, Constants.supportNumber)
+        return@setOnClickListener
+      }
       Router.openOrderScreen(this, program, intent.getStringExtra(Extras.EXTRA_PROGRAM_BLOCK_NAME),
           Extras.orderRequestCode)
     }

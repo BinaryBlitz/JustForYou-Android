@@ -62,4 +62,6 @@
   <string name="enter_number">Введите номер:</string>
   <string name="enter_code">Введите код:</string>
   <string name="hour_error">Доставку на следующий день, можно заказать только до 11:00 текущего дня</string>
+  <string name="individual_price">Индивидуальная цена</string>
+  <string name="call_manager">Связаться с менеджером</string>
 </resources>

@@ -148,4 +148,12 @@ object Router {
 
   }
 
+  fun dialPhoneNumber(context: Activity, phoneNumber: String) {
+    val intent = Intent(Intent.ACTION_DIAL)
+    intent.data = Uri.parse("tel:" + phoneNumber)
+    if (intent.resolveActivity(context.packageManager) != null) {
+      context.startActivity(intent)
+    }
+  }
+
 }
