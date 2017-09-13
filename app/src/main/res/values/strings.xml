@@ -64,4 +64,5 @@
   <string name="hour_error">Доставку на следующий день, можно заказать только до 11:00 текущего дня</string>
   <string name="individual_price">Индивидуальная цена</string>
   <string name="call_manager">Связаться с менеджером</string>
+  <string name="promotions_title">Акции</string>
 </resources>
