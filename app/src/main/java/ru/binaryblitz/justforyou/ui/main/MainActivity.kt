@@ -112,6 +112,7 @@ class MainActivity : BaseCartActivity() {
         )
         .withHeaderBackground(R.color.colorPrimary)
         .withSelectionListEnabledForSingleProfile(false)
+        .withProfileImagesClickable(false)
         .build()
 
     val result = DrawerBuilder()
@@ -147,6 +148,11 @@ class MainActivity : BaseCartActivity() {
           true
         }
         .build()
+  }
+
+  fun openSettingsFromProfile(): Boolean {
+    Router.openSettingsScreen(this)
+    return true
   }
 
 }
