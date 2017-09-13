@@ -20,6 +20,7 @@ import ru.binaryblitz.justforyou.ui.main.map.MapAddressActivity
 import ru.binaryblitz.justforyou.ui.main.order.OrderActivity
 import ru.binaryblitz.justforyou.ui.main.program_item.ProgramsActivity
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.DetailedProgramActivity
+import ru.binaryblitz.justforyou.ui.main.promotions.PromotionsActivity
 import ru.binaryblitz.justforyou.ui.main.purchases.PurchasesActivity
 import ru.binaryblitz.justforyou.ui.main.settings.SettingsActivity
 import ru.binaryblitz.justforyou.ui.main.settings.payment_cards.PaymentCardsActivity
@@ -154,6 +155,11 @@ object Router {
     if (intent.resolveActivity(context.packageManager) != null) {
       context.startActivity(intent)
     }
+  }
+
+  fun openPromotionsScreen(context: Activity) {
+    val intent = Intent(context, PromotionsActivity::class.java)
+    context.startActivity(intent)
   }
 
 }

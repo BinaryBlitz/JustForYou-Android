@@ -26,6 +26,7 @@ import ru.binaryblitz.justforyou.network.responses.orders.OrderResponse
 import ru.binaryblitz.justforyou.network.responses.orders.PurchaseItem
 import ru.binaryblitz.justforyou.network.responses.payment.Payment
 import ru.binaryblitz.justforyou.network.responses.payment_cards.PaymentCard
+import ru.binaryblitz.justforyou.network.responses.promotions.Promotion
 import ru.binaryblitz.justforyou.network.responses.purchases.PurchasesResponse
 
 /**
@@ -110,4 +111,6 @@ interface ApiService {
   fun updateDeviceToken(@Body tokenData: TokenData,
       @Query("api_token") token: String): Single<UserInfo>
 
+  @GET("$API_PATH/promotions.json")
+  fun getPromotions(@Query("api_token") token: String): Single<List<Promotion>>
 }

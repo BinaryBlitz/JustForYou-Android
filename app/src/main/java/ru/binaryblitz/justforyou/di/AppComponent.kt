@@ -19,6 +19,7 @@ import ru.binaryblitz.justforyou.ui.main.map.MapAddressPresenter
 import ru.binaryblitz.justforyou.ui.main.program_item.CartProgramPresenter
 import ru.binaryblitz.justforyou.ui.main.program_item.ProgramsPresenter
 import ru.binaryblitz.justforyou.ui.main.program_item.detailed_program.pages.menu.MenuPresenter
+import ru.binaryblitz.justforyou.ui.main.promotions.PromotionsPresenter
 import ru.binaryblitz.justforyou.ui.main.purchases.PurchasesPresenter
 import ru.binaryblitz.justforyou.ui.main.settings.SettingsActivity
 import ru.binaryblitz.justforyou.ui.main.settings.payment_cards.PaymentCardsPresenter
@@ -49,4 +50,5 @@ interface AppComponent {
   fun inject(presenter: DeliveriesPresenter)
   fun inject(baseCartScreen: BaseCartActivity)
   fun inject(orderPresenter: CartProgramPresenter)
+  fun inject(promotionsPresenter: PromotionsPresenter)
 }

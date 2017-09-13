@@ -22,6 +22,7 @@ import ru.binaryblitz.justforyou.network.responses.orders.PaymentCardBody
 import ru.binaryblitz.justforyou.network.responses.orders.PurchaseItem
 import ru.binaryblitz.justforyou.network.responses.payment.Payment
 import ru.binaryblitz.justforyou.network.responses.payment_cards.PaymentCard
+import ru.binaryblitz.justforyou.network.responses.promotions.Promotion
 import ru.binaryblitz.justforyou.network.responses.purchases.PurchasesResponse
 
 /**
@@ -166,6 +167,13 @@ class NetworkService(private val serviceApi: ApiService) {
 
   fun getDeliveries(token: String): Single<List<Delivery>> {
     return serviceApi.getDeliveries(token)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .map { it }
+  }
+
+  fun getPromotions(token: String): Single<List<Promotion>> {
+    return serviceApi.getPromotions(token)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .map { it }
