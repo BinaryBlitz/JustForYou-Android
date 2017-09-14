@@ -26,8 +26,10 @@ import ru.binaryblitz.justforyou.network.responses.orders.OrderResponse
 import ru.binaryblitz.justforyou.network.responses.orders.PurchaseItem
 import ru.binaryblitz.justforyou.network.responses.payment.Payment
 import ru.binaryblitz.justforyou.network.responses.payment_cards.PaymentCard
+import ru.binaryblitz.justforyou.network.responses.product_types.ProductTypes
 import ru.binaryblitz.justforyou.network.responses.promotions.Promotion
 import ru.binaryblitz.justforyou.network.responses.purchases.PurchasesResponse
+import ru.binaryblitz.justforyou.network.responses.substitutions.Substitutions
 
 /**
  * JustForYou API methods
@@ -113,4 +115,20 @@ interface ApiService {
 
   @GET("$API_PATH/promotions.json")
   fun getPromotions(@Query("api_token") token: String): Single<List<Promotion>>
+
+  @GET("$API_PATH/product_types.json")
+  fun getProducts(@Query("api_token") token: String): Single<List<ProductTypes>>
+
+  @GET("$API_PATH/substitutions.json")
+  fun getSubstitutions(@Query("api_token") token: String): Single<List<Substitutions>>
+
+  @POST("$API_PATH/products/{productId}/substitutions.json")
+  fun createSubstitution(@Path("productId") id: Int,
+      @Query("api_token") token: String): Single<Substitutions>
+
+  @DELETE("$API_PATH/substitutions/{productId}.json")
+  fun removeSubstitution(@Path("productId") id: Int,
+      @Query("api_token") token: String): Single<Substitutions>
+
+
 }

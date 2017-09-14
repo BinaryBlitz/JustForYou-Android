@@ -12,6 +12,7 @@ object Extras {
   public const val EXTRA_DAYS_COUNT: String = "extra_days_count"
   public const val EXTRA_DAYS_DATA: String = "extra_days_data"
   public const val orderRequestCode = 1010
+  public const val newSubRequestCode = 1030
   public const val EXTRA_URL: String = "extra_url"
   public const val paymentRequestCode = 1011
 

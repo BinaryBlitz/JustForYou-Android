@@ -64,6 +64,7 @@ dependencies {
   }
   implementation 'com.romandanylyk:pageindicatorview:0.2.0'
   implementation 'com.squareup.picasso:picasso:2.5.2'
+  implementation 'com.github.IntruderShanky:Sectioned-RecyclerView:2.1.1'
 
   // Networking
   def retrofitVersion = '2.2.0'

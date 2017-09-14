@@ -99,7 +99,7 @@ class MainActivity : BaseCartActivity() {
     val itemPrograms = PrimaryDrawerItem().withName("Программы").withSelectable(false)
     val itemPlaces = PrimaryDrawerItem().withName("Места").withSelectable(false)
     val itemPaymentHistory = PrimaryDrawerItem().withName("История платежей").withSelectable(false)
-//    val itemSubstitutions = PrimaryDrawerItem().withName("Замены").withSelectable(false)
+    val itemSubstitutions = PrimaryDrawerItem().withName("Замены").withSelectable(false)
     val itemSpecial = PrimaryDrawerItem().withName("Акции").withSelectable(false)
     val itemSettings = SecondaryDrawerItem().withName("Настройки").withSelectable(false)
 
@@ -126,6 +126,7 @@ class MainActivity : BaseCartActivity() {
             itemPrograms,
             itemPlaces,
             itemPaymentHistory,
+            itemSubstitutions,
             itemSpecial,
             DividerDrawerItem(),
             itemSettings
@@ -146,6 +147,9 @@ class MainActivity : BaseCartActivity() {
             }
             itemSpecial -> {
               Router.openPromotionsScreen(this)
+            }
+            itemSubstitutions -> {
+              Router.openSubsScreen(this)
             }
 
           }

@@ -24,6 +24,8 @@ import ru.binaryblitz.justforyou.ui.main.promotions.PromotionsActivity
 import ru.binaryblitz.justforyou.ui.main.purchases.PurchasesActivity
 import ru.binaryblitz.justforyou.ui.main.settings.SettingsActivity
 import ru.binaryblitz.justforyou.ui.main.settings.payment_cards.PaymentCardsActivity
+import ru.binaryblitz.justforyou.ui.main.substitutions.SubstitutionsActivity
+import ru.binaryblitz.justforyou.ui.main.substitutions.products.ProductsActivity
 import ru.binaryblitz.justforyou.ui.main.user_orders.UserOrdersActivity
 import ru.binaryblitz.justforyou.ui.main.web_payment.PaymentActivity
 
@@ -160,6 +162,16 @@ object Router {
   fun openPromotionsScreen(context: Activity) {
     val intent = Intent(context, PromotionsActivity::class.java)
     context.startActivity(intent)
+  }
+
+  fun openSubsScreen(context: Activity) {
+    val intent = Intent(context, SubstitutionsActivity::class.java)
+    context.startActivity(intent)
+  }
+
+  fun openProductsScreen(context: Activity) {
+    val intent = Intent(context, ProductsActivity::class.java)
+    context.startActivityForResult(intent, Extras.newSubRequestCode)
   }
 
 }

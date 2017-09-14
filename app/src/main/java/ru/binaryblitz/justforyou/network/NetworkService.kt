@@ -22,8 +22,10 @@ import ru.binaryblitz.justforyou.network.responses.orders.PaymentCardBody
 import ru.binaryblitz.justforyou.network.responses.orders.PurchaseItem
 import ru.binaryblitz.justforyou.network.responses.payment.Payment
 import ru.binaryblitz.justforyou.network.responses.payment_cards.PaymentCard
+import ru.binaryblitz.justforyou.network.responses.product_types.ProductTypes
 import ru.binaryblitz.justforyou.network.responses.promotions.Promotion
 import ru.binaryblitz.justforyou.network.responses.purchases.PurchasesResponse
+import ru.binaryblitz.justforyou.network.responses.substitutions.Substitutions
 
 /**
  * A Service that performs network requests
@@ -178,5 +180,34 @@ class NetworkService(private val serviceApi: ApiService) {
         .observeOn(AndroidSchedulers.mainThread())
         .map { it }
   }
+
+  fun getProducts(token: String): Single<List<ProductTypes>> {
+    return serviceApi.getProducts(token)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .map { it }
+  }
+
+  fun getUserSubstitutions(token: String): Single<List<Substitutions>> {
+    return serviceApi.getSubstitutions(token)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .map { it }
+  }
+
+  fun createUserSubstitution(productId: Int, token: String): Single<Substitutions> {
+    return serviceApi.createSubstitution(productId, token)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .map { it }
+  }
+
+  fun removeUserSubstitution(productId: Int, token: String): Single<Substitutions> {
+    return serviceApi.removeSubstitution(productId, token)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .map { it }
+  }
+
 
 }

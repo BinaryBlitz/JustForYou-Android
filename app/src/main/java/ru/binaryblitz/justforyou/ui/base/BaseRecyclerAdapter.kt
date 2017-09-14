@@ -17,6 +17,11 @@ abstract class BaseRecyclerAdapter<T> : Adapter<BaseRecyclerAdapter<T>.RecyclerV
     notifyDataSetChanged()
   }
 
+  fun addData(items: List<T>) {
+    this.dataItems.addAll(items)
+    notifyDataSetChanged()
+  }
+
   fun getItemAt(position: Int): T {
     return dataItems[position]
   }
