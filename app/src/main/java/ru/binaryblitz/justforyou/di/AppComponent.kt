@@ -23,6 +23,8 @@ import ru.binaryblitz.justforyou.ui.main.promotions.PromotionsPresenter
 import ru.binaryblitz.justforyou.ui.main.purchases.PurchasesPresenter
 import ru.binaryblitz.justforyou.ui.main.settings.SettingsActivity
 import ru.binaryblitz.justforyou.ui.main.settings.payment_cards.PaymentCardsPresenter
+import ru.binaryblitz.justforyou.ui.main.substitutions.SubstitutionsPresenter
+import ru.binaryblitz.justforyou.ui.main.substitutions.products.ProductsPresenter
 import ru.binaryblitz.justforyou.ui.main.user_orders.UserOrdersPresenter
 import javax.inject.Singleton
 
@@ -51,4 +53,6 @@ interface AppComponent {
   fun inject(baseCartScreen: BaseCartActivity)
   fun inject(orderPresenter: CartProgramPresenter)
   fun inject(promotionsPresenter: PromotionsPresenter)
+  fun inject(subsPresenter: SubstitutionsPresenter)
+  fun inject(productsPresenter: ProductsPresenter)
 }

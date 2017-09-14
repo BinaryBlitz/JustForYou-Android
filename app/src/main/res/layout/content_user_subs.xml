@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="ru.binaryblitz.justforyou.ui.main.delivery_addresses.DeliveryPlacesActivity"
+    >
+
+  <TextView
+      android:layout_marginTop="16dp"
+      android:layout_marginBottom="16dp"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="На данном экране вы можете выбрать до трех продуктов, которые вы не употребляете"
+      android:textAlignment="center"
+      android:textColor="@color/greyColor"
+      android:textSize="16sp"
+      />
+
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/ordersView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layoutAnimation="@anim/layout_animation_fall_down"
+      ></android.support.v7.widget.RecyclerView>
+
+</LinearLayout>
